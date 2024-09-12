@@ -9,16 +9,16 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-800 bg-opacity-95 w-full p-4 sticky top-0">
+    <nav className="bg-orange-400 bg-opacity-95 w-full p-4 sticky top-0">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-2xl font-bold">
-          ANIME ZONE
+        <div className="text-white text-2xl font-anton tracking-widest">
+          <a href="/">ANIME ZONE</a>
         </div>
 
-        <div className="hidden md:flex space-x-6">
-          <a href="#" className="text-gray-300 hover:text-white">Anime</a>
-          <a href="#" className="text-gray-300 hover:text-white">Characters</a>
-          <a href="#" className="text-gray-300 hover:text-white">About</a>
+        <div className="hidden md:flex space-x-6 font-antonio text-white tracking-wide">
+          <a href="#" className="hover:text-white">Anime</a>
+          <a href="#" className="hover:text-white">Characters</a>
+          <a href="#" className="hover:text-white">About</a>
         </div>
 
         <div className="md:hidden">
