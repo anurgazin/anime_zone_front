@@ -9,7 +9,7 @@ export const anime_data: Anime[] = [
     "genre": ["Action", "Drama", "Fantasy"],
     "type": "tv",
     "episodes": 87,
-    "description": "Humanity fights for survival against giant humanoid Titans that threaten their existence.",
+    "description": "Eren Yeager once lived a peaceful life behind the towering walls that protected humanity from the terrifying Titans. But that peace was shattered when a massive Titan broke through the outer wall, destroying his home and taking his mother’s life. Determined to rid the world of these monsters, Eren joins the military alongside his friends to fight back.\nHowever, as the battles intensify and Eren uncovers hidden secrets about the Titans and the world, he begins to question who the real enemy is. With humanity’s survival hanging in the balance, Eren must confront betrayal, conspiracy, and his own inner demons as he fights to uncover the truth.",
     "studio": ["Wit Studio", "MAPPA"],
     "duration": 24,
     "status": "finished",
@@ -280,5 +280,19 @@ export const anime_data: Anime[] = [
     "duration": 24,
     "status": "finished",
     "esrb": "T"
+  },
+  {
+   "id": "08b84e9d-54b2-42a5-b69d-9d37fdcb0d10",
+    "title": "Sakamoto Days",
+    "release_date": "2025-01-01",
+    "rating": 0,
+    "genre": ["Action", "Comedy", "Adventure", "Martial Arts"],
+    "type": "tv",
+    "episodes": 0,
+    "description": "Once feared as the most dangerous hitman, Taro Sakamoto has traded his violent life for that of a peaceful convenience store owner, married to the love of his life. But when old enemies resurface and threaten his new way of life, Sakamoto has no choice but to return to the world of assassins, only this time he is balancing his duties as a husband and father. 'Sakamoto Days' is a thrilling, yet comedic, tale of an unassuming man caught between the mundane and the deadly.",
+    "studio": ["TMS Entertainment"],
+    "duration": 24,
+    "status": "announced",
+    "esrb": "M"
   }
 ];
