@@ -13,39 +13,45 @@ export default function DisplaySingle({ anime }: DisplaySingleProps) {
 
     return (
         <div className="grid grid-cols-5 grid-rows-7 gap-4">
-            {/* Top background */}
+            {/* Top Banner */}
             <div className="col-span-5 row-span-2 relative overflow-hidden -z-10">
                 <Image src={logo} layout="fill" objectFit="cover" className="blur-sm" alt="Anime Banner" />
             </div>
-            {/* Logo section */}
-            <div className="row-span-3 row-start-3">
-                <Image src={logo} width={250} height={250} className="rounded-lg shadow-lg" alt="Anime Logo" />
-            </div>
-            {/* Data info */}
-            <div className="col-span-2 row-span-3 row-start-3">
-                <h1 className="text-4xl font-anton text-gray-800">{anime.title}</h1>
-                <div className="space-y-2">
-                    <p className="text-gray-600 font-antonio"><span className="font-anton">Rating:</span> {anime.rating}</p>
-                    <p className="text-gray-600 font-antonio"><span className="font-anton">Studio:</span> {studio}</p>
-                    <p className="text-gray-600 font-antonio"><span className="font-anton">Type:</span> {anime.type.toUpperCase()}</p>
-                    <p className="text-gray-600 font-antonio"><span className="font-anton">Genres:</span> {genre}</p>
-                    <p className="text-gray-600 font-antonio"><span className="font-anton">Release Date:</span> {anime.release_date}</p>
-                    <p className="text-gray-600 font-antonio"><span className="font-anton">Duration:</span> {anime.duration} mins</p>
+            {/* Information */}
+            <div className='col-span-5 row-span-5 row-start-3 grid grid-cols-5 grid-rows-5 gap-4 px-10'>
+                {/* Logo section */}
+                <div className="row-span-3">
+                    <Image src={logo} width={250} height={250} className="rounded-lg shadow-lg" alt="Anime Logo" />
                 </div>
-            </div>
-            {/* Media Section */}
-            <div className='row-span-5 col-start-5 row-start-3'>
-                <h2 className="text-2xl font-antonio text-gray-800">Media</h2>
-                <div className="flex flex-col">
-                    {media.map((screen, i) => (
-                        <Image key={i} src={screen} width={321} height={171} className="rounded-md shadow-md" alt={`Media ${i}`} />
-                    ))}
+                {/* Data info */}
+                <div className="col-span-2 row-span-3">
+                    <h1 className="text-4xl font-anton text-gray-800">{anime.title}</h1>
+                    <div className="space-y-2">
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">Rating:</span> {anime.rating} / 10</p>
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">Studio:</span> {studio}</p>
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">Type:</span> {anime.type.toUpperCase()}</p>
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">Genres:</span> {genre}</p>
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">Release Date:</span> {anime.release_date}</p>
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">Status:</span> {anime.status}</p>
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">Number of Episodes:</span> {anime.episodes}</p>
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">Duration:</span> {anime.duration} mins</p>
+                        <p className="text-gray-600 font-antonio"><span className="font-anton">ESRB:</span> {anime.esrb}</p>
+                    </div>
                 </div>
-            </div>
-            {/* Description */}
-            <div className="col-span-4 row-span-2 row-start-6">
-                <h2 className="text-2xl font-anton text-gray-800">Description</h2>
-                <p className="text-gray-700 mt-2">{anime.description}</p>
+                {/* Media Section */}
+                <div className='row-span-5 col-start-5'>
+                    <h2 className="text-2xl font-antonio text-gray-800">Media</h2>
+                    <div className="flex flex-col">
+                        {media.map((screen, i) => (
+                            <Image key={i} src={screen} width={321} height={171} className="rounded-md shadow-md" alt={`Media ${i}`} />
+                        ))}
+                    </div>
+                </div>
+                {/* Description */}
+                <div className="col-span-4 row-span-2 row-start-4">
+                    <h2 className="text-2xl font-anton text-gray-800">Description</h2>
+                    <p className="text-gray-700 mt-2">{anime.description}</p>
+                </div>
             </div>
         </div>
     );
