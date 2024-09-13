@@ -9,7 +9,7 @@ export const anime_data: Anime[] = [
     "genre": ["Action", "Drama", "Fantasy"],
     "type": "tv",
     "episodes": 87,
-    "description": "Eren Yeager once lived a peaceful life behind the towering walls that protected humanity from the terrifying Titans. But that peace was shattered when a massive Titan broke through the outer wall, destroying his home and taking his mother’s life. Determined to rid the world of these monsters, Eren joins the military alongside his friends to fight back.\nHowever, as the battles intensify and Eren uncovers hidden secrets about the Titans and the world, he begins to question who the real enemy is. With humanity’s survival hanging in the balance, Eren must confront betrayal, conspiracy, and his own inner demons as he fights to uncover the truth.",
+    "description": "\tEren Yeager once lived a peaceful life behind the towering walls that protected humanity from the terrifying Titans. But that peace was shattered when a massive Titan broke through the outer wall, destroying his home and taking his mother’s life. Determined to rid the world of these monsters, Eren joins the military alongside his friends to fight back.\n\tHowever, as the battles intensify and Eren uncovers hidden secrets about the Titans and the world, he begins to question who the real enemy is. With humanity’s survival hanging in the balance, Eren must confront betrayal, conspiracy, and his own inner demons as he fights to uncover the truth.",
     "studio": ["Wit Studio", "MAPPA"],
     "duration": 24,
     "status": "finished",
