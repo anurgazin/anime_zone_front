@@ -9,7 +9,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-orange-400 bg-opacity-95 w-full p-4 sticky top-0">
+    <nav className="bg-orange-400 bg-opacity-95 w-full p-4 sticky top-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-2xl font-anton tracking-widest">
           <a href="/">ANIME ZONE</a>

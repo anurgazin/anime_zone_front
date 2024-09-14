@@ -15,7 +15,7 @@ export default function DisplaySingle({ anime }: DisplaySingleProps) {
         <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
             {/* Top Banner */}
             <div className="relative overflow-hidden -z-10 h-48 sm:h-56 lg:col-span-5">
-                <Image src={logo} layout="fill" objectFit="cover" className="blur-sm" alt="Anime Banner" />
+                <Image src={logo} fill={true} objectFit="cover" className="blur-sm" alt="Anime Banner" />
             </div>
 
             {/* Information */}

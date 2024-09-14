@@ -1,22 +1,28 @@
-import Image from 'next/image'
+import Image from 'next/image';
 import { Anime } from "@/lib/types";
-import img from "@/tmp_data/anime/images/logos/jjk2.jpg"
+import img from "@/tmp_data/anime/images/logos/jjk2.jpg";
 import Link from 'next/link';
 
 export default function Card(anime: Anime) {
-    const genre = anime.genre.length > 1 ? anime.genre.join(", ") : anime.genre.toString();
-    const studio = anime.studio.length > 1 ? anime.studio.join(", ") : anime.studio.toString();
     return (
-        <div key={anime.id}>
-            <Link href={`/anime/${anime.id}`} >
-                <Image src={img} width={250} height={250} alt={"img"} />
-                <h1>Title: {anime.title}</h1>
-                <h1>Rating: {anime.rating}</h1>
-                <h1>Release Date: {anime.release_date}</h1>
-                <h1>Type: {anime.type.toUpperCase()}</h1>
-                <h1>Genres: {genre}</h1>
-                <h1>Studio: {studio}</h1>
+        <div key={anime.id} className='bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300'>
+            <Link href={`/anime/${anime.id}`} className="block">
+                {/* Image */}
+                <div className="relative w-full h-[200px] sm:h-[400px]">
+                    <Image
+                        src={img}
+                        fill={true}
+                        alt={anime.title}
+                        className="rounded-t-lg object-cover"
+                    />
+                </div>
+                {/* Card Content */}
+                <div className="p-4">
+                    <h1 className='text-base sm:text-lg font-bold text-gray-900 mb-2'>{anime.title}</h1>
+                    <h2 className='text-sm text-gray-700 mb-2'>Rating: {anime.rating} / 10</h2>
+                    <p className='text-xs sm:text-sm text-gray-600'>{anime.description.slice(0, 150)}...</p>
+                </div>
             </Link>
         </div>
-    )
+    );
 }
