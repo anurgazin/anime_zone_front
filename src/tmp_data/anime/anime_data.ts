@@ -1,5 +1,20 @@
 import { Anime } from "@/lib/types";
 
+export const genres = ["Action", "Drama", "Fantasy", "Romance",
+  "Supernatural", "Comedy", "Superhero", "Adventure",
+  "Historical", "Sci-fi", "Space", "Mecha", "Psychological",
+  "Thriller", "Martial Arts", "Mystery", "Horror", "Slice of Life", "Magic"]
+
+export const studios = ["MAPPA", "Wit Studio", "Cloverworks",
+  "CoMix Wave Films", "Bones", "Studio Ghibli", "Toei Animation",
+  "ufotable", "Sunrise", "Gainax", "Studio Pierrot", "Madhouse",
+  "A-1 Pictures", "TMS Entertainment", "Kyoto Animation"
+]
+
+export const release_types = ["movie", "tv", "ova", "ona"];
+export const status = ["finished", "airing", "announced"];
+export const esrb = ["E", "E10+", "T", "M", "AO", "RP", "RP17+"];
+
 export const anime_data: Anime[] = [
   {
     "id": "bfa7bcb0-6c97-4423-a1bc-92f64cfaab7f",
@@ -178,7 +193,7 @@ export const anime_data: Anime[] = [
     "type": "tv",
     "episodes": 12,
     "description": "A young man struggles to adjust to life after becoming a half-ghoul, a creature that feeds on human flesh.",
-    "studio": ["Pierrot"],
+    "studio": ["Studio Pierrot"],
     "duration": 24,
     "status": "finished",
     "esrb": "M"
@@ -220,7 +235,7 @@ export const anime_data: Anime[] = [
     "type": "tv",
     "episodes": 366,
     "description": "Ichigo Kurosaki gains the abilities of a Soul Reaper and must defend humanity from evil spirits.",
-    "studio": ["Pierrot"],
+    "studio": ["Studio Pierrot"],
     "duration": 24,
     "status": "finished",
     "esrb": "T"
@@ -248,7 +263,7 @@ export const anime_data: Anime[] = [
     "type": "tv",
     "episodes": 170,
     "description": "Asta, a boy born without magic in a world where magic is everything, aims to become the Wizard King.",
-    "studio": ["Pierrot"],
+    "studio": ["Studio Pierrot"],
     "duration": 24,
     "status": "finished",
     "esrb": "T"
@@ -282,7 +297,7 @@ export const anime_data: Anime[] = [
     "esrb": "T"
   },
   {
-   "id": "08b84e9d-54b2-42a5-b69d-9d37fdcb0d10",
+    "id": "08b84e9d-54b2-42a5-b69d-9d37fdcb0d10",
     "title": "Sakamoto Days",
     "release_date": "2025-01-01",
     "rating": 0,
