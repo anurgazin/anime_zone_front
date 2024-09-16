@@ -3,7 +3,11 @@ import { Anime } from "@/lib/types";
 import img from "@/tmp_data/anime/images/logos/jjk2.jpg";
 import Link from 'next/link';
 
-export default function Card(anime: Anime) {
+type Props = {
+    anime: Anime
+}
+
+export default function Card({anime}: Props) {
     return (
         <div key={anime.id} className='bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300'>
             <Link href={`/anime/${anime.id}`} className="block">
