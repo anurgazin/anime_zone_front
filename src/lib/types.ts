@@ -1,6 +1,6 @@
-export type Type = "movie" | "tv" | "ova";
-export type Status = "finished" | "airing" | "announced";
-export type ESRB = "E" | "E10+" | "T" | "M" | "AO" | "RP" | "RP17+";
+export type Type = "movie" | "tv" | "ova" | "ona" | "none";
+export type Status = "finished" | "airing" | "announced" | "none";
+export type ESRB = "E" | "E10+" | "T" | "M" | "AO" | "RP" | "RP17+" | "none";
 export type Anime = {
     id: string; // UUID format
     title: string;
@@ -15,4 +15,12 @@ export type Anime = {
     status: Status;
     esrb: ESRB;
   };
+
+export type Filters = {
+  genre: string[];
+  studio: string[];
+  releaseType: Type;
+  status: Status;
+  esrb: ESRB;
+};
   
