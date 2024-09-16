@@ -1,4 +1,4 @@
-export type Type = "movie" | "tv" | "ova" | "none";
+export type Type = "movie" | "tv" | "ova" | "ona" | "none";
 export type Status = "finished" | "airing" | "announced" | "none";
 export type ESRB = "E" | "E10+" | "T" | "M" | "AO" | "RP" | "RP17+" | "none";
 export type Anime = {

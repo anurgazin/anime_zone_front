@@ -1,8 +1,8 @@
-import { Anime } from "@/lib/types";
+import { Anime, Type, Status, ESRB } from "@/lib/types";
 
 export const genres = ["Action", "Drama", "Fantasy", "Romance",
   "Supernatural", "Comedy", "Superhero", "Adventure",
-  "Historical", "Sci-fi", "Space", "Mecha", "Psychological",
+  "Historical", "Sci-Fi", "Space", "Mecha", "Psychological",
   "Thriller", "Martial Arts", "Mystery", "Horror", "Slice of Life", "Magic"]
 
 export const studios = ["MAPPA", "Wit Studio", "Cloverworks",
@@ -11,9 +11,9 @@ export const studios = ["MAPPA", "Wit Studio", "Cloverworks",
   "A-1 Pictures", "TMS Entertainment", "Kyoto Animation"
 ]
 
-export const release_types = ["movie", "tv", "ova", "ona"];
-export const status = ["finished", "airing", "announced"];
-export const esrb = ["E", "E10+", "T", "M", "AO", "RP", "RP17+"];
+export const release_types: Type[] = ["movie", "tv", "ova", "ona"];
+export const status: Status[] = ["finished", "airing", "announced"];
+export const esrb:ESRB[] = ["E", "E10+", "T", "M", "AO", "RP", "RP17+"];
 
 export const anime_data: Anime[] = [
   {

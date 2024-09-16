@@ -14,6 +14,8 @@ export default function DisplayAll() {
         esrb: 'none',
     });
 
+    const [sortBy, setSortBy] = useState<string>('default');
+
     const handleFilterChange = (filterType: keyof Filters, value: string[] | string) => {
         setFilters(prevFilters => ({
             ...prevFilters,
@@ -21,7 +23,12 @@ export default function DisplayAll() {
         }));
     };
 
-    const filteredData = anime_data.filter((anime: Anime) => {
+    const handleSortChange = (sortValue: string) => {
+        setSortBy(sortValue);
+    };
+
+    // Apply filters
+    let filteredData = anime_data.filter((anime: Anime) => {
         return (
             (filters.genre.length === 0 || filters.genre.every(genre => anime.genre.includes(genre))) &&
             (filters.studio.length === 0 || filters.studio.every(studio => anime.studio.includes(studio))) &&
@@ -29,6 +36,18 @@ export default function DisplayAll() {
             (filters.status === 'none' || anime.status === filters.status) &&
             (filters.esrb === 'none' || anime.esrb === filters.esrb)
         );
+    });
+
+    // Apply sorting
+    filteredData = filteredData.sort((a, b) => {
+        if (sortBy === 'rating') {
+            return b.rating - a.rating;
+        } else if (sortBy === 'episodes') {
+            return b.episodes - a.episodes;
+        } else if (sortBy === 'release_date') {
+            return new Date(b.release_date).getTime() - new Date(a.release_date).getTime(); // Sort by release date (descending)
+        }
+        return 0;
     });
 
     return (
@@ -39,9 +58,14 @@ export default function DisplayAll() {
                     <Card key={anime.id} anime={anime} />
                 ))}
             </div>
-            {/* Filter */}
+            {/* Filter and Sort */}
             <div className="col-span-full lg:col-span-2">
-                <AnimeFilterSort filters={filters} onFilterChange={handleFilterChange} />
+                <AnimeFilterSort
+                    filters={filters}
+                    onFilterChange={handleFilterChange}
+                    onSortChange={handleSortChange}
+                    sortBy={sortBy}
+                />
             </div>
         </div>
     );

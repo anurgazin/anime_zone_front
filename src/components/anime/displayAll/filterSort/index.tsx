@@ -16,9 +16,11 @@ import { Filters } from "@/lib/types";
 type AnimeFilterSortProps = {
     filters: Filters;
     onFilterChange: (filterType: keyof Filters, value: string[] | string) => void;
+    onSortChange: (sortValue: string) => void;
+    sortBy: string;
 };
 
-export default function AnimeFilterSort({ filters, onFilterChange }: AnimeFilterSortProps) {
+export default function AnimeFilterSort({ filters, onFilterChange, onSortChange, sortBy }: AnimeFilterSortProps) {
     const [selectedGenres, setSelectedGenres] = useState<string[]>(filters.genre);
     const [selectedStudios, setSelectedStudios] = useState<string[]>(filters.studio);
     const [selectedReleaseType, setSelectedReleaseType] = useState<string>(filters.releaseType);
@@ -36,19 +38,21 @@ export default function AnimeFilterSort({ filters, onFilterChange }: AnimeFilter
         onFilterChange("releaseType", selectedReleaseType);
         onFilterChange("status", selectedStatus);
         onFilterChange("esrb", selectedEsrb);
+        toggleFilters();
     };
 
     const handleClear = () => {
         setSelectedGenres([]);
         setSelectedStudios([]);
-        setSelectedReleaseType('');
-        setSelectedStatus('');
-        setSelectedEsrb('');
+        setSelectedReleaseType('none');
+        setSelectedStatus('none');
+        setSelectedEsrb('none');
         onFilterChange("genre", []);
         onFilterChange("studio", []);
-        onFilterChange("releaseType", '');
-        onFilterChange("status", '');
-        onFilterChange("esrb", '');
+        onFilterChange("releaseType", 'none');
+        onFilterChange("status", 'none');
+        onFilterChange("esrb", 'none');
+        toggleFilters();
     };
 
     return (
@@ -67,7 +71,7 @@ export default function AnimeFilterSort({ filters, onFilterChange }: AnimeFilter
                 {/* Sort By / Per Page */}
                 <div className="flex flex-col space-y-4 mt-4">
                     <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 items-center">
-                        <Select>
+                        <Select value={(sortBy === "default" ? "": sortBy)} onValueChange={onSortChange}>
                             <SelectTrigger className="w-[200px] bg-gray-100 border-2 border-black p-2 rounded-2xl">
                                 <SelectValue placeholder="Sort By" />
                             </SelectTrigger>
