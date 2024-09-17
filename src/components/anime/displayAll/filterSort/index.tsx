@@ -16,11 +16,12 @@ import { Filters } from "@/lib/types";
 type AnimeFilterSortProps = {
     filters: Filters;
     onFilterChange: (filterType: keyof Filters, value: string[] | string) => void;
-    onSortChange: (sortValue: string) => void;
     sortBy: string;
+    onSortChange: (sortValue: string) => void;
+    onItemsPerPageChange: (value: number) => void;
 };
 
-export default function AnimeFilterSort({ filters, onFilterChange, onSortChange, sortBy }: AnimeFilterSortProps) {
+export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSortChange, onItemsPerPageChange }: AnimeFilterSortProps) {
     const [selectedGenres, setSelectedGenres] = useState<string[]>(filters.genre);
     const [selectedStudios, setSelectedStudios] = useState<string[]>(filters.studio);
     const [selectedReleaseType, setSelectedReleaseType] = useState<string>(filters.releaseType);
@@ -56,7 +57,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, onSortChange,
     };
 
     return (
-        <div className="lg:sticky h-[90vh] lg:top-[64px] lg:bottom-0 lg:overflow-y-auto lg:p-6">
+        <div className="lg:sticky lg:h-[90vh] lg:top-[64px] lg:bottom-0 lg:overflow-y-auto lg:p-6">
             {/* Toggle Button for Mobile */}
             <div className="lg:hidden fixed lg:relative bottom-0 left-0 w-full bg-orange-400 text-white p-3 text-lg rounded-none lg:rounded-md z-50">
                 <button onClick={toggleFilters} className="w-full text-center">
@@ -65,7 +66,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, onSortChange,
             </div>
 
             {/* Scrollable Filters Section */}
-            <div className={`${isOpen ? "block fixed bottom-12 left-0 w-full bg-white lg:relative lg:bottom-auto p-4 lg:p-0 h-[80vh] overflow-y-scroll" : "hidden"} lg:block`}>
+            <div className={`${isOpen ? "border-t-2 border-orange-400 block fixed bottom-12 left-0 w-full bg-white lg:relative lg:bottom-auto p-4 lg:p-0 h-[80vh] overflow-y-scroll" : "hidden"} lg:block`}>
                 <h1 className="text-xl font-antonio">Filters / Sort By</h1>
 
                 {/* Sort By / Per Page */}
@@ -81,7 +82,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, onSortChange,
                                 <SelectItem value="release_date">Release Date</SelectItem>
                             </SelectContent>
                         </Select>
-                        <Select>
+                        <Select onValueChange={(value) => onItemsPerPageChange(Number(value))}>
                             <SelectTrigger className="w-[200px] bg-gray-100 border-2 border-black p-2 rounded-2xl">
                                 <SelectValue placeholder="Per Page" />
                             </SelectTrigger>

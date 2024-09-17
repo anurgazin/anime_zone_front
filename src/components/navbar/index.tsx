@@ -47,15 +47,15 @@ export default function Navbar() {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } md:hidden mt-2 space-y-2`}
+        } md:hidden mt-2 space-y-2 text-white font-antonio`}
       >
-        <a href="#" className="block text-gray-300 hover:text-white">
+        <a href="#" className="block">
           Anime
         </a>
-        <a href="#" className="block text-gray-300 hover:text-white">
+        <a href="#" className="block">
           Characters
         </a>
-        <a href="#" className="block text-gray-300 hover:text-white">
+        <a href="#" className="block">
           About
         </a>
       </div>
