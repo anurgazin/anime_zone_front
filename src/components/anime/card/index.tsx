@@ -22,8 +22,8 @@ export default function Card({anime}: Props) {
                 </div>
                 {/* Card Content */}
                 <div className="p-4">
-                    <h1 className='text-base sm:text-lg font-bold text-gray-900 mb-2'>{anime.title}</h1>
-                    <h2 className='text-sm text-gray-700 mb-2'>Rating: {anime.rating} / 10</h2>
+                    <h1 className='text-base sm:text-lg font-anton text-gray-900 mb-2'>{anime.title}</h1>
+                    <h2 className='text-sm text-gray-700 mb-2 font-antonio'>Rating: {anime.rating} / 10</h2>
                     <p className='text-xs sm:text-sm text-gray-600'>{anime.description.slice(0, 150)}...</p>
                 </div>
             </Link>
