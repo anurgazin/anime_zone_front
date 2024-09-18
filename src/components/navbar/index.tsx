@@ -16,8 +16,8 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex space-x-6 font-antonio text-white tracking-wide">
-          <a href="#" className="hover:text-white">Anime</a>
-          <a href="#" className="hover:text-white">Characters</a>
+          <a href="/anime" className="hover:text-white">Anime</a>
+          <a href="/characters" className="hover:text-white">Characters</a>
           <a href="#" className="hover:text-white">About</a>
         </div>
 
