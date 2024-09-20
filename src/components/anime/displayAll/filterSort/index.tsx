@@ -60,9 +60,9 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
         <div className="lg:sticky lg:h-[90vh] lg:top-[64px] lg:bottom-0 lg:overflow-y-auto lg:p-6">
             {/* Toggle Button for Mobile */}
             <div className="lg:hidden fixed lg:relative bottom-0 left-0 w-full bg-orange-400 text-white p-3 text-lg rounded-none lg:rounded-md z-50">
-                <button onClick={toggleFilters} className="w-full text-center">
+                <Button onClick={toggleFilters} className="w-full text-center">
                     {isOpen ? "Hide Filters" : "Show Filters"}
-                </button>
+                </Button>
             </div>
 
             {/* Scrollable Filters Section */}

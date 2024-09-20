@@ -1,7 +1,10 @@
+"use client";
 import Image from 'next/image';
 import { Character } from "@/lib/types";
 import logo from "@/tmp_data/characters/images/logos/gon_freecs.webp";
 import { media } from '@/tmp_data/anime/images/media/media';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 type DisplaySingleProps = {
     character: Character;
@@ -9,6 +12,10 @@ type DisplaySingleProps = {
 
 export default function DisplaySingle({ character }: DisplaySingleProps) {
     const from_anime = character.from_anime.length > 1 ? character.from_anime.join(", ") : character.from_anime.toString();
+    const [show, setShow] = useState(false);
+    const toggleShow = () => {
+        setShow(!show);
+    }
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
@@ -27,7 +34,7 @@ export default function DisplaySingle({ character }: DisplaySingleProps) {
                 {/* Data info */}
                 <div className="lg:col-span-2 lg:row-span-1 p-4 rounded-lg border-2 border-orange-200 p-4 rounded-lg lg:border-none">
                     <h1 className="text-2xl sm:text-3xl font-anton text-gray-800 mb-4">{character.first_name} {character.last_name}</h1>
-                    <div className="text-lg sm:text-xl text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="text-lg sm:text-xl font-antonio text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <p><span className="font-semibold">First Name:</span> {character.first_name}</p>
                             <p><span className="font-semibold">Last Name:</span> {character.last_name}</p>
@@ -36,7 +43,11 @@ export default function DisplaySingle({ character }: DisplaySingleProps) {
                         <div>
                             <p><span className="font-semibold">Age:</span> {character.age}</p>
                             <p><span className="font-semibold">Gender:</span> {character.gender}</p>
-                            <p><span className="font-semibold">Status:</span> {character.status.toUpperCase()}</p>
+                            <p><span className="font-semibold">Status:</span>
+                                <Button onClick={toggleShow} variant="link" className='text-lg sm:text-xl'>
+                                    {show ? (character.status.toUpperCase()) : ("SHOW")}
+                                </Button>
+                            </p>
                         </div>
                     </div>
                 </div>
