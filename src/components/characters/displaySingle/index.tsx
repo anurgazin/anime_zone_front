@@ -34,14 +34,14 @@ export default function DisplaySingle({ character }: DisplaySingleProps) {
         <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
             {/* Top Banner */}
             <div className="relative overflow-hidden -z-10 h-48 sm:h-56 lg:col-span-5">
-                <Image src={logo} fill={true} objectFit="cover" className="blur-sm" alt="Anime Banner" />
+                <Image src={logo} fill={true} className="blur-sm object-cover" alt="Anime Banner" />
             </div>
 
             {/* Information */}
             <div className="lg:col-span-5  grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
                 {/* Logo section */}
                 <div className="lg:col-span-1 flex justify-center lg:justify-start" onClick={() => handleImageClick(logo)}>
-                    <Image src={logo} objectFit='cover' className="rounded-lg shadow-lg" alt="Character Logo" />
+                    <Image src={logo} className="rounded-lg shadow-lg object-cover" alt="Character Logo" />
                 </div>
 
                 {/* Data info */}
