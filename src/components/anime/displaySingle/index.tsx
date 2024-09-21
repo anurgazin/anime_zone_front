@@ -1,7 +1,16 @@
+"use client";
 import Image from 'next/image';
 import { Anime } from "@/lib/types";
 import logo from "@/tmp_data/anime/images/logos/jjk2.jpg";
 import { media } from '@/tmp_data/anime/images/media/media';
+import { useState } from 'react';
+import Modal from '@/components/modal';
+
+type img = {
+    src: string;
+    width: number;
+    height: number;
+}
 
 type DisplaySingleProps = {
     anime: Anime;
@@ -11,19 +20,23 @@ export default function DisplaySingle({ anime }: DisplaySingleProps) {
     const genre = anime.genre.length > 1 ? anime.genre.join(", ") : anime.genre.toString();
     const studio = anime.studio.length > 1 ? anime.studio.join(", ") : anime.studio.toString();
 
+    const [selectedImage, setSelectedImage] = useState<img | null>(null);
+    const handleImageClick = (image: img) => {
+        setSelectedImage(image);
+    }
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
             {/* Top Banner */}
             <div className="relative overflow-hidden -z-10 h-48 sm:h-56 lg:col-span-5">
-                <Image src={logo} fill={true} objectFit="cover" className="blur-sm" alt="Anime Banner" />
+                <Image src={logo} fill={true} className="blur-sm object-cover" alt="Anime Banner" />
             </div>
 
             {/* Information */}
             <div className="lg:col-span-5  grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
                 {/* Logo section */}
-                <div className="lg:col-span-1 flex justify-center lg:justify-start">
-                    
-                    <Image src={logo} objectFit='cover' className="rounded-lg shadow-lg" alt="Anime Logo" />
+                <div className="lg:col-span-1 flex justify-center lg:justify-start" onClick={() => handleImageClick(logo)}>
+                    <Image src={logo} className="rounded-lg shadow-lg object-cover" alt="Anime Logo" />
                 </div>
 
                 {/* Data info */}
@@ -51,7 +64,9 @@ export default function DisplaySingle({ anime }: DisplaySingleProps) {
                     <h2 className="text-xl sm:text-2xl font-antonio text-gray-600 mb-2">Media</h2>
                     <div className="grid grid-cols-2 gap-2 lg:flex lg:flex-col">
                         {media.map((screen, i) => (
-                            <Image key={i} src={screen} width={321} height={171} className="rounded-md shadow-md border-2 border-orange-200" alt={`Media ${i}`} />
+                            <div key={i} onClick={() => handleImageClick(screen)}>
+                                <Image src={screen} width={321} height={171} className="rounded-md shadow-md border-2 border-orange-200" alt={`Media ${i}`} />
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -62,6 +77,7 @@ export default function DisplaySingle({ anime }: DisplaySingleProps) {
                     <p className="text-gray-700 whitespace-pre-wrap">{anime.description}</p>
                 </div>
             </div>
+            {selectedImage && <Modal modalContent={selectedImage} onClose={() => setSelectedImage(null)} />}
         </div>
     );
 }
