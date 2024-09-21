@@ -22,6 +22,7 @@ export default function DisplaySingle({ anime }: DisplaySingleProps) {
             <div className="lg:col-span-5  grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
                 {/* Logo section */}
                 <div className="lg:col-span-1 flex justify-center lg:justify-start">
+                    
                     <Image src={logo} objectFit='cover' className="rounded-lg shadow-lg" alt="Anime Logo" />
                 </div>
 
