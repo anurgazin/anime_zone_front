@@ -22,8 +22,8 @@ export default function Modal({ modalContent, onClose }: ModalProps) {
             </Button>
             <Image
                 src={modalContent.src}
-                width={modalContent.width}
-                height={modalContent.height}
+                width={640}
+                height={480}
                 alt="Modal content"
                 className="block w-full max-w-[90vw] max-h-[80vh] object-contain"
             />
