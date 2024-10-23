@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
-import { anime_data } from "@/tmp_data/anime/anime_data";
-import { Anime, Filters } from "@/lib/types";
+import { useEffect, useState } from "react";
+import { AnimeAPI, Filters } from "@/lib/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Card from "../card";
 import AnimeFilterSort from "./filterSort";
+import { getAllAnime } from "@/lib/api";
 
 export default function DisplayAll() {
     const [filters, setFilters] = useState<Filters>({
@@ -16,9 +16,28 @@ export default function DisplayAll() {
         esrb: 'none',
     });
 
+    const [animeList, setAnimeList] = useState<AnimeAPI[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
     const [sortBy, setSortBy] = useState<string>('default');
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+
+    useEffect(() => {
+        const fetchAnime = async () => {
+            try {
+                const response = await getAllAnime();
+                setAnimeList(response.data);
+            } catch (error) {
+                setError("Failed to load anime data.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAnime();
+    }, []);
 
     const handleFilterChange = (filterType: keyof Filters, value: string[] | string) => {
         setFilters(prevFilters => ({
@@ -41,7 +60,7 @@ export default function DisplayAll() {
     };
 
     // Filters
-    let filteredData = anime_data.filter((anime: Anime) => {
+    const filteredData = animeList.filter((anime: AnimeAPI) => {
         return (
             (filters.genre.length === 0 || filters.genre.every(genre => anime.genre.includes(genre))) &&
             (filters.studio.length === 0 || filters.studio.every(studio => anime.studio.includes(studio))) &&
@@ -52,24 +71,39 @@ export default function DisplayAll() {
     });
 
     // Sorting
-    filteredData = filteredData.sort((a, b) => {
+    const sortedData = filteredData.sort((a, b) => {
         if (sortBy === 'rating') {
-            return b.rating - a.rating;
+            return b.average_rating - a.average_rating;
         } else if (sortBy === 'episodes') {
             return b.episodes - a.episodes;
         } else if (sortBy === 'release_date') {
-            return new Date(b.release_date).getTime() - new Date(a.release_date).getTime(); // Sort by release date (descending)
+            return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
         }
         return 0;
     });
 
     // Pagination
-    const totalItems = filteredData.length;
+    const totalItems = sortedData.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const paginatedData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
-    // Pagination Buttons
+    const paginatedData = sortedData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+    // Loading and Error States
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <h1 className="text-center text-gray-600 font-anton">Loading...</h1>
+            </div>
+        );
+    }
+    if (error) {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <p className="text-center text-red-600">Error: {error}</p>
+            </div>
+        );
+    }
+
 
     return (
         <div className="grid lg:grid-cols-5 grid-rows-auto gap-4">
@@ -79,6 +113,7 @@ export default function DisplayAll() {
                     <Card key={anime.id} anime={anime} />
                 ))}
             </div>
+
             {/* Filter and Sort */}
             <div className="col-span-full lg:col-span-2">
                 <AnimeFilterSort
@@ -91,9 +126,9 @@ export default function DisplayAll() {
             </div>
 
             {/* Pagination Controls */}
-            <div className="h-[84px] col-span-full lg:col-span-3 flex justify-center space-x-2 m-4 font-anton">
+            <div className="h-[84px] col-span-full lg:col-span-3 flex justify-center items-center space-x-2 m-4 font-anton">
                 <Button
-                    className={`px-4 py-2 bg-gray-300 rounded ${currentPage === 1 ? '-z-10 opacity-50 cursor-not-allowed' : ''}`}
+                    className={`px-4 py-2 bg-gray-300 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
                     disabled={currentPage === 1}
                     onClick={() => handlePageChange(currentPage - 1)}
                     variant="outline"
@@ -113,7 +148,7 @@ export default function DisplayAll() {
                 ))}
 
                 <Button
-                    className={`px-4 py-2 bg-gray-300 rounded ${currentPage === totalPages ? '-z-10 opacity-50 cursor-not-allowed' : ''}`}
+                    className={`px-4 py-2 bg-gray-300 rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
                     disabled={currentPage === totalPages}
                     onClick={() => handlePageChange(currentPage + 1)}
                     variant="outline"
