@@ -1,24 +1,61 @@
 "use client";
-import { useState } from "react";
-import { character_data } from "@/tmp_data/characters/character_data";
+import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Card from "../card";
+import { CharacterAPI } from "@/lib/types";
+import { getAllCharacters } from "@/lib/api";
 
 export default function DisplayAll() {
+    const [characterList, setCharacterList] = useState<CharacterAPI[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
     const [currentPage, setCurrentPage] = useState<number>(1);
+
+    useEffect(() => {
+        const fetchCharacters = async () => {
+            try {
+                const response = await getAllCharacters();
+                setCharacterList(response.data);
+            } catch (error) {
+                setError("Failed to load characters data.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCharacters();
+    }, []);
+
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
 
     // Pagination
-    const totalItems = character_data.length;
+    const totalItems = characterList.length;
     const totalPages = Math.ceil(totalItems / 10);
-    const paginatedData = character_data.slice((currentPage - 1) * 10, currentPage * 10);
+    const paginatedData = characterList.slice((currentPage - 1) * 10, currentPage * 10);
 
     // Pagination Buttons
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+    // Loading and Error States
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <h1 className="text-center text-gray-600 font-anton">Loading...</h1>
+            </div>
+        );
+    }
+    if (error) {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <p className="text-center text-red-600">Error: {error}</p>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col justify-center">
