@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import { Character } from "@/lib/types";
-import img from "@/tmp_data/characters/images/logos/gon_freecs.webp";
+import { CharacterAPI } from "@/lib/types";
 import Link from 'next/link';
 
 type Props = {
-    character: Character
+    character: CharacterAPI
 }
 
 export default function Card({ character }: Props) {
@@ -15,9 +14,9 @@ export default function Card({ character }: Props) {
                 {/* Image */}
                 <div className="relative w-full h-[200px] sm:h-[400px]">
                     <Image
-                        src={img}
+                        src={character.logo}
                         fill={true}
-                        alt={character.id}
+                        alt={character.first_name + " " + character.last_name}
                         className="rounded-t-lg object-cover"
                     />
                 </div>

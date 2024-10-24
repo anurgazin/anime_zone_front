@@ -16,21 +16,20 @@ export type Anime = {
   esrb: ESRB;
 };
 
-// Rating TypeScript equivalent
 export type Rating = {
-  id?: string; // MongoDB ObjectId as a string (optional for new ratings)
-  anime_id: string; // MongoDB ObjectId as a string (reference to Anime)
-  user_id: string; // MongoDB ObjectId as a string (reference to User)
-  score: number; // Rating score
-  timestamp: string; // ISO date string for when the rating was given
-  review?: string; // Optional user review
+  id?: string;
+  anime_id: string;
+  user_id: string;
+  score: number;
+  timestamp: string;
+  review?: string;
 };
 
-// Anime TypeScript equivalent
+// Anime type for API
 export type AnimeAPI = {
-  id?: string; // MongoDB ObjectId as a string (optional for new anime)
+  id?: string;
   title: string;
-  release_date: string; // ISO date string
+  release_date: Date;
   average_rating: number; // Average rating score
   rating_count: number; // Total number of ratings
   genre: string[]; // List of genres
@@ -63,4 +62,17 @@ export type Character = {
   gender: string;
   bio: string;
   status: string;
+}
+
+export type CharacterAPI = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  age: number;
+  from_anime: string[];
+  gender: string;
+  bio: string;
+  status: string;
+  logo: string; // URL or path to the logo image
+  media: string[]; // List of associated media (e.g., posters, trailers)
 }
