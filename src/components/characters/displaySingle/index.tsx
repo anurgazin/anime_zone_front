@@ -4,6 +4,7 @@ import { CharacterAPI } from "@/lib/types";
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Modal from '@/components/modal';
+import Link from 'next/link';
 
 type img = {
     src: string;
@@ -16,7 +17,11 @@ type DisplaySingleProps = {
 };
 
 export default function DisplaySingle({ character }: DisplaySingleProps) {
-    const from_anime = character.from_anime.length > 1 ? character.from_anime.join(", ") : character.from_anime.toString();
+    const from_anime_links = character.from_anime.map((anime) => (
+        <Link key={anime.id} href={`/anime/${anime.id}`} className="underline">
+            {anime.title}
+        </Link>
+    ));
 
     const [show, setShow] = useState(false);
     const toggleShow = () => {
@@ -55,7 +60,7 @@ export default function DisplaySingle({ character }: DisplaySingleProps) {
                         <div>
                             <p><span className="font-semibold">First Name:</span> {character.first_name}</p>
                             <p><span className="font-semibold">Last Name:</span> {character.last_name}</p>
-                            <p><span className="font-semibold">From:</span> {from_anime}</p>
+                            <p><span className="font-semibold">From:</span> {from_anime_links}</p>
                         </div>
                         <div>
                             <p><span className="font-semibold">Age:</span> {character.age}</p>

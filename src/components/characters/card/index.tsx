@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function Card({ character }: Props) {
-    const from_anime = character.from_anime.length > 1 ? character.from_anime.join(", ") : character.from_anime.toString();
+    const from_anime = character.from_anime.map(anime => anime.title).join(", ");
     return (
         <div key={character.id} className='bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300'>
             <Link href={`/characters/${character.id}`} className="block">
