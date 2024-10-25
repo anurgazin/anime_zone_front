@@ -64,12 +64,17 @@ export type Character = {
   status: string;
 }
 
+type FromAnime = {
+  id: string;
+  title: string
+}
+
 export type CharacterAPI = {
   id: string;
   first_name: string;
   last_name: string;
   age: number;
-  from_anime: string[];
+  from_anime: FromAnime[];
   gender: string;
   bio: string;
   status: string;
