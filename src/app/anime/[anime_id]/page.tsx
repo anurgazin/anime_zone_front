@@ -1,13 +1,14 @@
 "use client"
 import { useEffect, useState } from "react";
 import DisplaySingle from "@/components/anime/displaySingle";
-import { getAllComments, getSingleAnime } from "@/lib/api"; // Import the API function
-import { AnimeAPI, Comment } from "@/lib/types";
+import { getAllComments, getAnimeRating, getSingleAnime } from "@/lib/api"; // Import the API function
+import { AnimeAPI, Comment, Rating } from "@/lib/types";
 
 export default function SingleAnime({ params }: { params: { anime_id: string } }) {
     const anime_id = params.anime_id;
     const [anime, setAnime] = useState<AnimeAPI>(); // State to store the fetched anime data
     const [comments, setComments] = useState<Comment[]>()
+    const [rating, setRating] = useState<Rating[]>()
     const [loading, setLoading] = useState<boolean>(true); // State for loading status
     const [error, setError] = useState<string>(""); // State for error handling
 
@@ -16,8 +17,10 @@ export default function SingleAnime({ params }: { params: { anime_id: string } }
             try {
                 const anime_response = await getSingleAnime(anime_id);
                 const comment_response = await getAllComments("anime", anime_id);
+                const rating_response = await getAnimeRating(anime_id);
                 setAnime(anime_response.data);
                 setComments(comment_response.data);
+                setRating(rating_response.data)
                 setLoading(false);
             } catch (err) {
                 setError("Failed to fetch anime.");
@@ -34,7 +37,7 @@ export default function SingleAnime({ params }: { params: { anime_id: string } }
     if (anime) {
         return (
             <div>
-                <DisplaySingle anime={anime} comments={comments} />
+                <DisplaySingle anime={anime} comments={comments} rating={rating} />
             </div>
         );
     }
