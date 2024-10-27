@@ -81,3 +81,20 @@ export type CharacterAPI = {
   logo: string; // URL or path to the logo image
   media: string[]; // List of associated media (e.g., posters, trailers)
 }
+
+export type CommentType = "anime" | "character" | "anime_list" | "character_list";
+export type CommentUser = {
+  user_id: string
+  username: string
+}
+
+// Comment struct represents Comment information
+export type Comment = {
+  id: string;
+  type: CommentType;
+  content_id: string;
+  user: CommentUser;
+  text: string;
+  timestamp: Date;
+  rating: number;
+}
