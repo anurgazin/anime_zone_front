@@ -13,6 +13,7 @@ const commentsAPI = axios.create({
 });
 export const getAllAnime = () => animeAPI.get(``);
 export const getSingleAnime = (id: string) => animeAPI.get(`/id/${id}`)
+export const getAnimeRating = (id: string) => animeAPI.get(`/rating/${id}`)
 export const getAllCharacters = () => characterAPI.get(``);
 export const getSingleCharacter = (id: string) => characterAPI.get(`/${id}`)
 export const getAllComments = (type: string, id: string) => commentsAPI.get(`/${type}/${id}`);

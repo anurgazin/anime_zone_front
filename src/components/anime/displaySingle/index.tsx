@@ -1,6 +1,6 @@
 "use client";
 import Image from 'next/image';
-import { AnimeAPI, Comment } from "@/lib/types";
+import { AnimeAPI, Comment, Rating } from "@/lib/types";
 import { useState } from 'react';
 import Modal from '@/components/modal';
 
@@ -13,9 +13,10 @@ type img = {
 type DisplaySingleProps = {
     anime: AnimeAPI;
     comments: Comment[] | undefined;
+    rating: Rating[] | undefined;
 };
 
-export default function DisplaySingle({ anime, comments }: DisplaySingleProps) {
+export default function DisplaySingle({ anime, comments, rating }: DisplaySingleProps) {
     const genre = anime.genre.length > 1 ? anime.genre.join(", ") : anime.genre.toString();
     const studio = anime.studio.length > 1 ? anime.studio.join(", ") : anime.studio.toString();
 
@@ -25,6 +26,7 @@ export default function DisplaySingle({ anime, comments }: DisplaySingleProps) {
         setSelectedImage(image);
     };
     console.log(comments)
+    console.log(rating)
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
