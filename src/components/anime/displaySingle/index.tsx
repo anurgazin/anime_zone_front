@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { AnimeAPI, Comment, Rating } from "@/lib/types";
 import { useState } from 'react';
 import Modal from '@/components/modal';
+import CommentComponent from '@/components/comments';
+import RatingComponent from '@/components/review';
 
 type img = {
     src: string;
@@ -36,7 +38,7 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
             </div>
 
             {/* Information */}
-            <div className="lg:col-span-5 grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
+            <div className="lg:col-span-5 grid grid-cols-1 lg:grid-cols-6 lg:grid-rows-auto gap-5 justify-self-center px-4 sm:px-10 py-4">
                 {/* Logo section */}
                 <div className="lg:col-span-1 flex justify-center lg:justify-start relative w-full h-[200px] sm:h-[400px]"
                     onClick={() => handleImageClick({
@@ -49,7 +51,7 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
                 </div>
 
                 {/* Data info */}
-                <div className="lg:col-span-2 lg:row-span-1 p-4 rounded-lg border-2 border-orange-200 lg:border-none">
+                <div className="lg:col-span-3 lg:row-span-1 p-4 rounded-lg border-2 border-orange-200 lg:border-none">
                     <h1 className="text-2xl sm:text-3xl font-anton text-gray-800 mb-4">{anime.title}</h1>
                     <div className="text-lg sm:text-xl text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -69,14 +71,14 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
                 </div>
 
                 {/* Media Section */}
-                <div className="lg:col-span-1 lg:row-span-2 flex flex-col space-y-2">
-                    <h2 className="text-xl sm:text-2xl font-antonio text-gray-600 mb-2">Media</h2>
-                    <div className="grid grid-cols-2 gap-2 lg:flex lg:flex-col">
+                <div className="lg:col-span-2 lg:row-span-3 flex flex-col">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2">Media</h2>
+                    <div className="grid grid-cols-subgrid space-y-2">
                         {anime.media.map((mediaItem, i) => {
                             const isYouTubeLink = mediaItem.includes("youtube.com") || mediaItem.includes("youtu.be");
 
                             return (
-                                <div key={i} className="media-item">
+                                <div key={i} className="col-start-2">
                                     {isYouTubeLink ? (
                                         // Render YouTube iframe for YouTube links
                                         <iframe
@@ -84,6 +86,8 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
                                                 ? mediaItem.replace("youtu.be/", "www.youtube.com/embed/")
                                                 : mediaItem.replace("watch?v=", "embed/")
                                             }
+                                            width="320"
+                                            height="240"
                                             className="rounded-md shadow-md border-2 border-orange-200"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowFullScreen
@@ -94,8 +98,8 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
                                         <div
                                             onClick={() => handleImageClick({
                                                 src: mediaItem,
-                                                width: 321,
-                                                height: 171
+                                                width: 320,
+                                                height: 240
                                             })}
                                         >
                                             <Image
@@ -117,6 +121,21 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
                 <div className="lg:col-span-4 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg lg:border-none">
                     <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Description</h2>
                     <p className="text-gray-700 whitespace-pre-wrap">{anime.description}</p>
+                </div>
+
+                {/* Comments */}
+                <div className='lg:col-span-2 lg:row-start-3 border-2 border-orange-200 p-4 rounded-lg'>
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Comments</h2>
+                    {comments?.map((comment, i) => {
+                        return (<CommentComponent key={i} comment={comment} />)
+                    })}
+                </div>
+                {/* Reviews */}
+                <div className='lg:col-span-2 lg:row-start-3 border-2 border-orange-200 p-4 rounded-lg'>
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Reviews</h2>
+                    {rating?.map((r, i) => {
+                        return (<RatingComponent key={i} rating={r} />)
+                    })}
                 </div>
             </div>
             {selectedImage && <Modal modalContent={selectedImage} onClose={() => setSelectedImage(null)} />}
