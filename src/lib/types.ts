@@ -16,10 +16,15 @@ export type Anime = {
   esrb: ESRB;
 };
 
+export type RatingUser = {
+  user_id: string;
+  username: string;
+}
+
 export type Rating = {
   id?: string;
   anime_id: string;
-  user_id: string;
+  user: RatingUser;
   score: number;
   timestamp: string;
   review?: string;
