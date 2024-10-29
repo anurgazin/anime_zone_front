@@ -11,12 +11,12 @@ export default function Card({ anime }: Props) {
         <div key={anime.id} className='bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300'>
             <Link href={`/anime/${anime.id}`} className="block">
                 {/* Image */}
-                <div className="relative w-full h-[200px] sm:h-[400px]">
+                <div className="relative lg:w-full h-[400px]">
                     <Image
                         src={anime.logo}
                         fill={true}
                         alt={anime.title}
-                        className="rounded-t-lg object-cover"
+                        className="rounded-t-lg object-contain lg:object-cover"
                     />
                 </div>
                 {/* Card Content */}

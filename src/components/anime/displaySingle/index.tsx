@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Modal from '@/components/modal';
 import CommentComponent from '@/components/comments';
 import RatingComponent from '@/components/review';
+// import { Separator } from "@/components/ui/separator"
 
 type img = {
     src: string;
@@ -27,8 +28,6 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
     const handleImageClick = (image: img) => {
         setSelectedImage(image);
     };
-    console.log(comments)
-    console.log(rating)
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
@@ -40,20 +39,20 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
             {/* Information */}
             <div className="lg:col-span-5 grid grid-cols-1 lg:grid-cols-6 lg:grid-rows-auto gap-5 justify-self-center px-4 sm:px-10 py-4">
                 {/* Logo section */}
-                <div className="lg:col-span-1 flex justify-center lg:justify-start relative w-full h-[200px] sm:h-[400px]"
+                <div className="lg:col-span-1 flex justify-center lg:justify-start relative lg:w-full h-[400px]"
                     onClick={() => handleImageClick({
                         src: anime.logo,
                         width: 0,
                         height: 0
                     })}
                 >
-                    <Image src={anime.logo} fill={true} className="rounded-lg shadow-lg object-cover" alt="Anime Logo" />
+                    <Image src={anime.logo} fill={true} className="rounded-lg lg:shadow-lg object-contain lg:object-cover" alt="Anime Logo" />
                 </div>
 
                 {/* Data info */}
                 <div className="lg:col-span-3 lg:row-span-1 p-4 rounded-lg border-2 border-orange-200 lg:border-none">
                     <h1 className="text-2xl sm:text-3xl font-anton text-gray-800 mb-4">{anime.title}</h1>
-                    <div className="text-lg sm:text-xl text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="text-lg sm:text-xl text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:border-2 lg:border-orange-200 p-2 rounded-lg">
                         <div>
                             <p><span className="font-semibold">Rating:</span> {anime.average_rating > 0 ? `${anime.average_rating} / 10` : "Not Available"}</p>
                             <p><span className="font-semibold">Studio:</span> {studio}</p>
@@ -118,24 +117,35 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
                 </div>
 
                 {/* Description */}
-                <div className="lg:col-span-4 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg lg:border-none">
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Description</h2>
+                <div className="lg:col-span-4 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 underline decoration-orange-300 underline-offset-8">Description</h2>
                     <p className="text-gray-700 whitespace-pre-wrap">{anime.description}</p>
                 </div>
 
-                {/* Comments */}
-                <div className='lg:col-span-2 lg:row-start-3 border-2 border-orange-200 p-4 rounded-lg'>
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Comments</h2>
-                    {comments?.map((comment, i) => {
-                        return (<CommentComponent key={i} comment={comment} />)
-                    })}
-                </div>
-                {/* Reviews */}
-                <div className='lg:col-span-2 lg:row-start-3 border-2 border-orange-200 p-4 rounded-lg'>
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Reviews</h2>
-                    {rating?.map((r, i) => {
-                        return (<RatingComponent key={i} rating={r} />)
-                    })}
+                {/* Comments and Reviews Section */}
+                <div className="lg:col-span-4 lg:row-start-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
+                    {/* Comments */}
+                    <div className="border-2 border-orange-200 p-4 rounded-lg">
+                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
+                        {comments && comments.length > 0 ? (
+                            comments.map((comment, i) => (
+                                <CommentComponent key={i} comment={comment} />
+                            ))
+                        ) : (
+                            <p className="text-gray-600 italic">No comments yet.</p>
+                        )}
+                    </div>
+                    {/* Reviews */}
+                    <div className="border-2 border-orange-200 p-4 rounded-lg">
+                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
+                        {rating && rating.length > 0 ? (
+                            rating.map((r, i) => (
+                                <RatingComponent key={i} rating={r} />
+                            ))
+                        ) : (
+                            <p className="text-gray-600 italic">No reviews yet.</p>
+                        )}
+                    </div>
                 </div>
             </div>
             {selectedImage && <Modal modalContent={selectedImage} onClose={() => setSelectedImage(null)} />}
