@@ -106,16 +106,16 @@ export default function DisplayAll() {
 
 
     return (
-        <div className="grid lg:grid-cols-5 grid-rows-auto gap-4">
+        <div className="flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-auto gap-3">
             {/* Anime Cards */}
-            <div className="col-span-full lg:col-span-3 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 p-4">
+            <div className="flex flex-col lg:col-span-3 lg:grid lg:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 p-4">
                 {paginatedData.map((anime) => (
                     <Card key={anime.id} anime={anime} />
                 ))}
             </div>
 
             {/* Filter and Sort */}
-            <div className="col-span-full lg:col-span-2">
+            <div className="lg:col-span-2">
                 <AnimeFilterSort
                     filters={filters}
                     onFilterChange={handleFilterChange}
@@ -126,7 +126,7 @@ export default function DisplayAll() {
             </div>
 
             {/* Pagination Controls */}
-            <div className="h-[84px] col-span-full lg:col-span-3 flex justify-center items-center space-x-2 m-4 font-anton">
+            <div className="h-[100px] lg:col-span-3 flex justify-center content-start space-x-2 font-anton">
                 <Button
                     className={`px-4 py-2 bg-gray-300 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
                     disabled={currentPage === 1}
