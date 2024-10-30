@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import DisplaySingle from "@/components/characters/displaySingle";
 import { getSingleCharacter } from "@/lib/api";
 import { CharacterAPI } from "@/lib/types";
+import Loading from "@/components/loading";
+import Error from "@/components/error";
 
 export default function SingleCharacter({ params }: { params: { character_id: string } }) {
     const character_id = params.character_id;
@@ -25,8 +27,8 @@ export default function SingleCharacter({ params }: { params: { character_id: st
         fetchCharacter();
     }, [character_id]); // Re-fetch if character_id changes
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    if (loading) return <Loading />;
+    if (error) return <Error error={error} />;
 
     if (character) {
         return (

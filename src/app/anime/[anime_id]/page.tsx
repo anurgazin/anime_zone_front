@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import DisplaySingle from "@/components/anime/displaySingle";
 import { getAllComments, getAnimeRating, getSingleAnime } from "@/lib/api"; // Import the API function
 import { AnimeAPI, Comment, Rating } from "@/lib/types";
+import Loading from "@/components/loading";
+import Error from "@/components/error";
 
 export default function SingleAnime({ params }: { params: { anime_id: string } }) {
     const anime_id = params.anime_id;
@@ -31,8 +33,8 @@ export default function SingleAnime({ params }: { params: { anime_id: string } }
         fetchAnime();
     }, [anime_id]); // Re-fetch if anime_id changes
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    if (loading) return <Loading />;
+    if (error) return <Error error={error} />;
 
     if (anime) {
         return (
