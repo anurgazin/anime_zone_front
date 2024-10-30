@@ -33,20 +33,20 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
         <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
             {/* Top Banner */}
             <div className="relative overflow-hidden -z-10 h-48 sm:h-56 lg:col-span-5">
-                <Image src={anime.logo} fill={true} className="blur-sm object-cover" alt="Anime Banner" />
+                <Image src={anime.logo} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" fill={true} className="blur-sm object-cover" alt="Anime Banner" />
             </div>
 
             {/* Information */}
             <div className="lg:col-span-5 grid grid-cols-1 lg:grid-cols-6 lg:grid-rows-auto gap-5 justify-self-center px-4 sm:px-10 py-4">
                 {/* Logo section */}
-                <div className="lg:col-span-1 flex justify-center lg:justify-start relative lg:w-full h-[400px]"
+                <div className="flex justify-center lg:justify-start relative lg:w-full h-[350px]"
                     onClick={() => handleImageClick({
                         src: anime.logo,
                         width: 0,
                         height: 0
                     })}
                 >
-                    <Image src={anime.logo} fill={true} className="rounded-lg lg:shadow-lg object-contain lg:object-cover" alt="Anime Logo" />
+                    <Image src={anime.logo} priority fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="rounded-lg lg:shadow-lg object-contain lg:object-fill" alt="Anime Logo" />
                 </div>
 
                 {/* Data info */}

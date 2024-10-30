@@ -16,6 +16,7 @@ export default function Card({ anime }: Props) {
                         src={anime.logo}
                         fill={true}
                         alt={anime.title}
+                        priority
                         className="rounded-t-lg object-contain lg:object-cover"
                     />
                 </div>

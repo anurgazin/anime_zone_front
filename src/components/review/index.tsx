@@ -24,7 +24,7 @@ export default function RatingComponent({ rating }: RatingProps) {
             </div>
             {/* Text Review */}
             {rating.review && (
-                <p className="text-gray-700 italic">{rating.review}</p>
+                <p className="text-gray-700 italic whitespace-pre-line">{rating.review}</p>
             )}
         </div>
     );
