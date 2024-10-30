@@ -87,9 +87,9 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
                                 <SelectValue placeholder="Per Page" />
                             </SelectTrigger>
                             <SelectContent className="bg-white">
-                                <SelectItem value="10">10</SelectItem>
-                                <SelectItem value="15">15</SelectItem>
-                                <SelectItem value="20">20</SelectItem>
+                                <SelectItem value="12">12</SelectItem>
+                                <SelectItem value="18">18</SelectItem>
+                                <SelectItem value="24">24</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -97,7 +97,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
                     {/* Genre Filters */}
                     <div className="bg-white border-2 border-black p-2 rounded font-antonio">
                         <h2 className="text-lg font-semibold mb-2">Genres</h2>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-2 gap-2">
                             {genres.map((genre, id) => (
                                 <div key={id} className="flex items-center space-x-2">
                                     <Checkbox
@@ -121,7 +121,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
                     {/* Studio Filters */}
                     <div className="bg-white border-2 border-black p-2 rounded font-antonio">
                         <h2 className="text-lg font-medium mb-2">Studios</h2>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-2 gap-2">
                             {studios.map((studio, id) => (
                                 <div key={id} className="flex items-center space-x-2">
                                     <Checkbox
@@ -148,7 +148,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
                         <RadioGroup
                             value={selectedReleaseType}
                             onValueChange={setSelectedReleaseType}
-                            className="flex flex-row space-x-4"
+                            className="flex flex-row flex-wrap"
                         >
                             {release_types.map((type, id) => (
                                 <div key={id} className="flex items-center space-x-2">
@@ -165,7 +165,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
                         <RadioGroup
                             value={selectedStatus}
                             onValueChange={setSelectedStatus}
-                            className="flex flex-row space-x-4"
+                            className="flex flex-row flex-wrap"
                         >
                             {status.map((stat, id) => (
                                 <div key={id} className="flex items-center space-x-2">

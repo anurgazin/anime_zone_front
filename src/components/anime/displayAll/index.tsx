@@ -22,7 +22,7 @@ export default function DisplayAll() {
 
     const [sortBy, setSortBy] = useState<string>('default');
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(12);
 
     useEffect(() => {
         const fetchAnime = async () => {
@@ -108,14 +108,14 @@ export default function DisplayAll() {
     return (
         <div className="flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-auto gap-3">
             {/* Anime Cards */}
-            <div className="flex flex-col lg:col-span-3 lg:grid lg:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 p-4">
+            <div className="flex flex-col lg:col-span-4 lg:grid lg:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 p-4">
                 {paginatedData.map((anime) => (
                     <Card key={anime.id} anime={anime} />
                 ))}
             </div>
 
             {/* Filter and Sort */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-1">
                 <AnimeFilterSort
                     filters={filters}
                     onFilterChange={handleFilterChange}
