@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import Card from "../card";
 import { CharacterAPI } from "@/lib/types";
 import { getAllCharacters } from "@/lib/api";
+import Loading from "@/components/loading";
+import Error from "@/components/error";
 
 export default function DisplayAll() {
     const [characterList, setCharacterList] = useState<CharacterAPI[]>([]);
@@ -42,20 +44,8 @@ export default function DisplayAll() {
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     // Loading and Error States
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center h-full">
-                <h1 className="text-center text-gray-600 font-anton">Loading...</h1>
-            </div>
-        );
-    }
-    if (error) {
-        return (
-            <div className="flex items-center justify-center h-full">
-                <p className="text-center text-red-600">Error: {error}</p>
-            </div>
-        );
-    }
+    if (loading) return <Loading />;
+    if (error) return <Error error={error} />;
 
     return (
         <div className="flex flex-col justify-center">
