@@ -103,3 +103,26 @@ export type Comment = {
   timestamp: Date;
   rating: number;
 }
+
+export type ListUser = {
+  user_id: string
+  username: string
+}
+
+// AnimeList struct represents AnimeList information
+export type AnimeList = {
+  id: string
+  name: string
+  user: ListUser
+  anime_List: string[]
+  rating: number
+}
+
+// CharacterList struct represents CharacterList information
+export type CharacterList = {
+  id: string
+  name: string
+  user: ListUser
+  character_List: string[]
+  rating: number
+}
