@@ -1,10 +1,11 @@
 "use client";
 import Image from 'next/image';
-import { AnimeAPI, Comment, Rating } from "@/lib/types";
+import { AnimeAPI, AnimeList, Comment, Rating } from "@/lib/types";
 import { useState } from 'react';
 import Modal from '@/components/modal';
 import CommentComponent from '@/components/comments';
 import RatingComponent from '@/components/review';
+import AnimeListDisplay from '@/components/lists/animeList';
 // import { Separator } from "@/components/ui/separator"
 
 type img = {
@@ -17,9 +18,10 @@ type DisplaySingleProps = {
     anime: AnimeAPI;
     comments: Comment[] | undefined;
     rating: Rating[] | undefined;
+    animeList: AnimeList[] | undefined;
 };
 
-export default function DisplaySingle({ anime, comments, rating }: DisplaySingleProps) {
+export default function DisplaySingle({ anime, comments, rating, animeList }: DisplaySingleProps) {
     const genre = anime.genre.length > 1 ? anime.genre.join(", ") : anime.genre.toString();
     const studio = anime.studio.length > 1 ? anime.studio.join(", ") : anime.studio.toString();
 
@@ -122,8 +124,20 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
                     <p className="text-gray-700 whitespace-pre-wrap">{anime.description}</p>
                 </div>
 
-                {/* Comments and Reviews Section */}
-                <div className="lg:col-span-4 lg:row-start-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
+                {/* Reviews */}
+                <div className="lg:col-span-4 lg:row-start-3 border-2 border-orange-200 p-4 rounded-lg">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
+                    {rating && rating.length > 0 ? (
+                        rating.map((r, i) => (
+                            <RatingComponent key={i} rating={r} />
+                        ))
+                    ) : (
+                        <p className="text-gray-600 italic">No reviews yet.</p>
+                    )}
+                </div>
+
+                {/* Comments and Lists Section */}
+                <div className="lg:col-span-4 lg:row-start-4 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
                     {/* Comments */}
                     <div className="border-2 border-orange-200 p-4 rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
@@ -135,15 +149,16 @@ export default function DisplaySingle({ anime, comments, rating }: DisplaySingle
                             <p className="text-gray-600 italic">No comments yet.</p>
                         )}
                     </div>
-                    {/* Reviews */}
+
+                    {/* AnimeLists */}
                     <div className="border-2 border-orange-200 p-4 rounded-lg">
-                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
-                        {rating && rating.length > 0 ? (
-                            rating.map((r, i) => (
-                                <RatingComponent key={i} rating={r} />
+                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Anime Lists</h2>
+                        {animeList && animeList.length > 0 ? (
+                            animeList.map((a, i) => (
+                                <AnimeListDisplay key={i} animeList={a} />
                             ))
                         ) : (
-                            <p className="text-gray-600 italic">No reviews yet.</p>
+                            <p className="text-gray-600 italic">No anime lists yet.</p>
                         )}
                     </div>
                 </div>
