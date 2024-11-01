@@ -49,13 +49,13 @@ export default function Navbar() {
           isOpen ? "block" : "hidden"
         } md:hidden mt-2 space-y-2 text-white font-antonio`}
       >
-        <a href="#" className="block">
+        <a href="/anime" className="block">
           Anime
         </a>
-        <a href="#" className="block">
+        <a href="/characters" className="block">
           Characters
         </a>
-        <a href="#" className="block">
+        <a href="/about" className="block">
           About
         </a>
       </div>

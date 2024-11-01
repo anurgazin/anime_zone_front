@@ -43,14 +43,14 @@ export default function DisplaySingle({ character }: DisplaySingleProps) {
             {/* Information */}
             <div className="lg:col-span-5  grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
                 {/* Logo section */}
-                <div className="lg:col-span-1 flex justify-center lg:justify-start relative w-full h-[200px] sm:h-[400px]"
+                <div className="lg:col-span-1 flex justify-center lg:justify-start relative w-full h-[350px]"
                     onClick={() => handleImageClick({
                         src: character.logo,
                         width: 0,
                         height: 0
                     })}
                 >
-                    <Image src={character.logo} fill={true} className="rounded-lg shadow-lg object-cover" alt="Anime Logo" />
+                    <Image src={character.logo} priority fill={true} className="rounded-lg shadow-lg object-cover" alt="Anime Logo" />
                 </div>
 
                 {/* Data info */}
@@ -89,8 +89,12 @@ export default function DisplaySingle({ character }: DisplaySingleProps) {
                                 src: screen,
                                 width: 320,
                                 height: 240
-                            })}>
-                                <Image src={screen} width={321} height={171} className="rounded-md shadow-md border-2 border-orange-200" alt={`Media ${i}`} />
+                            })} className='relative w-auto h-[170px]'>
+                                <Image src={screen}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    className="rounded-md object-contain border-2  border-orange-200"
+                                    alt={`Media ${i}`} />
                             </div>
                         ))}
                     </div>
