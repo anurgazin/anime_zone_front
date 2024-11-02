@@ -12,12 +12,12 @@ export default function Card({ character }: Props) {
         <div key={character.id} className='bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300'>
             <Link href={`/characters/${character.id}`} className="block">
                 {/* Image */}
-                <div className="relative w-full h-[200px] sm:h-[400px]">
+                <div className="relative lg:w-full h-[400px]">
                     <Image
                         src={character.logo}
                         fill={true}
                         alt={character.first_name + " " + character.last_name}
-                        className="rounded-t-lg object-cover"
+                        className="rounded-t-lg object-contain lg:object-cover"
                     />
                 </div>
                 {/* Card Content */}
