@@ -1,10 +1,12 @@
 "use client";
 import Image from 'next/image';
-import { CharacterAPI } from "@/lib/types";
+import { CharacterAPI, CharacterList, Comment } from "@/lib/types";
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Modal from '@/components/modal';
 import Link from 'next/link';
+import CharacterListDisplay from '@/components/lists/characterList';
+import CommentComponent from '@/components/comments';
 
 type img = {
     src: string;
@@ -14,9 +16,11 @@ type img = {
 
 type DisplaySingleProps = {
     character: CharacterAPI;
+    comments: Comment[] | undefined;
+    lists: CharacterList[] | undefined;
 };
 
-export default function DisplaySingle({ character }: DisplaySingleProps) {
+export default function DisplaySingle({ character, comments, lists }: DisplaySingleProps) {
     const from_anime_links = character.from_anime.map((anime) => (
         <Link key={anime.id} href={`/anime/${anime.id}`} className="underline">
             {anime.title}
@@ -97,6 +101,32 @@ export default function DisplaySingle({ character }: DisplaySingleProps) {
                                     alt={`Media ${i}`} />
                             </div>
                         ))}
+                    </div>
+                </div>
+                {/* Comments and Lists Section */}
+                <div className="lg:col-span-4 lg:row-start-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
+                    {/* Comments */}
+                    <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
+                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
+                        {comments && comments.length > 0 ? (
+                            comments.map((comment, i) => (
+                                <CommentComponent key={i} comment={comment} />
+                            ))
+                        ) : (
+                            <p className="text-gray-600 italic">No comments yet.</p>
+                        )}
+                    </div>
+
+                    {/* AnimeLists */}
+                    <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
+                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Character Lists</h2>
+                        {lists && lists.length > 0 ? (
+                            lists.map((a, i) => (
+                                <CharacterListDisplay key={i} characterList={a} />
+                            ))
+                        ) : (
+                            <p className="text-gray-600 italic">No character lists yet.</p>
+                        )}
                     </div>
                 </div>
             </div>
