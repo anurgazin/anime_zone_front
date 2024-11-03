@@ -126,3 +126,19 @@ export type CharacterList = {
   character_List: string[]
   rating: number
 }
+
+
+export type LoginUser = {
+  email: string
+  password: string
+}
+
+export type User = {
+  id: string;
+  email: string;
+  username: string;
+  password: string;
+  role: string;
+  bio: string;
+  logo?: File;
+}

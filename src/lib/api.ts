@@ -1,4 +1,5 @@
 import axios from "axios";
+import { LoginUser } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_DOMAIN;
 
@@ -14,6 +15,12 @@ const commentsAPI = axios.create({
 const listsAPI = axios.create({
     baseURL: API_URL + "list",
 })
+const baseAPI = axios.create({
+    baseURL: API_URL
+})
+
+
+export const loginUser = (payload: LoginUser) => baseAPI.post(`/login`, payload)
 export const getAllAnime = () => animeAPI.get(``);
 export const getSingleAnime = (id: string) => animeAPI.get(`/id/${id}`)
 export const getAnimeRating = (id: string) => animeAPI.get(`/rating/${id}`)
