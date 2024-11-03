@@ -18,6 +18,7 @@ export default function Navbar() {
         <div className="hidden md:flex space-x-6 font-antonio text-white tracking-wide">
           <a href="/anime" className="hover:text-white">Anime</a>
           <a href="/characters" className="hover:text-white">Characters</a>
+          <a href="/login" className="hover:text-white">Login</a>
           <a href="/about" className="hover:text-white">About</a>
         </div>
 
@@ -45,15 +46,17 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`${
-          isOpen ? "block" : "hidden"
-        } md:hidden mt-2 space-y-2 text-white font-antonio`}
+        className={`${isOpen ? "block" : "hidden"
+          } md:hidden mt-2 space-y-2 text-white font-antonio`}
       >
         <a href="/anime" className="block">
           Anime
         </a>
         <a href="/characters" className="block">
           Characters
+        </a>
+        <a href="/login" className="block">
+          Login
         </a>
         <a href="/about" className="block">
           About
