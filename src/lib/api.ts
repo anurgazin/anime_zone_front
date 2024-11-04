@@ -21,6 +21,7 @@ const baseAPI = axios.create({
 
 
 export const loginUser = (payload: LoginUser) => baseAPI.post(`/login`, payload)
+export const registerUser = (payload: FormData) => baseAPI.post(`/register`, payload)
 export const getAllAnime = () => animeAPI.get(``);
 export const getSingleAnime = (id: string) => animeAPI.get(`/id/${id}`)
 export const getAnimeRating = (id: string) => animeAPI.get(`/rating/${id}`)

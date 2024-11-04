@@ -133,6 +133,14 @@ export type LoginUser = {
   password: string
 }
 
+export type RegisterUser = {
+  email: string;
+  username: string;
+  password: string;
+  bio: string;
+  logo?: File;
+}
+
 export type User = {
   id: string;
   email: string;
@@ -140,5 +148,5 @@ export type User = {
   password: string;
   role: string;
   bio: string;
-  logo?: File;
+  logo: string;
 }
