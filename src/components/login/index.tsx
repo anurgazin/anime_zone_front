@@ -6,6 +6,7 @@ import { LoginUser } from "@/lib/types";
 import { setCookie } from 'cookies-next';
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import Link from 'next/link'
 
 export default function LoginForm() {
     const [email, setEmail] = useState<string>("");
@@ -31,7 +32,7 @@ export default function LoginForm() {
                 setError('Login failed: No token received');
                 setLoading(false);
             }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             setError(error.response?.data || 'An error occurred during login');
             setLoading(false);
@@ -77,6 +78,12 @@ export default function LoginForm() {
             >
                 Login
             </Button>
+            <p className="text-center text-gray-600 text-sm mt-4">
+                Don&apos;t have an account?{" "}
+                <Link href="/register" className="text-orange-500 hover:text-orange-600 font-medium">
+                    Register now!
+                </Link>
+            </p>
         </form>
     );
 }
