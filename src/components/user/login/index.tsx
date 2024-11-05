@@ -5,8 +5,17 @@ import { loginUser } from "@/lib/api";
 import { LoginUser } from "@/lib/types";
 import { setCookie } from 'cookies-next';
 import { useRouter } from "next/navigation";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import Link from 'next/link'
+import { jwtDecode } from "jwt-decode";
+
+type TokenInfo = {
+    exp: number;
+    iat: number;
+    id: string;
+    role: string;
+    username: string;
+}
 
 export default function LoginForm() {
     const [email, setEmail] = useState<string>("");
@@ -26,7 +35,11 @@ export default function LoginForm() {
             const response = await loginUser(payload);
 
             if (response.data.token) {
-                setCookie("token", response.data.token)
+                const decoded = jwtDecode<TokenInfo>(response.data.token);
+                if (decoded.id != "") {
+                    setCookie("token", response.data.token)
+                    setCookie("id", decoded.id)
+                }
                 router.push('/');
             } else {
                 setError('Login failed: No token received');

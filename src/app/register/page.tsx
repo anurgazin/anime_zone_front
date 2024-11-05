@@ -1,4 +1,4 @@
-import RegistrationForm from "@/components/register";
+import RegistrationForm from "@/components/user/register";
 
 export default function Characters() {
     return (

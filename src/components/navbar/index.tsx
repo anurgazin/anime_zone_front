@@ -55,8 +55,8 @@ export default function Navbar() {
         <a href="/characters" className="block">
           Characters
         </a>
-        <a href="/login" className="block">
-          Login
+        <a href="/dashboard" className="block">
+          Dashboard
         </a>
         <a href="/about" className="block">
           About

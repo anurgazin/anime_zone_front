@@ -1,6 +1,7 @@
 "use client";
 
 import { Comment } from "@/lib/types";
+import Link from "next/link";
 
 type CommentProps = {
     comment: Comment;
@@ -20,7 +21,9 @@ export default function CommentComponent({ comment }: CommentProps) {
         <div className="pb-4 mb-4">
             {/* Header with Username and Timestamp */}
             <div className="flex justify-between items-center">
-                <p className="font-semibold text-gray-800">{comment.user.username}</p>
+                <Link href={`/dashboard/${comment.user.user_id}`}>
+                    <p className="font-semibold text-gray-800">{comment.user.username}</p>
+                </Link>
                 <p className="text-sm text-gray-500">{formatted_time}</p>
             </div>
 
