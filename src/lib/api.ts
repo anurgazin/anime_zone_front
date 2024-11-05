@@ -19,17 +19,26 @@ const baseAPI = axios.create({
     baseURL: API_URL
 })
 
-
+// User
 export const loginUser = (payload: LoginUser) => baseAPI.post(`/login`, payload)
 export const registerUser = (payload: FormData) => baseAPI.post(`/register`, payload)
+export const getUser = (id: string) => baseAPI.get(`/user/${id}`)
+// Anime
 export const getAllAnime = () => animeAPI.get(``);
 export const getSingleAnime = (id: string) => animeAPI.get(`/id/${id}`)
 export const getAnimeRating = (id: string) => animeAPI.get(`/rating/${id}`)
+export const getAnimeRatingByUser = (id: string) => animeAPI.get(`/rating/user/${id}`)
+// Characters
 export const getAllCharacters = () => characterAPI.get(``);
 export const getSingleCharacter = (id: string) => characterAPI.get(`/${id}`)
 export const getAllCharactersFromAnime = (id: string) => characterAPI.get(`/anime/${id}`)
+// Comments
 export const getAllComments = (type: string, id: string) => commentsAPI.get(`/${type}/${id}`);
+export const getAllCommentsByUser = (id: string) => commentsAPI.get(`/user/${id}`);
+// Lists
 export const getAllAnimeLists = () => listsAPI.get(`/anime`);
 export const getAllCharacterLists = () => listsAPI.get(`/characters`);
 export const getAllAnimeListsByAnimeId = (id: string) => listsAPI.get(`/anime/anime/${id}`);
 export const getAllCharacterListsByCharacterId = (id: string) => listsAPI.get(`/characters/character/${id}`);
+export const getAllAnimeListsByUserId = (id: string) => listsAPI.get(`/anime/user/${id}`);
+export const getAllCharacterListsByUserId = (id: string) => listsAPI.get(`/characters/user/${id}`);

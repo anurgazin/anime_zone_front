@@ -3,7 +3,7 @@
 import { useState, FormEvent } from "react";
 import { registerUser } from "@/lib/api";
 import { useRouter } from "next/navigation";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import Link from "next/link";
 
 export default function RegistrationForm() {

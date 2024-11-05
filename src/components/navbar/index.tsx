@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from 'next/link'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,14 +13,14 @@ export default function Navbar() {
     <nav className="bg-orange-400 bg-opacity-95 w-full lg:h-[64px] p-4 sticky top-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-2xl font-anton tracking-widest">
-          <a href="/">ANIME ZONE</a>
+          <Link href="/">ANIME ZONE</Link>
         </div>
 
         <div className="hidden md:flex space-x-6 font-antonio text-white tracking-wide">
-          <a href="/anime" className="hover:text-white">Anime</a>
-          <a href="/characters" className="hover:text-white">Characters</a>
-          <a href="/login" className="hover:text-white">Login</a>
-          <a href="/about" className="hover:text-white">About</a>
+          <Link href="/anime" className="hover:text-white">Anime</Link>
+          <Link href="/characters" className="hover:text-white">Characters</Link>
+          <Link href="/dashboard" className="hover:text-white">Dashboard</Link>
+          <Link href="/about" className="hover:text-white">About</Link>
         </div>
 
         <div className="md:hidden">
@@ -49,18 +50,18 @@ export default function Navbar() {
         className={`${isOpen ? "block" : "hidden"
           } md:hidden mt-2 space-y-2 text-white font-antonio`}
       >
-        <a href="/anime" className="block">
+        <Link href="/anime" className="block">
           Anime
-        </a>
-        <a href="/characters" className="block">
+        </Link>
+        <Link href="/characters" className="block">
           Characters
-        </a>
-        <a href="/login" className="block">
-          Login
-        </a>
-        <a href="/about" className="block">
+        </Link>
+        <Link href="/dashboard" className="block">
+          Dashboard
+        </Link>
+        <Link href="/about" className="block">
           About
-        </a>
+        </Link>
       </div>
     </nav>
   );
