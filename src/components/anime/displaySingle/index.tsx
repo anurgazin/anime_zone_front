@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Modal from '@/components/modal';
 import CommentComponent from '@/components/comments';
 import RatingComponent from '@/components/review';
-import AnimeListDisplay from '@/components/lists/animeList';
+import AnimeListDisplay from '@/components/lists/animeList/displayList';
 import CharacterFromAnimeCard from './charactersFrom';
 // import { Separator } from "@/components/ui/separator"
 

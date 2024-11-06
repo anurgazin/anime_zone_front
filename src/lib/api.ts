@@ -1,5 +1,6 @@
 import axios from "axios";
-import { LoginUser } from "./types";
+import { getCookie } from 'cookies-next';
+import { LoginUser, PostListRequest } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_DOMAIN;
 
@@ -18,6 +19,16 @@ const listsAPI = axios.create({
 const baseAPI = axios.create({
     baseURL: API_URL
 })
+
+
+export default function authHeader() {
+    const token = getCookie("token");
+    if (token) {
+        return { Auth: token.toString() };
+    } else {
+        return {};
+    }
+}
 
 // User
 export const loginUser = (payload: LoginUser) => baseAPI.post(`/login`, payload)
@@ -42,3 +53,4 @@ export const getAllAnimeListsByAnimeId = (id: string) => listsAPI.get(`/anime/an
 export const getAllCharacterListsByCharacterId = (id: string) => listsAPI.get(`/characters/character/${id}`);
 export const getAllAnimeListsByUserId = (id: string) => listsAPI.get(`/anime/user/${id}`);
 export const getAllCharacterListsByUserId = (id: string) => listsAPI.get(`/characters/user/${id}`);
+export const postAnimeList = (payload: PostListRequest) => listsAPI.post(`/anime`, payload, { headers: authHeader() });

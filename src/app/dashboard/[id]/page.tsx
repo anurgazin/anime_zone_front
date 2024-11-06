@@ -4,9 +4,9 @@ import { getAllAnimeListsByUserId, getAllCharacterListsByUserId, getAllCommentsB
 import { AnimeList, CharacterList, Comment, Rating, User } from "@/lib/types";
 import Loading from "@/components/loading";
 import Error from "@/components/error";
-import DashboardUser from "@/components/user/dashboard";
+import UserPage from "@/components/user/user";
 
-export default function Dashboard({ params }: { params: { id: string } }) {
+export default function DisplayUser({ params }: { params: { id: string } }) {
     const user_id = params.id;
     const [user, setUser] = useState<User>(); // State to store the fetched anime data
     const [comments, setComments] = useState<Comment[]>()
@@ -45,7 +45,7 @@ export default function Dashboard({ params }: { params: { id: string } }) {
     if (user) {
         return (
             <div>
-                <DashboardUser user={user} comments={comments} reviews={rating} anime_lists={animeLists} character_lists={characters} />
+                <UserPage user={user} comments={comments} reviews={rating} anime_lists={animeLists} character_lists={characters} />
             </div>
         );
     }

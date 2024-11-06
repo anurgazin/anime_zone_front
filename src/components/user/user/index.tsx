@@ -7,7 +7,6 @@ import CharacterListDisplay from '@/components/lists/characterList';
 import CommentComponent from '@/components/comments';
 import AnimeListDisplay from '@/components/lists/animeList/displayList';
 import RatingComponent from '@/components/review';
-import Link from 'next/link';
 
 type img = {
     src: string;
@@ -15,7 +14,7 @@ type img = {
     height: number;
 }
 
-type DisplaySingleProps = {
+type UserPageProps = {
     user: User;
     comments: Comment[] | undefined;
     character_lists: CharacterList[] | undefined;
@@ -23,7 +22,7 @@ type DisplaySingleProps = {
     reviews: Rating[] | undefined;
 };
 
-export default function DashboardUser({ user, comments, character_lists, anime_lists, reviews }: DisplaySingleProps) {
+export default function UserPage({ user, comments, character_lists, anime_lists, reviews }: UserPageProps) {
     const [selectedImage, setSelectedImage] = useState<img | null>(null);
     const handleImageClick = (image: img) => {
         setSelectedImage(image);
@@ -53,7 +52,6 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                 <div className="lg:col-span-2 lg:row-span-1 p-4 rounded-lg border-2 border-orange-200 p-4 rounded-lg lg:border-none">
                     <h1 className="text-2xl sm:text-3xl font-anton text-gray-800 mb-4">{user.username}</h1>
                     <div className="text-lg sm:text-xl font-antonio text-gray-600 grid grid-cols-1 gap-4">
-                        <p><span className="font-semibold">Email:</span> {user.email}</p>
                         <p><span className="font-semibold">Role:</span> {user.role}</p>
                     </div>
                 </div>
@@ -94,16 +92,13 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                 <div className="lg:col-span-4 lg:row-start-4 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
                     {/* AnimeLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
-                        <div className='flex flex-row justify-between text-xl sm:text-2xl font-anton '>
-                            <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Anime Lists</h2>
-                            <Link href="/dashboard/animeList" className='text-3xl text-orange-400'>+</Link>
-                        </div>
+                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Character Lists</h2>
                         {anime_lists && anime_lists.length > 0 ? (
                             anime_lists.map((a, i) => (
                                 <AnimeListDisplay key={i} animeList={a} />
                             ))
                         ) : (
-                            <p className="text-gray-600 italic">No anime lists yet.</p>
+                            <p className="text-gray-600 italic">No character lists yet.</p>
                         )}
                     </div>
 
