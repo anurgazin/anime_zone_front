@@ -32,7 +32,7 @@ export type Rating = {
 
 // Anime type for API
 export type AnimeAPI = {
-  id?: string;
+  id: string;
   title: string;
   release_date: Date;
   average_rating: number; // Average rating score
@@ -107,6 +107,12 @@ export type Comment = {
 export type ListUser = {
   user_id: string
   username: string
+}
+
+
+export type PostListRequest = {
+  title: string
+  content_list: string[]
 }
 
 // AnimeList struct represents AnimeList information

@@ -1,6 +1,6 @@
 import RegistrationForm from "@/components/user/register";
 
-export default function Characters() {
+export default function Register() {
     return (
         <div>
             <RegistrationForm />
