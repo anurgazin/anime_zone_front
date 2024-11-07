@@ -54,3 +54,4 @@ export const getAllCharacterListsByCharacterId = (id: string) => listsAPI.get(`/
 export const getAllAnimeListsByUserId = (id: string) => listsAPI.get(`/anime/user/${id}`);
 export const getAllCharacterListsByUserId = (id: string) => listsAPI.get(`/characters/user/${id}`);
 export const postAnimeList = (payload: PostListRequest) => listsAPI.post(`/anime`, payload, { headers: authHeader() });
+export const postCharacterList = (payload: PostListRequest) => listsAPI.post(`/characters`, payload, { headers: authHeader() });

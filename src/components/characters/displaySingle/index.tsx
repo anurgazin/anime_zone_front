@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Modal from '@/components/modal';
 import Link from 'next/link';
-import CharacterListDisplay from '@/components/lists/characterList';
+import CharacterListDisplay from '@/components/lists/characterList/displayList';
 import CommentComponent from '@/components/comments';
 
 type img = {

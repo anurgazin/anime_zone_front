@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { AnimeList, CharacterList, Comment, Rating, User } from "@/lib/types";
 import { useState } from 'react';
 import Modal from '@/components/modal';
-import CharacterListDisplay from '@/components/lists/characterList';
+import CharacterListDisplay from '@/components/lists/characterList/displayList';
 import CommentComponent from '@/components/comments';
 import AnimeListDisplay from '@/components/lists/animeList/displayList';
 import RatingComponent from '@/components/review';
@@ -109,7 +109,10 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
 
                     {/* CharacterLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
-                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Character Lists</h2>
+                        <div className='flex flex-row justify-between text-xl sm:text-2xl font-anton '>
+                            <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Characters Lists</h2>
+                            <Link href="/dashboard/charactersList" className='text-3xl text-orange-400'>+</Link>
+                        </div>
                         {character_lists && character_lists.length > 0 ? (
                             character_lists.map((a, i) => (
                                 <CharacterListDisplay key={i} characterList={a} />
