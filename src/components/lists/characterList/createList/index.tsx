@@ -1,29 +1,29 @@
 "use client";
 
 import { useState, FormEvent, useEffect } from "react";
-import { AnimeAPI, PostListRequest } from "@/lib/types";
+import { CharacterAPI, PostListRequest } from "@/lib/types";
 import { useRouter } from "next/navigation";
-import { getAllAnime, postAnimeList } from "@/lib/api";
+import { getAllCharacters, postCharacterList } from "@/lib/api";
 
-export default function CreateAnimeListForm() {
+export default function CreateCharacterListForm() {
     const [listTitle, setListTitle] = useState<string>("");
     const [selectedAnimeIds, setSelectedAnimeIds] = useState<string[]>([]);
-    const [animeList, setAnimeList] = useState<AnimeAPI[]>([]);
+    const [characters, setCharacters] = useState<CharacterAPI[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
 
-    // Fetch list of anime on component mount
+    // Fetch list of characters on component mount
     useEffect(() => {
-        const fetchAnimeList = async () => {
+        const fetchCharacters = async () => {
             try {
-                const response = await getAllAnime(); // Fetches anime list
-                setAnimeList(response.data);
+                const response = await getAllCharacters(); // Fetches characters
+                setCharacters(response.data);
             } catch (err) {
-                setError("Failed to load anime list");
+                setError("Failed to load characters");
             }
         };
-        fetchAnimeList();
+        fetchCharacters();
     }, []);
 
     const handleCheckboxChange = (animeId: string) => {
@@ -44,7 +44,7 @@ export default function CreateAnimeListForm() {
         };
 
         try {
-            const response = await postAnimeList(formData);
+            const response = await postCharacterList(formData);
             if (response.status === 201) {
                 router.push("/dashboard"); // Redirect to dashboard
             } else {
@@ -61,7 +61,7 @@ export default function CreateAnimeListForm() {
 
     return (
         <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg space-y-6">
-            <h2 className="text-2xl font-semibold text-center text-gray-800">Create Anime List</h2>
+            <h2 className="text-2xl font-semibold text-center text-gray-800">Create Character List</h2>
 
             <div className="flex flex-col space-y-2">
                 <label htmlFor="listTitle" className="text-gray-700 font-medium">List Title:</label>
@@ -77,23 +77,23 @@ export default function CreateAnimeListForm() {
             </div>
 
             <div className="flex flex-col space-y-2 h-[50vh] overflow-y-auto">
-                <label className="text-xl text-gray-700 font-medium">Select Anime:</label>
-                {animeList.length > 0 ? (
-                    animeList.map((anime) => (
-                        <div key={anime.id} className="flex items-center space-x-2">
+                <label className="text-xl text-gray-700 font-medium">Select Characters:</label>
+                {characters.length > 0 ? (
+                    characters.map((character) => (
+                        <div key={character.id} className="flex items-center space-x-2">
                             <input
                                 type="checkbox"
-                                id={anime.id}
-                                value={anime.id}
-                                onChange={() => handleCheckboxChange(anime.id)}
-                                checked={selectedAnimeIds.includes(anime.id)}
+                                id={character.id}
+                                value={character.id}
+                                onChange={() => handleCheckboxChange(character.id)}
+                                checked={selectedAnimeIds.includes(character.id)}
                                 className="w-4 h-4 text-orange-500 focus:ring-2 focus:ring-orange-400 border-gray-300 rounded"
                             />
-                            <label htmlFor={anime.id} className="text-gray-700">{anime.title}</label>
+                            <label htmlFor={character.id} className="text-gray-700">{character.last_name} {character.first_name}</label>
                         </div>
                     ))
                 ) : (
-                    <p>Loading anime list...</p>
+                    <p>Loading characters list...</p>
                 )}
             </div>
 
