@@ -4,7 +4,6 @@ import { useState, FormEvent } from "react";
 import { postComment } from "@/lib/api";
 import { Button } from "../../ui/button";
 import { PostCommentType } from "@/lib/types";
-import { useRouter } from "next/navigation";
 
 interface CommentFormProps {
     contentType: PostCommentType["type"];
@@ -15,8 +14,6 @@ export default function WriteComment({ contentType, contentId }: CommentFormProp
     const [text, setText] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-
-    const router = useRouter();
 
     // Handle form submission
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -33,7 +30,6 @@ export default function WriteComment({ contentType, contentId }: CommentFormProp
         try {
             await postComment(payload);
             setText(""); // Clear textarea on successful submission
-            router.refresh();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.response?.data || "Failed to post comment");

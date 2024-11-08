@@ -24,6 +24,7 @@ export default function Modal({ modalContent, onClose }: ModalProps) {
                 src={modalContent.src}
                 width={640}
                 height={480}
+                quality={100} 
                 alt="Modal content"
                 className="block w-full max-w-[90vw] max-h-[80vh] object-contain"
             />

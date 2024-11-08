@@ -23,9 +23,14 @@ export default function RatingComponent({ rating }: RatingProps) {
                 <span className="ml-2 text-gray-800">{rating.score} / 10</span>
             </div>
             {/* Text Review */}
-            {rating.review && (
-                <p className="text-gray-700 italic whitespace-pre-line">{rating.review}</p>
-            )}
+            {rating.review ?
+                (
+                    <p className="text-gray-700 italic whitespace-pre-line">{rating.review}</p>
+                ) :
+                (
+                    <p className="text-gray-400 italic">No text review</p>
+                )
+            }
         </div>
     );
 }
