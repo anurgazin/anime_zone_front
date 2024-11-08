@@ -40,7 +40,8 @@ export default function LoginForm() {
                     setCookie("token", response.data.token)
                     setCookie("id", decoded.id)
                 }
-                router.push('/');
+                router.push('/dashboard');
+                router.refresh();
             } else {
                 setError('Login failed: No token received');
                 setLoading(false);
