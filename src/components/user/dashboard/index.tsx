@@ -59,13 +59,13 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                 </div>
 
                 {/* Description */}
-                <div className="lg:col-span-4 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg lg:border-none">
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Description</h2>
+                <div className="lg:col-span-5 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg lg:border-none">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Bio</h2>
                     <p className="text-gray-700 whitespace-pre-wrap">{user.bio}</p>
                 </div>
 
                 {/* Comments and Reviews Section */}
-                <div className="lg:col-span-4 lg:row-start-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
+                <div className="lg:col-span-5 lg:row-start-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
                     {/* Comments */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
@@ -91,7 +91,7 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                 </div>
 
                 {/* Lists */}
-                <div className="lg:col-span-4 lg:row-start-4 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
+                <div className="lg:col-span-5 lg:row-start-4 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
                     {/* AnimeLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <div className='flex flex-row justify-between text-xl sm:text-2xl font-anton '>
