@@ -103,6 +103,11 @@ export type Comment = {
   timestamp: Date;
   rating: number;
 }
+export type PostCommentType = {
+  type: CommentType;
+  content_id: string;
+  text: string;
+}
 
 export type ListUser = {
   user_id: string

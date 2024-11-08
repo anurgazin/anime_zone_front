@@ -4,7 +4,7 @@ import { AnimeList, CharacterList, Comment, Rating, User } from "@/lib/types";
 import { useState } from 'react';
 import Modal from '@/components/modal';
 import CharacterListDisplay from '@/components/lists/characterList/displayList';
-import CommentComponent from '@/components/comments';
+import CommentComponent from '@/components/comments/displayComments';
 import AnimeListDisplay from '@/components/lists/animeList/displayList';
 import RatingComponent from '@/components/review';
 
