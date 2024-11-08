@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getCookie } from 'cookies-next';
-import { LoginUser, PostListRequest } from "./types";
+import { LoginUser, PostCommentType, PostListRequest } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_DOMAIN;
 
@@ -46,6 +46,7 @@ export const getAllCharactersFromAnime = (id: string) => characterAPI.get(`/anim
 // Comments
 export const getAllComments = (type: string, id: string) => commentsAPI.get(`/${type}/${id}`);
 export const getAllCommentsByUser = (id: string) => commentsAPI.get(`/user/${id}`);
+export const postComment = (payload: PostCommentType) => commentsAPI.post(``, payload, { headers: authHeader() })
 // Lists
 export const getAllAnimeLists = () => listsAPI.get(`/anime`);
 export const getAllCharacterLists = () => listsAPI.get(`/characters`);
