@@ -13,7 +13,7 @@ type WriteReviewProps = {
 
 export default function WriteReview({ anime }: WriteReviewProps) {
     const [text, setText] = useState<string>("");
-    const [rating, setRating] = useState<number>(0)
+    const [rating, setRating] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -28,13 +28,13 @@ export default function WriteReview({ anime }: WriteReviewProps) {
         const payload: PostRatingRequest = {
             score: rating,
             review: text
-        }
+        };
 
         try {
             await postAnimeRating(anime.id, payload);
-            setText(""); // Clear textarea on successful submission
-            setRating(0)
-            router.push(`/anime/${anime.id}`)
+            setText("");
+            setRating(0);
+            router.push(`/anime/${anime.id}`);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.response?.data || "Failed to post review");
@@ -45,23 +45,34 @@ export default function WriteReview({ anime }: WriteReviewProps) {
 
     // Handle clearing the textarea
     const handleCancel = () => {
-        setText(""); // Clear the text input
-        setRating(0)
+        setText("");
+        setRating(0);
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-1">
-            {error && <p className="text-red-500">{error}</p>}
-            <h2 className="text-2xl font-semibold text-center text-gray-800">Review For {anime.title}</h2>
-            {/* Logo */}
-            <div className='lg:col-span-2 flex justify-center'>
-                <div className="relative w-full h-[350px]">
-                    <Image src={anime.logo} priority fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="rounded-lg object-contain" alt="Anime Logo" />
+        <form onSubmit={handleSubmit} className="space-y-4 p-4 shadow-md rounded-md border border-gray-200 max-w-lg mx-auto m-4">
+            {error && <p className="text-red-500 text-center text-sm">{error}</p>}
+
+            {/* Title */}
+            <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">Review for {anime.title}</h2>
+
+            {/* Anime Logo */}
+            <div className="flex justify-center mb-4">
+                <div className="relative w-full h-[350px] lg:w-[60%]">
+                    <Image
+                        src={anime.logo}
+                        priority
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="rounded-md object-contain"
+                        alt="Anime Logo"
+                    />
                 </div>
             </div>
-            {/* Rating */}
-            <div className="flex flex-col space-y-2">
-                <label htmlFor="rating" className="text-gray-700 font-medium">Rating:</label>
+
+            {/* Rating Input */}
+            <div className="flex flex-col">
+                <label htmlFor="rating" className="text-gray-700 font-medium">Rating (0-10):</label>
                 <input
                     type="number"
                     id="rating"
@@ -70,44 +81,46 @@ export default function WriteReview({ anime }: WriteReviewProps) {
                     required
                     min={0}
                     max={10}
-                    className="p-3 border rounded-md focus:ring-2 focus:ring-orange-400 focus:outline-none"
-                    placeholder="Rate the Anime (0-10)"
+                    className="p-2 border rounded focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
+                    placeholder="Enter your rating"
                 />
             </div>
 
-            {/* Review Text */}
-            <div className="flex flex-col space-y-2">
+            {/* Review Textarea */}
+            <div className="flex flex-col mt-2">
+                <label htmlFor="text" className="text-gray-700 font-medium">Your Review:</label>
                 <textarea
                     id="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    className="p-3 border rounded-md focus:ring-1 focus:ring-orange-400 focus:outline-none"
-                    rows={4}
-                    placeholder="Write your review here...(Optional)"
+                    className="p-2 border rounded focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
+                    rows={10}
+                    placeholder="Write your review here...(optional)"
                 />
             </div>
 
             {/* Buttons */}
-            <div className="flex justify-end space-x-2">
+            <div className="flex justify-end space-x-2 mt-6">
                 {/* Cancel Button */}
                 <Button
                     type="button"
                     onClick={handleCancel}
                     disabled={loading}
                     variant="ghost"
-                    className="text-gray-600 p-3"
+                    className="text-gray-500 hover:text-gray-900 transition-colors duration-200 rounded-lg p-3"
                 >
                     {loading ? "Canceling..." : "Cancel"}
                 </Button>
+
                 {/* Submit Button */}
                 <Button
                     type="submit"
                     disabled={loading}
-                    className="bg-orange-400 text-white font-medium p-3 rounded-md hover:bg-orange-500 transition-colors duration-300"
+                    className="bg-orange-400 text-white font-medium p-3 rounded-lg hover:bg-orange-500 transition-colors duration-200"
                 >
-                    {loading ? "Posting..." : "Post Review"}
+                    {loading ? "Posting..." : "Review"}
                 </Button>
             </div>
-        </form >
+        </form>
     );
 }
