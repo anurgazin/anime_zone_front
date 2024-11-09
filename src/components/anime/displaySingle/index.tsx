@@ -4,11 +4,12 @@ import { AnimeAPI, AnimeList, CharacterAPI, Comment, Rating } from "@/lib/types"
 import { useState } from 'react';
 import Modal from '@/components/modal';
 import CommentComponent from '@/components/comments/displayComments';
-import RatingComponent from '@/components/review';
+import RatingComponent from '@/components/review/displayReview';
 import AnimeListDisplay from '@/components/lists/animeList/displayList';
 import CharacterFromAnimeCard from './charactersFrom';
 import WriteComment from '@/components/comments/writeComment';
 import { getCookie } from 'cookies-next';
+import Link from 'next/link';
 
 type img = {
     src: string;
@@ -109,8 +110,8 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                                             onClick={() =>
                                                 handleImageClick({
                                                     src: mediaItem,
-                                                    width: 320,
-                                                    height: 240,
+                                                    width: 1280,
+                                                    height: 720,
                                                 })
                                             }
                                             className="relative w-[320px] h-[180px]">
@@ -151,7 +152,10 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
 
                 {/* Reviews */}
                 <div className="border-2 border-orange-200 shadow-md bg-white p-4 rounded-lg">
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
+                    <div className='flex flex-row justify-between text-xl sm:text-2xl font-anton'>
+                        <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
+                        <Link href={`/dashboard/review/${anime.id}`} className='text-3xl text-orange-400'>+</Link>
+                    </div>
                     {rating && rating.length > 0 ? (
                         rating
                             .map((r, i) => (

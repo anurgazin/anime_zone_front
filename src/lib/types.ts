@@ -30,6 +30,11 @@ export type Rating = {
   review?: string;
 };
 
+export type PostRatingRequest = {
+  score: number
+  review: string // optional
+}
+
 // Anime type for API
 export type AnimeAPI = {
   id: string;
