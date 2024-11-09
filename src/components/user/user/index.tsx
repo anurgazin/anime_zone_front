@@ -6,7 +6,7 @@ import Modal from '@/components/modal';
 import CharacterListDisplay from '@/components/lists/characterList/displayList';
 import CommentComponent from '@/components/comments/displayComments';
 import AnimeListDisplay from '@/components/lists/animeList/displayList';
-import RatingComponent from '@/components/review';
+import RatingComponent from '@/components/review/displayReview';
 
 type img = {
     src: string;

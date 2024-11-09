@@ -6,7 +6,7 @@ import Modal from '@/components/modal';
 import CharacterListDisplay from '@/components/lists/characterList/displayList';
 import CommentComponent from '@/components/comments/displayComments';
 import AnimeListDisplay from '@/components/lists/animeList/displayList';
-import RatingComponent from '@/components/review';
+import RatingComponent from '@/components/review/displayReview';
 import Link from 'next/link';
 
 type img = {
@@ -94,7 +94,7 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                 <div className="lg:col-span-5 lg:row-start-4 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
                     {/* AnimeLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
-                        <div className='flex flex-row justify-between text-xl sm:text-2xl font-anton '>
+                        <div className='flex flex-row justify-between text-xl sm:text-2xl font-anton'>
                             <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Anime Lists</h2>
                             <Link href="/dashboard/animeList" className='text-3xl text-orange-400'>+</Link>
                         </div>
