@@ -35,6 +35,7 @@ export default function WriteReview({ anime }: WriteReviewProps) {
             setText("");
             setRating(0);
             router.push(`/anime/${anime.id}`);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.response?.data || "Failed to post review");
         } finally {
