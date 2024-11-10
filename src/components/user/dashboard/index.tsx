@@ -79,7 +79,10 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                     </div>
                     {/* Reviews */}
                     <div className="border-2 border-orange-200 shadow-md bg-white p-4 rounded-lg">
-                        <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
+                        <div className='flex flex-row justify-between text-xl sm:text-2xl font-anton'>
+                            <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
+                            <Link href={`/dashboard/review`} className='text-3xl text-orange-400'>+</Link>
+                        </div>
                         {reviews && reviews.length > 0 ? (
                             reviews.map((r, i) => (
                                 r.review && (<RatingComponent key={i} rating={r} />)

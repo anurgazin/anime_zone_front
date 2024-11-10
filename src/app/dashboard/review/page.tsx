@@ -1,21 +1,20 @@
 "use client"
 import Loading from "@/components/loading";
 import Error from "@/components/error";
-import WriteReview from "@/components/review/writeReviewById";
-import { getSingleAnime } from "@/lib/api";
+import WriteReviewList from "@/components/review/writeReviewList";
+import { getAllAnime } from "@/lib/api";
 import { AnimeAPI } from "@/lib/types";
 import { useEffect, useState } from "react";
 
-export default function ReviewId({ params }: { params: { id: string } }) {
-    const anime_id = params.id;
-    const [anime, setAnime] = useState<AnimeAPI>()
+export default function Review() {
+    const [anime, setAnime] = useState<AnimeAPI[]>()
     const [loading, setLoading] = useState<boolean>(true); // State for loading status
     const [error, setError] = useState<string>(""); // State for error handling
 
     useEffect(() => {
         const fetchAnime = async () => {
             try {
-                const anime_response = await getSingleAnime(anime_id)
+                const anime_response = await getAllAnime()
                 setAnime(anime_response.data)
                 setLoading(false);
             } catch (err) {
@@ -24,7 +23,7 @@ export default function ReviewId({ params }: { params: { id: string } }) {
             }
         }
         fetchAnime();
-    }, [anime_id])
+    }, [])
 
     if (loading) return <Loading />;
     if (error) return <Error error={error} />;
@@ -32,7 +31,7 @@ export default function ReviewId({ params }: { params: { id: string } }) {
     if (anime) {
         return (
             <div>
-                <WriteReview anime={anime} />
+                <WriteReviewList anime={anime} />
             </div>
         );
     }
