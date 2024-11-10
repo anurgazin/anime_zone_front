@@ -6,6 +6,7 @@ import { Button } from "../../ui/button";
 import { AnimeAPI, PostRatingRequest } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 type WriteReviewProps = {
     anime: AnimeAPI;
@@ -51,10 +52,17 @@ export default function WriteReview({ anime }: WriteReviewProps) {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 p-4 shadow-md rounded-md border border-gray-200 max-w-lg mx-auto m-4">
+            {/* Back to Dashboard */}
+            <Link
+                href={`/anime/${anime.id}`}
+                className="text-gray-500 hover:text-orange-500 transition-colors duration-200"
+            >
+                <span className="text-orange-500">&#8592;</span> Back to Page
+            </Link>
             {error && <p className="text-red-500 text-center text-sm">{error}</p>}
 
             {/* Title */}
-            <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">Review for {anime.title}</h2>
+            <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">{anime.title}</h2>
 
             {/* Anime Logo */}
             <div className="flex justify-center mb-4">
