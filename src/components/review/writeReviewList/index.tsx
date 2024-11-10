@@ -48,6 +48,7 @@ export default function WriteReviewList({ anime }: WriteReviewProps) {
                 setRating(0);
                 router.push(`/dashboard`);
             }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.response?.data || "Failed to post review");
         } finally {
