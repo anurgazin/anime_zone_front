@@ -2,20 +2,12 @@
 
 import { useState, FormEvent } from "react";
 import { loginUser } from "@/lib/api";
-import { LoginUser } from "@/lib/types";
+import { LoginUser, TokenInfo } from "@/lib/types";
 import { setCookie } from 'cookies-next';
 import { useRouter } from "next/navigation";
 import { Button } from "../../ui/button";
 import Link from 'next/link'
 import { jwtDecode } from "jwt-decode";
-
-type TokenInfo = {
-    exp: number;
-    iat: number;
-    id: string;
-    role: string;
-    username: string;
-}
 
 export default function LoginForm() {
     const [email, setEmail] = useState<string>("");

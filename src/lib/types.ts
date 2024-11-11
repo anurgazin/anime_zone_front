@@ -166,3 +166,11 @@ export type User = {
   bio: string;
   logo: string;
 }
+
+export type TokenInfo = {
+  exp: number;
+  iat: number;
+  id: string;
+  role: string;
+  username: string;
+}
