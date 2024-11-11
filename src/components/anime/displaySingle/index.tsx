@@ -154,7 +154,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                 <div className="border-2 border-orange-200 shadow-md bg-white p-4 rounded-lg">
                     <div className='flex flex-row justify-between text-xl sm:text-2xl font-anton'>
                         <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
-                        <Link href={`/dashboard/review/${anime.id}`} className='text-3xl text-orange-400'>+</Link>
+                        {user_exists.length > 0 && <Link href={`/dashboard/review/${anime.id}`} className='text-3xl text-orange-400'>+</Link>}
                     </div>
                     {rating && rating.length > 0 ? (
                         rating

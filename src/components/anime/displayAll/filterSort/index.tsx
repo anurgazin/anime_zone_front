@@ -72,7 +72,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
                 {/* Sort By / Per Page */}
                 <div className="flex flex-col space-y-4 mt-4">
                     <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 items-center">
-                        <Select value={(sortBy === "default" ? "": sortBy)} onValueChange={onSortChange}>
+                        <Select value={(sortBy === "default" ? "" : sortBy)} onValueChange={onSortChange}>
                             <SelectTrigger className="w-[200px] bg-gray-100 border-2 border-black p-2 rounded-2xl">
                                 <SelectValue placeholder="Sort By" />
                             </SelectTrigger>
@@ -97,7 +97,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
                     {/* Genre Filters */}
                     <div className="bg-white border-2 border-black p-2 rounded font-antonio">
                         <h2 className="text-lg font-semibold mb-2">Genres</h2>
-                        <div className="grid grid-cols-2 sm:grid-cols-2 gap-2">
+                        <div className="grid grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-2">
                             {genres.map((genre, id) => (
                                 <div key={id} className="flex items-center space-x-2">
                                     <Checkbox
@@ -121,7 +121,7 @@ export default function AnimeFilterSort({ filters, onFilterChange, sortBy, onSor
                     {/* Studio Filters */}
                     <div className="bg-white border-2 border-black p-2 rounded font-antonio">
                         <h2 className="text-lg font-medium mb-2">Studios</h2>
-                        <div className="grid grid-cols-2 sm:grid-cols-2 gap-2">
+                        <div className="grid grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-2">
                             {studios.map((studio, id) => (
                                 <div key={id} className="flex items-center space-x-2">
                                     <Checkbox
