@@ -7,6 +7,7 @@ import { AnimeAPI, PostRatingRequest } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
 
 type WriteReviewProps = {
     anime: AnimeAPI;
@@ -17,6 +18,7 @@ export default function WriteReview({ anime }: WriteReviewProps) {
     const [rating, setRating] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const { toast } = useToast()
 
     const router = useRouter();
 
@@ -35,10 +37,19 @@ export default function WriteReview({ anime }: WriteReviewProps) {
             await postAnimeRating(anime.id, payload);
             setText("");
             setRating(0);
+            toast({
+                title: "Success",
+                description: "Review Uploaded Successfully!",
+            });
             router.push(`/anime/${anime.id}`);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.response?.data || "Failed to post review");
+            toast({
+                title: "Error",
+                description: err.response?.data || "Failed to post review",
+                variant: "destructive",
+            })
         } finally {
             setLoading(false);
         }

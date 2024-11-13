@@ -46,7 +46,7 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                         height: 0
                     })}
                 >
-                    <Image src={user.logo} priority fill={true} className="rounded-lg shadow-lg object-cover" alt="User Logo" />
+                    <Image src={user.logo} priority fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="rounded-lg shadow-lg object-cover" alt="User Logo" />
                 </div>
 
                 {/* Data info */}

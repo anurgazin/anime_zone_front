@@ -54,6 +54,22 @@ export type AnimeAPI = {
   media: string[]; // List of associated media (e.g., posters, trailers)
 };
 
+export type AnimeAPIUploader = {
+  title: string
+  release_date: Date
+  genre: string[]
+  type: Type
+  episodes: number
+  description: string
+  studio: string[]
+  duration: number
+  status: Status
+  esrb: ESRB
+  link: string
+  logo: File
+  media: File[]
+}
+
 
 export type Filters = {
   genre: string[];
