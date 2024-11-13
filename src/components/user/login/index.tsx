@@ -8,18 +8,19 @@ import { useRouter } from "next/navigation";
 import { Button } from "../../ui/button";
 import Link from 'next/link'
 import { jwtDecode } from "jwt-decode";
+import { useToast } from "@/hooks/use-toast";
 
 export default function LoginForm() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+
+    const { toast } = useToast()
 
     const router = useRouter();
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setError(null);
         setLoading(true);
 
         const payload: LoginUser = { email, password }
@@ -32,15 +33,27 @@ export default function LoginForm() {
                     setCookie("token", response.data.token)
                     setCookie("id", decoded.id)
                 }
-                router.push('/dashboard');
+                toast({
+                    title: "Success",
+                    description: "Welcome back!",
+                });
+                router.push('/anime');
                 router.refresh();
             } else {
-                setError('Login failed: No token received');
+                toast({
+                    title: "Error",
+                    description: 'Login failed: No token received',
+                    variant: "destructive",
+                })
                 setLoading(false);
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
-            setError(error.response?.data || 'An error occurred during login');
+            toast({
+                title: "Error",
+                description: error.response?.data || 'An error occurred during login',
+                variant: "destructive",
+            })
             setLoading(false);
         }
     }
@@ -74,8 +87,6 @@ export default function LoginForm() {
                     placeholder="Enter your password"
                 />
             </div>
-
-            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
             <Button
                 type="submit"

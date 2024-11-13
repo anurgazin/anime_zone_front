@@ -4,42 +4,46 @@ import type { NextRequest } from "next/server";
 import { TokenInfo } from "@/lib/types";
 import { jwtDecode } from "jwt-decode";
 
-// List of protected paths that require a user token
+// List of protected paths
 const protectedPaths = ["/dashboard"];
-const protectedAdminPaths = ["/create"];
+const protectedAdminPaths = ["/dashboard/post/"];
 
+// Middleware function
 export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
 
-    // Check if the path is protected
-    const requiresAuth = protectedPaths.some((protectedPath) => path.startsWith(protectedPath));
-    const requiresAdminAuth = protectedAdminPaths.some((protectedAdminPaths) => path.startsWith(protectedAdminPaths));
+    // Fetch the user token from cookies
+    const userToken = request.cookies.get("token")?.value;
 
-    if (requiresAuth) {
-        const userToken = request.cookies.get("token")?.value;
-
-        // Redirect to login if user_token cookie is missing
+    // If the path requires authentication
+    if (protectedPaths.some((protectedPath) => path.startsWith(protectedPath))) {
+        // Redirect to login if token is missing
         if (!userToken) {
-            const loginUrl = new URL("/login", request.url);
-            return NextResponse.redirect(loginUrl);
+            return NextResponse.redirect(new URL("/login", request.url));
         }
     }
 
-    if (requiresAdminAuth) {
-        const userToken = request.cookies.get("token")?.value;
+    // If the path requires admin authentication
+    if (protectedAdminPaths.some((adminPath) => path.startsWith(adminPath))) {
+        // If no token is found, redirect to login
+        if (!userToken) {
+            return NextResponse.redirect(new URL("/login", request.url));
+        }
 
-        if (userToken) {
+        try {
+            // Decode the token and check if the user has admin privileges
             const decoded = jwtDecode<TokenInfo>(userToken);
-            if (decoded.role != "admin") {
-                console.log("user is guest")
+            if (decoded.role !== "admin") {
+                return NextResponse.redirect(new URL("/dashboard", request.url));
             }
-        } else {
-            const loginUrl = new URL("/login", request.url);
-            return NextResponse.redirect(loginUrl);
+        } catch (error) {
+            console.error("Token decoding failed:", error);
+            // Redirect to login if token decoding fails
+            return NextResponse.redirect(new URL("/login", request.url));
         }
     }
 
-    // Continue to the requested page if user_token is present or path is not protected
+    // Continue to the requested page if no redirects were triggered
     return NextResponse.next();
 }
 
