@@ -100,6 +100,7 @@ export default function WriteReview({ anime }: WriteReviewProps) {
                     required
                     min={0}
                     max={10}
+                    step={0.5}
                     className="p-2 border rounded focus:ring-2 focus:ring-orange-400 focus:outline-none text-sm"
                     placeholder="Enter your rating"
                 />
