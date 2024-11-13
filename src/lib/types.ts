@@ -108,6 +108,18 @@ export type CharacterAPI = {
   media: string[]; // List of associated media (e.g., posters, trailers)
 }
 
+export type CharacterAPIUploader = {
+  first_name: string
+  last_name: string
+  age: number
+  from_anime: string[]
+  gender: string
+  bio: string
+  status: string
+  logo: File
+  media: File[]
+}
+
 export type CommentType = "anime" | "character" | "anime_list" | "character_list";
 export type CommentUser = {
   user_id: string

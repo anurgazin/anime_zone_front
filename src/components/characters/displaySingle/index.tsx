@@ -7,6 +7,8 @@ import Modal from '@/components/modal';
 import Link from 'next/link';
 import CharacterListDisplay from '@/components/lists/characterList/displayList';
 import CommentComponent from '@/components/comments/displayComments';
+import WriteComment from '@/components/comments/writeComment';
+import { getCookie } from 'cookies-next';
 
 type img = {
     src: string;
@@ -21,6 +23,7 @@ type DisplaySingleProps = {
 };
 
 export default function DisplaySingle({ character, comments, lists }: DisplaySingleProps) {
+    const user_exists = getCookie("token") || "";
     const from_anime_links = character.from_anime.map((anime) => (
         <Link key={anime.id} href={`/anime/${anime.id}`} className="underline">
             {anime.title}
@@ -38,76 +41,86 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
+        <div className="grid grid-cols-1 grid-rows-auto gap-4">
             {/* Top Banner */}
-            <div className="relative overflow-hidden -z-10 h-48 sm:h-56 lg:col-span-5">
-                <Image src={character.logo} fill={true} className="blur-sm object-cover" alt="Anime Banner" />
+            <div className="relative overflow-hidden -z-10 h-48 sm:h-56">
+                <Image src={character.logo} fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="blur-sm object-cover" alt="Character Banner" />
             </div>
 
             {/* Information */}
-            <div className="lg:col-span-5  grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
-                {/* Logo section */}
-                <div className="lg:col-span-1 flex justify-center lg:justify-start relative w-full h-[350px]"
-                    onClick={() => handleImageClick({
-                        src: character.logo,
-                        width: 0,
-                        height: 0
-                    })}
-                >
-                    <Image src={character.logo} priority fill={true} className="rounded-lg shadow-lg object-cover" alt="Anime Logo" />
-                </div>
-
-                {/* Data info */}
-                <div className="lg:col-span-2 lg:row-span-1 p-4 rounded-lg border-2 border-orange-200 p-4 rounded-lg lg:border-none">
-                    <h1 className="text-2xl sm:text-3xl font-anton text-gray-800 mb-4">{character.first_name} {character.last_name}</h1>
-                    <div className="text-lg sm:text-xl font-antonio text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <p><span className="font-semibold">First Name:</span> {character.first_name}</p>
-                            <p><span className="font-semibold">Last Name:</span> {character.last_name}</p>
-                            <p><span className="font-semibold">From:</span> {from_anime_links}</p>
+            <div className="flex flex-col gap-4 pt-1 p-6">
+                <div className='grid grid-cols-1 lg:grid-cols-10 gap-8'>
+                    {/* Logo section */}
+                    <div className='lg:col-span-2 flex justify-center'>
+                        <div className="relative w-full h-[350px]"
+                            onClick={() => handleImageClick({
+                                src: character.logo,
+                                width: 0,
+                                height: 0
+                            })}
+                        >
+                            <Image src={character.logo} priority fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="rounded-lg object-contain lg:hover:scale-[1.025] transition-scale duration-200" alt={`${character.first_name} ${character.last_name}`} />
                         </div>
-                        <div>
-                            <p><span className="font-semibold">Age:</span> {character.age}</p>
-                            <p><span className="font-semibold">Gender:</span> {character.gender}</p>
-                            <p><span className="font-semibold">Status:</span>
-                                <Button onClick={toggleShow} variant="link" className='text-lg sm:text-xl'>
-                                    {show ? (character.status.toUpperCase()) : ("SHOW")}
-                                </Button>
-                            </p>
+                    </div>
+
+                    {/* Data info */}
+                    <div className="lg:col-span-8 p-4 rounded-lg border-2 border-orange-200 lg:border-none">
+                        <h1 className="text-2xl sm:text-3xl font-anton text-gray-800 mb-4">{character.first_name} {character.last_name}</h1>
+                        <div className="text-lg sm:text-xl font-antonio text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <p><span className="font-semibold">First Name:</span> {character.first_name}</p>
+                                <p><span className="font-semibold">Last Name:</span> {character.last_name}</p>
+                                <p><span className="font-semibold">From:</span> {from_anime_links}</p>
+                            </div>
+                            <div>
+                                <p><span className="font-semibold">Age:</span> {character.age}</p>
+                                <p><span className="font-semibold">Gender:</span> {character.gender}</p>
+                                <p><span className="font-semibold">Status:</span>
+                                    <Button onClick={toggleShow} variant="link" className='text-lg sm:text-xl'>
+                                        {show ? (character.status.toUpperCase()) : ("SHOW")}
+                                    </Button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Description */}
-                <div className="lg:col-span-4 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg lg:border-none">
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Description</h2>
-                    <p className="text-gray-700 whitespace-pre-wrap">{character.bio}</p>
-                </div>
-
                 {/* Media Section */}
-                <div className="lg:col-span-1 lg:row-span-2 flex flex-col space-y-2">
-                    <h2 className="text-xl sm:text-2xl font-antonio text-gray-600 mb-2">Media</h2>
-                    <div className="grid grid-cols-2 gap-2 lg:flex lg:flex-col">
+                <div className="border-2 border-orange-200 p-6 rounded-lg shadow-md">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 underline decoration-orange-300 underline-offset-8">
+                        Media
+                    </h2>
+                    <div className="flex flex-row flex-wrap gap-4 justify-center">
                         {character.media.map((screen, i) => (
                             <div key={i} onClick={() => handleImageClick({
                                 src: screen,
-                                width: 320,
-                                height: 240
-                            })} className='relative w-auto h-[170px]'>
+                                width: 1280,
+                                height: 720,
+                            })} className="relative w-[250px] h-[180px]">
                                 <Image src={screen}
                                     fill
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    className="rounded-md object-contain border-2  border-orange-200"
+                                    className="rounded-md object-cover hover:scale-[1.025] transition-transform duration-200"
                                     alt={`Media ${i}`} />
                             </div>
                         ))}
                     </div>
                 </div>
+
+                {/* Description */}
+                <div className='border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg'>
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Biography</h2>
+                    <p className="text-gray-700 whitespace-pre-wrap">{character.bio}</p>
+                </div>
+
                 {/* Comments and Lists Section */}
-                <div className="lg:col-span-4 lg:row-start-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
+                <div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
                     {/* Comments */}
-                    <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
+                    <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg space-y-4">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
+                        {user_exists.length > 0 ? (<WriteComment contentType='character' contentId={character.id} />) : (
+                            <p className="text-gray-600 italic">You should be logged in to write a comment.</p>
+                        )}
                         {comments && comments.length > 0 ? (
                             comments.map((comment, i) => (
                                 <CommentComponent key={i} comment={comment} />
