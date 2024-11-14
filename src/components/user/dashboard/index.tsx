@@ -33,11 +33,11 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
         <div className="grid grid-cols-1 lg:grid-cols-5 grid-rows-auto gap-4">
             {/* Top Banner */}
             <div className="relative overflow-hidden -z-10 h-48 sm:h-56 lg:col-span-5">
-                <Image src={user.logo} fill={true} className="blur-sm object-cover" alt="User Banner" />
+                <Image src={user.logo} fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="blur-sm object-cover" alt="User Banner" />
             </div>
 
             {/* Information */}
-            <div className="lg:col-span-5  grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
+            <div className="lg:col-span-5 grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
                 {/* Logo section */}
                 <div className="lg:col-span-1 flex justify-center lg:justify-start relative w-full h-[350px]"
                     onClick={() => handleImageClick({
@@ -52,14 +52,21 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                 {/* Data info */}
                 <div className="lg:col-span-2 lg:row-span-1 p-4 rounded-lg border-2 border-orange-200 p-4 rounded-lg lg:border-none">
                     <h1 className="text-2xl sm:text-3xl font-anton text-gray-800 mb-4">{user.username}</h1>
-                    <div className="text-lg sm:text-xl font-antonio text-gray-600 grid grid-cols-1 gap-4">
-                        <p><span className="font-semibold">Email:</span> {user.email}</p>
-                        <p><span className="font-semibold">Role:</span> {user.role}</p>
+                    <div className="text-lg sm:text-xl font-antonio text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:border-2 lg:border-orange-200 shadow-md bg-white p-2 rounded-lg">
+                        <div>
+                            <p><span className="font-semibold">Email:</span> {user.email}</p>
+                            <p><span className="font-semibold">Role:</span> {user.role}</p>
+                        </div>
+                        {user.role === "admin" &&
+                            <div className='flex flex-col'>
+                                <Link href="/dashboard/post/anime"> <span className='text-orange-400'>+</span> Add New Anime </Link>
+                                <Link href="/dashboard/post/character"> <span className='text-orange-400'>+</span> Add New Character </Link>
+                            </div>}
                     </div>
                 </div>
 
                 {/* Description */}
-                <div className="lg:col-span-5 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg lg:border-none">
+                <div className="lg:col-span-5 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg">
                     <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Bio</h2>
                     <p className="text-gray-700 whitespace-pre-wrap">{user.bio}</p>
                 </div>

@@ -117,17 +117,21 @@ export default function AddAnime() {
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"
                     required
-                    className="w-full p-4 border border-gray-300 rounded-lg"
+                    className="w-full p-2 border border-gray-300 rounded-lg"
                 />
 
                 {/* Release Date */}
-                <input
-                    type="date"
-                    value={releaseDate}
-                    onChange={(e) => setReleaseDate(e.target.value)}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg"
-                />
+                <div>
+                    <label htmlFor="release_date" className="text-gray-700">Release Date:</label>
+                    <input
+                        id="release_date"
+                        type="date"
+                        value={releaseDate}
+                        onChange={(e) => setReleaseDate(e.target.value)}
+                        required
+                        className="w-full p-2 border border-gray-300 rounded-lg"
+                    />
+                </div>
 
                 {/* Studio */}
                 <input
@@ -135,7 +139,7 @@ export default function AddAnime() {
                     value={studio}
                     onChange={(e) => setStudio(e.target.value)}
                     placeholder="Studios (comma separated)"
-                    className="w-full p-4 border border-gray-300 rounded-lg"
+                    className="w-full p-2 border border-gray-300 rounded-lg"
                 />
 
                 {/* Genre */}
@@ -144,7 +148,7 @@ export default function AddAnime() {
                     value={genre}
                     onChange={(e) => setGenre(e.target.value)}
                     placeholder="Genres (comma separated)"
-                    className="w-full p-4 border border-gray-300 rounded-lg"
+                    className="w-full p-2 border border-gray-300 rounded-lg"
                 />
 
                 {/* Episodes */}
@@ -156,7 +160,7 @@ export default function AddAnime() {
                         value={episodes}
                         onChange={(e) => setEpisodes(Number(e.target.value))}
                         placeholder="Episodes"
-                        className="w-full p-3 border rounded"
+                        className="w-full p-2 border rounded"
                     />
                 </div>
 
@@ -169,7 +173,7 @@ export default function AddAnime() {
                         value={duration}
                         onChange={(e) => setDuration(Number(e.target.value))}
                         placeholder="Duration (minutes)"
-                        className="w-full p-4 border border-gray-300 rounded-lg"
+                        className="w-full p-2 border border-gray-300 rounded-lg"
                     />
                 </div>
 
@@ -227,7 +231,7 @@ export default function AddAnime() {
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Description"
                     rows={4}
-                    className="w-full p-4 border border-gray-300 rounded-lg"
+                    className="w-full p-2 border border-gray-300 rounded-lg"
                 />
 
                 {/* Link */}
@@ -236,19 +240,52 @@ export default function AddAnime() {
                     value={link}
                     onChange={(e) => setLink(e.target.value)}
                     placeholder="Youtube Link(OP, ED or trailer)"
-                    className="w-full p-4 border border-gray-300 rounded-lg"
+                    className="w-full p-2 border border-gray-300 rounded-lg"
                 />
 
                 {/* Logo */}
-                <div>
-                    <label htmlFor="logo" className="text-gray-700">Logo:</label>
-                    <input id="logo" type="file" onChange={(e) => e.target.files && setLogo(e.target.files[0])} className="block" />
+                <div className="mb-6">
+                    <label htmlFor="logo" className="block text-gray-700 font-medium">Logo:</label>
+                    <input
+                        id="logo"
+                        type="file"
+                        className="w-full p-2 border border-gray-300 rounded-lg bg-white shadow-sm cursor-pointer focus:outline-none 
+                        file:bg-orange-400
+                        file:rounded-lg
+                        file:text-white 
+                        file:border-0 
+                        file:me-2 
+                        file:px-2"
+                        aria-describedby="logo_input_help"
+                        accept=".jpg,.jpeg,.png,.webp"
+                        onChange={(e) => e.target.files && setLogo(e.target.files[0])}
+                    />
+                    <p className="mt-2 text-sm text-gray-500" id="logo_input_help">
+                        PNG, JPG or WEBP
+                    </p>
                 </div>
 
                 {/* Media */}
                 <div>
-                    <label htmlFor="media" className="text-gray-700">Media:</label>
-                    <input id="media" type="file" multiple onChange={(e) => setMedia(Array.from(e.target.files || []))} className="block mt-4" />
+                    <label htmlFor="media" className="block text-gray-700 font-medium">Media:</label>
+                    <input
+                        id="media"
+                        type="file"
+                        multiple
+                        className="w-full p-2 border border-gray-300 rounded-lg bg-white shadow-sm cursor-pointer
+                        file:bg-orange-400
+                        file:rounded-lg
+                        file:text-white 
+                        file:border-0 
+                        file:me-2 
+                        file:px-2"
+                        aria-describedby="media_input_help"
+                        accept=".jpg,.jpeg,.png,.webp"
+                        onChange={(e) => setMedia(Array.from(e.target.files || []))}
+                    />
+                    <p className="mt-2 text-sm text-gray-500" id="media_input_help">
+                        PNG, JPG or WEBP
+                    </p>
                 </div>
 
                 <div className="flex justify-end space-x-3">
