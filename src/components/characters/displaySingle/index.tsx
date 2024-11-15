@@ -9,6 +9,7 @@ import CharacterListDisplay from '@/components/lists/characterList/displayList';
 import CommentComponent from '@/components/comments/displayComments';
 import WriteComment from '@/components/comments/writeComment';
 import { getCookie } from 'cookies-next';
+import AddToCharactersList from '@/components/lists/characterList/addToList';
 
 type img = {
     src: string;
@@ -133,6 +134,7 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
                     {/* AnimeLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Character Lists</h2>
+                        <AddToCharactersList characterId={character.id} />
                         {lists && lists.length > 0 ? (
                             lists.map((a, i) => (
                                 <CharacterListDisplay key={i} characterList={a} />
