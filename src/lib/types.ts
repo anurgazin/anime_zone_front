@@ -162,6 +162,10 @@ export type AnimeList = {
   rating: number
 }
 
+export type AddToList = {
+  object_id: string
+}
+
 // CharacterList struct represents CharacterList information
 export type CharacterList = {
   id: string

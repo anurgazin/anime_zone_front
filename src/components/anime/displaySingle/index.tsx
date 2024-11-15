@@ -10,6 +10,7 @@ import CharacterFromAnimeCard from './charactersFrom';
 import WriteComment from '@/components/comments/writeComment';
 import { getCookie } from 'cookies-next';
 import Link from 'next/link';
+import AddToAnimeList from '@/components/lists/animeList/addToList';
 
 type img = {
     src: string;
@@ -186,6 +187,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                     {/* AnimeLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Anime Lists</h2>
+                        <AddToAnimeList animeId={anime.id} />
                         {animeList && animeList.length > 0 ? (
                             animeList.map((a, i) => (
                                 <AnimeListDisplay key={i} animeList={a} />

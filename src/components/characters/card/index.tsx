@@ -16,6 +16,7 @@ export default function Card({ character }: Props) {
                     <Image
                         src={character.logo}
                         fill={true}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         alt={character.first_name + " " + character.last_name}
                         className="rounded-t-lg object-contain lg:object-cover"
                     />
