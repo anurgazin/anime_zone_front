@@ -44,7 +44,7 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
     return (
         <div className="grid grid-cols-1 grid-rows-auto gap-4">
             {/* Top Banner */}
-            <div className="relative overflow-hidden -z-10 h-48 sm:h-56">
+            <div className="relative overflow-hidden -z-10 h-24 sm:h-48">
                 <Image src={character.logo} fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="blur-sm object-cover" alt="Character Banner" />
             </div>
 
@@ -60,7 +60,7 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
                                 height: 0
                             })}
                         >
-                            <Image src={character.logo} priority fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="rounded-lg object-contain lg:hover:scale-[1.025] transition-scale duration-200" alt={`${character.first_name} ${character.last_name}`} />
+                            <Image src={character.logo} priority fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="rounded-lg object-contain lg:hover:scale-[1.025] active:scale-[1.025] transition-scale duration-200" alt={`${character.first_name} ${character.last_name}`} />
                         </div>
                     </div>
 
@@ -91,17 +91,17 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
                     <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 underline decoration-orange-300 underline-offset-8">
                         Media
                     </h2>
-                    <div className="flex flex-row flex-wrap gap-4 justify-center">
+                    <div className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
                         {character.media.map((screen, i) => (
                             <div key={i} onClick={() => handleImageClick({
                                 src: screen,
                                 width: 1280,
                                 height: 720,
-                            })} className="relative w-[250px] h-[180px]">
+                            })} className="flex-shrink-0 snap-center snap-always scroll-smooth lg:snap-align-none relative w-[300px] lg:w-[320px] h-[180px]">
                                 <Image src={screen}
                                     fill
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    className="rounded-md object-cover hover:scale-[1.025] transition-transform duration-200"
+                                    className="rounded-md object-cover hover:scale-[1.025] active:scale-[1.025] transition-transform duration-200"
                                     alt={`Media ${i}`} />
                             </div>
                         ))}
