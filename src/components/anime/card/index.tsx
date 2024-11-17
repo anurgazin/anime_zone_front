@@ -8,7 +8,7 @@ type Props = {
 
 export default function Card({ anime }: Props) {
     return (
-        <div key={anime.id} className='bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300'>
+        <div key={anime.id} className='bg-white shadow-md rounded-lg hover:scale-[1.025] active:scale-[1.025] transition-transform duration-200'>
             <Link href={`/anime/${anime.id}`} className="block">
                 {/* Image */}
                 <div className="relative lg:w-full h-[400px]">

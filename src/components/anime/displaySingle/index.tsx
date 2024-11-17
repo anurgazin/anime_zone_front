@@ -40,7 +40,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
     return (
         <div className="grid grid-cols-1 grid-rows-auto gap-4">
             {/* Top Banner */}
-            <div className="relative overflow-hidden -z-10 h-48 sm:h-56">
+            <div className="relative overflow-hidden -z-10 h-24 sm:h-48">
                 <Image src={anime.logo} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" fill={true} className="blur-sm object-cover" alt="Anime Banner" />
             </div>
 
@@ -56,13 +56,13 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                                 height: 0
                             })}
                         >
-                            <Image src={anime.logo} priority fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="rounded-lg object-contain lg:hover:scale-[1.025] transition-scale duration-200" alt="Anime Logo" />
+                            <Image src={anime.logo} priority fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="rounded-lg object-contain lg:hover:scale-[1.025] active:scale-[1.025] transition-scale duration-200" alt="Anime Logo" />
                         </div>
                     </div>
                     {/* Data info */}
                     <div className="lg:col-span-8 p-4 rounded-lg border-2 border-orange-200 lg:border-none">
                         <h1 className="text-2xl sm:text-3xl font-anton text-gray-800 mb-4">{anime.title}</h1>
-                        <div className="text-lg sm:text-xl text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:border-2 lg:border-orange-200 shadow-md bg-white p-2 rounded-lg">
+                        <div className="text-lg sm:text-xl text-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:border-2 lg:border-orange-200 bg-white p-2 rounded-lg">
                             <div>
                                 <p><span className="font-semibold">Rating:</span> {anime.average_rating > 0 ? `${anime.average_rating} / 10` : "Not Available"}</p>
                                 <p><span className="font-semibold">Studio:</span> {studio}</p>
@@ -81,15 +81,15 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                 </div>
                 {/* Media */}
                 <div className="border-2 border-orange-200 p-6 rounded-lg shadow-md">
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 underline decoration-orange-300 underline-offset-8">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">
                         Media
                     </h2>
-                    <div className="flex flex-row flex-wrap gap-4 justify-center">
+                    <div className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
                         {anime.media.map((mediaItem, i) => {
                             const isYouTubeLink = mediaItem.includes("youtube.com") || mediaItem.includes("youtu.be");
 
                             return (
-                                <div key={i}>
+                                <div key={i} className="flex-shrink-0 snap-center snap-always scroll-smooth lg:snap-align-none">
                                     {isYouTubeLink ? (
                                         // Render YouTube iframe for YouTube links
                                         <iframe
@@ -115,13 +115,14 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                                                     height: 720,
                                                 })
                                             }
-                                            className="relative w-[320px] h-[180px]">
+                                            className="relative w-[300px] lg:w-[320px] h-[180px]"
+                                        >
                                             <Image
                                                 src={mediaItem}
                                                 fill
                                                 quality={100}
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                className="rounded-md object-cover hover:scale-[1.025] transition-transform duration-200"
+                                                className="rounded-md object-cover hover:scale-[1.025] active:scale-[1.025] transition-transform duration-200"
                                                 alt={`Media ${i}`}
                                             />
                                         </div>
@@ -132,6 +133,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                     </div>
                 </div>
 
+
                 {/* Description */}
                 <div className='border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg'>
                     <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 underline decoration-orange-300 underline-offset-8">Description</h2>
@@ -140,7 +142,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                 {/* Characters */}
                 <div className="border-2 border-orange-200 p-6 rounded-lg shadow-md bg-white">
                     <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-6 underline decoration-orange-300 underline-offset-4">Characters</h2>
-                    <div className="flex flex-row flex-wrap gap-4 items-center">
+                    <div className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
                         {characters && characters.length > 0 ? (
                             characters.map((c, i) => (
                                 <CharacterFromAnimeCard key={i} character={c} />
