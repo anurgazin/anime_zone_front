@@ -1,9 +1,9 @@
-import DisplayAll from "@/components/anime/displayAll";
+import MainComponent from "@/components/main";
 
 export default function Home() {
   return (
     <div>
-      <DisplayAll />
+      <MainComponent />
     </div>
   );
 }
