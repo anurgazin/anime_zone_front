@@ -37,13 +37,16 @@ export const getUser = (id: string) => baseAPI.get(`/user/${id}`)
 // Anime
 export const getAllAnime = () => animeAPI.get(``);
 export const getSingleAnime = (id: string) => animeAPI.get(`/id/${id}`)
+export const getHighestRatedAnime = () => animeAPI.get(`/highest`);
+export const getMostPopularAnime = () => animeAPI.get(`/popular`);
 export const getAnimeRating = (id: string) => animeAPI.get(`/rating/${id}`)
 export const getAnimeRatingByUser = (id: string) => animeAPI.get(`/rating/user/${id}`)
 export const postAnimeRating = (id: string, payload: PostRatingRequest) => animeAPI.post(`/rating/${id}`, payload, { headers: authHeader() })
 export const postAnime = (payload: FormData) => animeAPI.post(``, payload, { headers: authHeader() })
 // Characters
 export const getAllCharacters = () => characterAPI.get(``);
-export const getSingleCharacter = (id: string) => characterAPI.get(`/${id}`)
+export const getCharactersNameAsc = () => characterAPI.get(`/name/asc`);
+export const getSingleCharacter = (id: string) => characterAPI.get(`/id/${id}`)
 export const getAllCharactersFromAnime = (id: string) => characterAPI.get(`/anime/${id}`)
 export const postCharacter = (payload: FormData) => characterAPI.post(``, payload, { headers: authHeader() });
 // Comments
