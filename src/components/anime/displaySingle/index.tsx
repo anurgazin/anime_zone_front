@@ -46,9 +46,9 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
     };
 
     return (
-        <div className="grid grid-cols-1 grid-rows-auto gap-4">
+        <div className="grid grid-cols-1 grid-rows-auto gap-2">
             {/* Top Banner */}
-            <div className="relative overflow-hidden -z-10 h-24 sm:h-48">
+            <div className="relative overflow-hidden -z-10 h-24 sm:h-36">
                 <Image src={anime.logo} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" fill={true} className="blur-sm object-cover" alt="Anime Banner" />
             </div>
 
@@ -89,15 +89,15 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                 </div>
                 {/* Media */}
                 <div className="border-2 border-orange-200 p-6 rounded-lg shadow-md">
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 underline decoration-orange-300 underline-offset-8">
                         Media
                     </h2>
-                    <div className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
+                    <div className="flex gap-4 mb-2 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
                         {anime.media.map((mediaItem, i) => {
                             const isYouTubeLink = mediaItem.includes("youtube.com") || mediaItem.includes("youtu.be");
 
                             return (
-                                <div key={i} className="flex-shrink-0 snap-center snap-always scroll-smooth lg:snap-align-none">
+                                <div key={i} className="flex-shrink-0 mb-2 snap-center snap-always scroll-smooth lg:snap-align-none">
                                     {isYouTubeLink ? (
                                         // Render YouTube iframe for YouTube links
                                         <iframe
@@ -210,7 +210,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
 
                 {/* Similar Anime */}
                 <div className="border-2 border-orange-200 p-6 rounded-lg shadow-md bg-white">
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-6 underline decoration-orange-300 underline-offset-4">Similar Anime</h2>
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-4">Similar Anime</h2>
                     <div className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
                         {similarAnime && similarAnime.length > 0 ? (
                             similarAnime.map((s, i) => (

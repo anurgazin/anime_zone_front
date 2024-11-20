@@ -14,7 +14,7 @@ export default function AnimeListDisplay({ animeList }: AnimeListProps) {
         <div className="pb-4 mb-4">
             {/* Header with List Name */}
             <div className="flex justify-between items-center">
-                <p className="font-semibold text-gray-800">{animeList.name}</p>
+                <p className="flex-wrap font-semibold text-gray-800">{animeList.name}</p>
                 <p className="text-sm text-gray-500">{animeList.user.username}</p>
             </div>
             {/* Rating */}
