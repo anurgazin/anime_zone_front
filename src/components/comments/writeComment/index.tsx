@@ -8,9 +8,10 @@ import { PostCommentType } from "@/lib/types";
 interface CommentFormProps {
     contentType: PostCommentType["type"];
     contentId: string;
+    handleReload: () => void;
 }
 
-export default function WriteComment({ contentType, contentId }: CommentFormProps) {
+export default function WriteComment({ contentType, contentId, handleReload }: CommentFormProps) {
     const [text, setText] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -30,7 +31,8 @@ export default function WriteComment({ contentType, contentId }: CommentFormProp
         try {
             await postComment(payload);
             setText(""); // Clear textarea on successful submission
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            handleReload();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.response?.data || "Failed to post comment");
         } finally {

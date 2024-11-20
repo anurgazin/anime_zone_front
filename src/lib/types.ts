@@ -70,6 +70,15 @@ export type AnimeAPIUploader = {
   media: File[]
 }
 
+export type AnimeDetails = {
+  anime: AnimeAPI
+  similar_anime: AnimeAPI[]
+  reviews: Rating[]
+  comments: Comment[]
+  anime_list: AnimeList[]
+  characters: CharacterAPI[]
+}
+
 
 export type Filters = {
   genre: string[];

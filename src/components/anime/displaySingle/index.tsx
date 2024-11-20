@@ -12,6 +12,7 @@ import WriteComment from '@/components/comments/writeComment';
 import { getCookie } from 'cookies-next';
 import Link from 'next/link';
 import AddToAnimeList from '@/components/lists/animeList/addToList';
+import { useRouter } from 'next/navigation';
 
 type img = {
     src: string;
@@ -32,6 +33,11 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
     const user_exists = getCookie("token") || "";
     const genre = anime.genre.length > 1 ? anime.genre.join(", ") : anime.genre.toString();
     const studio = anime.studio.length > 1 ? anime.studio.join(", ") : anime.studio.toString();
+
+    const router = useRouter()
+    const handleReload = () => {
+        router.refresh();
+    };
 
     const [selectedImage, setSelectedImage] = useState<img | null>(null);
 
@@ -176,7 +182,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                     {/* Comments */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg space-y-4">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
-                        {user_exists.length > 0 ? (<WriteComment contentType='anime' contentId={anime.id} />) : (
+                        {user_exists.length > 0 ? (<WriteComment contentType='anime' contentId={anime.id} handleReload={handleReload} />) : (
                             <p className="text-gray-600 italic">You should be logged in to write a comment.</p>
                         )}
                         {comments && comments.length > 0 ? (
@@ -191,7 +197,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                     {/* AnimeLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Anime Lists</h2>
-                        {user_exists && <AddToAnimeList animeId={anime.id} />}
+                        {user_exists && <AddToAnimeList animeId={anime.id} handleReload={handleReload} />}
                         {animeList && animeList.length > 0 ? (
                             animeList.map((a, i) => (
                                 <AnimeListDisplay key={i} animeList={a} />
