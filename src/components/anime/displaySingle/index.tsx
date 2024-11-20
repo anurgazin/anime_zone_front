@@ -6,7 +6,8 @@ import Modal from '@/components/modal';
 import CommentComponent from '@/components/comments/displayComments';
 import RatingComponent from '@/components/review/displayReview';
 import AnimeListDisplay from '@/components/lists/animeList/displayList';
-import CharacterFromAnimeCard from './charactersFrom';
+import CharacterFromAnimeCard from '@/components/anime/displaySingle/charactersFrom';
+import SimilarAnimeCard from '@/components/anime/displaySingle/similarAnime';
 import WriteComment from '@/components/comments/writeComment';
 import { getCookie } from 'cookies-next';
 import Link from 'next/link';
@@ -24,9 +25,10 @@ type DisplaySingleProps = {
     rating: Rating[] | undefined;
     animeList: AnimeList[] | undefined;
     characters: CharacterAPI[] | undefined;
+    similarAnime: AnimeAPI[] | undefined;
 };
 
-export default function DisplaySingle({ anime, comments, rating, animeList, characters }: DisplaySingleProps) {
+export default function DisplaySingle({ anime, comments, rating, animeList, characters, similarAnime }: DisplaySingleProps) {
     const user_exists = getCookie("token") || "";
     const genre = anime.genre.length > 1 ? anime.genre.join(", ") : anime.genre.toString();
     const studio = anime.studio.length > 1 ? anime.studio.join(", ") : anime.studio.toString();
@@ -196,6 +198,20 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                             ))
                         ) : (
                             <p className="text-gray-600 italic">No anime lists yet.</p>
+                        )}
+                    </div>
+                </div>
+
+                {/* Similar Anime */}
+                <div className="border-2 border-orange-200 p-6 rounded-lg shadow-md bg-white">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-6 underline decoration-orange-300 underline-offset-4">Similar Anime</h2>
+                    <div className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
+                        {similarAnime && similarAnime.length > 0 ? (
+                            similarAnime.map((s, i) => (
+                                <SimilarAnimeCard key={i} anime={s} />
+                            ))
+                        ) : (
+                            <p className="text-gray-600 italic">No similar anime found.</p>
                         )}
                     </div>
                 </div>
