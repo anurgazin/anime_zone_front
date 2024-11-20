@@ -1,15 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimeAPI, Filters } from "@/lib/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Card from "../card";
 import AnimeFilterSort from "./filterSort";
-import { getAllAnime } from "@/lib/api";
-import Loading from "@/components/loading";
-import Error from "@/components/error";
 
-export default function DisplayAll() {
+type AnimeDisplayAllProps = {
+    anime: AnimeAPI[]
+}
+
+export default function DisplayAll({ anime }: AnimeDisplayAllProps) {
     const [filters, setFilters] = useState<Filters>({
         genre: [],
         studio: [],
@@ -18,28 +19,10 @@ export default function DisplayAll() {
         esrb: 'none',
     });
 
-    const [animeList, setAnimeList] = useState<AnimeAPI[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
     const [sortBy, setSortBy] = useState<string>('default');
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [itemsPerPage, setItemsPerPage] = useState<number>(12);
 
-    useEffect(() => {
-        const fetchAnime = async () => {
-            try {
-                const response = await getAllAnime();
-                setAnimeList(response.data);
-            } catch (error) {
-                setError("Failed to load anime data.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchAnime();
-    }, []);
 
     const handleFilterChange = (filterType: keyof Filters, value: string[] | string) => {
         setFilters(prevFilters => ({
@@ -62,7 +45,7 @@ export default function DisplayAll() {
     };
 
     // Filters
-    const filteredData = animeList.filter((anime: AnimeAPI) => {
+    const filteredData = anime.filter((anime: AnimeAPI) => {
         return (
             (filters.genre.length === 0 || filters.genre.every(genre => anime.genre.includes(genre))) &&
             (filters.studio.length === 0 || filters.studio.every(studio => anime.studio.includes(studio))) &&
@@ -89,10 +72,6 @@ export default function DisplayAll() {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const paginatedData = sortedData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-    // Loading and Error States
-    if (loading) return <Loading />;
-    if (error) return <Error error={error} />;
 
 
     return (

@@ -7,8 +7,9 @@ type CharacterFromAnimeProps = {
 
 export default function CharacterFromAnimeCard({ character }: CharacterFromAnimeProps) {
     return (
-        <Link href={`/characters/${character.id}`} className="block">
-            <div className="pb-4 mb-4 lg:hover:scale-[1.10] transition-scale duration-200">
+        <div className="pb-4 mb-4 hover:scale-105 active:scale-100 transition-scale duration-200">
+            <Link href={`/characters/${character.id}`} className="block">
+
                 <div className="relative w-[120px] h-[120px]">
                     <Image
                         src={character.logo}
@@ -22,7 +23,8 @@ export default function CharacterFromAnimeCard({ character }: CharacterFromAnime
                 <div className="flex justify-between items-center">
                     <p className="font-semibold text-gray-800">{character.last_name} {character.first_name}</p>
                 </div>
-            </div>
-        </Link>
+
+            </Link >
+        </div>
     );
 };
