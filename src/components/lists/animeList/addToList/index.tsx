@@ -9,9 +9,10 @@ import Link from "next/link";
 
 type AddToAnimeListProps = {
     animeId: string;
+    handleReload: () => void;
 };
 
-export default function AddToAnimeList({ animeId }: AddToAnimeListProps) {
+export default function AddToAnimeList({ animeId, handleReload }: AddToAnimeListProps) {
     const userId = getCookie("id") || "";
     const [animeLists, setAnimeLists] = useState<AnimeList[]>([]);
     const [selectedLists, setSelectedLists] = useState<string[]>([]);
@@ -46,6 +47,7 @@ export default function AddToAnimeList({ animeId }: AddToAnimeListProps) {
                 });
                 setSelectedLists([]);
                 setDropdownOpen(false);
+                handleReload()
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
                 toast({

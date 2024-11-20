@@ -1,17 +1,20 @@
 import DisplaySingle from "@/components/anime/displaySingle";
-import { getAllAnimeListsByAnimeId, getAllCharactersFromAnime, getAllComments, getAnimeRating, getSimilarAnime, getSingleAnime } from "@/lib/api"; // Import the API function
+import { getAnimeDetails } from "@/lib/api"; // Import the API function
 import Error from "@/components/error";
+import { AnimeDetails } from "@/lib/types";
 
 export default async function SingleAnime({ params }: { params: { anime_id: string } }) {
     const anime_id = params.anime_id;
 
     try {
-        const anime = (await getSingleAnime(anime_id)).data
-        const comments = (await getAllComments("anime", anime_id)).data
-        const reviews = (await getAnimeRating(anime_id)).data
-        const animeLists = (await getAllAnimeListsByAnimeId(anime_id)).data
-        const characters = (await getAllCharactersFromAnime(anime_id)).data
-        const similarAnime = (await getSimilarAnime(anime_id)).data
+        const details: AnimeDetails = (await getAnimeDetails(anime_id)).data
+        const anime = details.anime
+        const reviews = details.reviews
+        const similarAnime = details.similar_anime
+        const comments = details.comments
+        const characters = details.characters
+        const animeLists = details.anime_list
+
         if (anime) {
             return (
                 <div>

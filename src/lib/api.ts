@@ -41,6 +41,9 @@ export const getHighestRatedAnime = () => animeAPI.get(`/highest`);
 export const getMostPopularAnime = () => animeAPI.get(`/popular`);
 export const getSimilarAnime = (id: string) => animeAPI.get(`/similar/${id}`)
 export const getAnimeRating = (id: string) => animeAPI.get(`/rating/${id}`)
+
+export const getAnimeDetails = (id: string) => animeAPI.get(`/details/${id}`)
+
 export const getAnimeRatingByUser = (id: string) => animeAPI.get(`/rating/user/${id}`)
 export const postAnimeRating = (id: string, payload: PostRatingRequest) => animeAPI.post(`/rating/${id}`, payload, { headers: authHeader() })
 export const postAnime = (payload: FormData) => animeAPI.post(``, payload, { headers: authHeader() })

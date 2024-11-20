@@ -9,9 +9,10 @@ import Link from "next/link";
 
 type AddToCharactersListProps = {
     characterId: string;
+    handleReload: () => void;
 };
 
-export default function AddToCharactersList({ characterId }: AddToCharactersListProps) {
+export default function AddToCharactersList({ characterId, handleReload }: AddToCharactersListProps) {
     const userId = getCookie("id") || "";
     const [characterLists, setCharacterLists] = useState<CharacterList[]>([]);
     const [selectedLists, setSelectedLists] = useState<string[]>([]);
@@ -47,6 +48,7 @@ export default function AddToCharactersList({ characterId }: AddToCharactersList
                 });
                 setSelectedLists([]);
                 setDropdownOpen(false);
+                handleReload()
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
                 toast({

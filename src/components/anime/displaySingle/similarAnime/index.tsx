@@ -8,10 +8,10 @@ type Props = {
 
 export default function SimilarAnimeCard({ anime }: Props) {
     return (
-        <div className="bg-white shadow-lg rounded-lg hover:scale-105 active:scale-100 transition-transform duration-200 ease-in-out">
+        <div className="max-w-[240px] bg-white shadow-md hover:scale-105 active:scale-100 transition-transform duration-200 ease-in-out">
             <Link href={`/anime/${anime.id}`} className="block">
                 {/* Image */}
-                <div className="relative w-[180px] h-[320px]">
+                <div className="relative w-[240px] h-[320px]">
                     <Image
                         src={anime.logo}
                         fill={true}

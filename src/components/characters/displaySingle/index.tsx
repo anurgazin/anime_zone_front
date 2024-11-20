@@ -10,6 +10,7 @@ import CommentComponent from '@/components/comments/displayComments';
 import WriteComment from '@/components/comments/writeComment';
 import { getCookie } from 'cookies-next';
 import AddToCharactersList from '@/components/lists/characterList/addToList';
+import { useRouter } from 'next/navigation';
 
 type img = {
     src: string;
@@ -30,6 +31,11 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
             {anime.title}
         </Link>
     ));
+
+    const router = useRouter()
+    const handleReload = () => {
+        router.refresh();
+    };
 
     const [show, setShow] = useState(false);
     const toggleShow = () => {
@@ -119,7 +125,7 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
                     {/* Comments */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg space-y-4">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
-                        {user_exists.length > 0 ? (<WriteComment contentType='character' contentId={character.id} />) : (
+                        {user_exists.length > 0 ? (<WriteComment contentType='character' contentId={character.id} handleReload={handleReload} />) : (
                             <p className="text-gray-600 italic">You should be logged in to write a comment.</p>
                         )}
                         {comments && comments.length > 0 ? (
@@ -134,7 +140,7 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
                     {/* CharacterLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Character Lists</h2>
-                        {user_exists && <AddToCharactersList characterId={character.id} />}
+                        {user_exists && <AddToCharactersList characterId={character.id} handleReload={handleReload} />}
                         {lists && lists.length > 0 ? (
                             lists.map((a, i) => (
                                 <CharacterListDisplay key={i} characterList={a} />
