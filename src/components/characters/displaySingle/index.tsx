@@ -97,7 +97,7 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
                     <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 underline decoration-orange-300 underline-offset-8">
                         Media
                     </h2>
-                    <div className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
+                    <div className="flex gap-4 mb-2 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
                         {character.media.map((screen, i) => (
                             <div key={i} onClick={() => handleImageClick({
                                 src: screen,

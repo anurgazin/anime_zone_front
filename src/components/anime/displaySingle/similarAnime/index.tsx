@@ -8,7 +8,7 @@ type Props = {
 
 export default function SimilarAnimeCard({ anime }: Props) {
     return (
-        <div className="max-w-[240px] bg-white shadow-md hover:scale-105 active:scale-100 transition-transform duration-200 ease-in-out">
+        <div className="max-w-[240px] mb-4 bg-white flex-shrink-0 mb-2 snap-center snap-always scroll-smooth lg:snap-align-none shadow-md hover:scale-105 active:scale-100 transition-transform duration-200 ease-in-out">
             <Link href={`/anime/${anime.id}`} className="block">
                 {/* Image */}
                 <div className="relative w-[240px] h-[320px]">
@@ -23,7 +23,7 @@ export default function SimilarAnimeCard({ anime }: Props) {
                 </div>
                 {/* Card Content */}
                 <div className="p-4 flex flex-col flex-wrap">
-                    <h1 className="lg:text-lg font-anton text-gray-900 mb-2">
+                    <h1 className="lg:text-lg font-anton text-gray-900">
                         {anime.title}
                     </h1>
                 </div>
