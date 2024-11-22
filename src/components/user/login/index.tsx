@@ -27,11 +27,12 @@ export default function LoginForm() {
         try {
             const response = await loginUser(payload);
 
-            if (response.data.token) {
-                const decoded = jwtDecode<TokenInfo>(response.data.token);
-                if (decoded.id != "") {
-                    setCookie("token", response.data.token)
-                    setCookie("id", decoded.id)
+            if (response.data.access_token && response.data.refresh_token) {
+                const decoded_access = jwtDecode<TokenInfo>(response.data.access_token);
+                if (decoded_access.id != "") {
+                    setCookie("access_token", response.data.access_token)
+                    setCookie("refresh_token", response.data.refresh_token)
+                    setCookie("id", decoded_access.id)
                 }
                 toast({
                     title: "Success",

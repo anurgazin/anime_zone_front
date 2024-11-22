@@ -8,7 +8,6 @@ import Link from 'next/link';
 import CharacterListDisplay from '@/components/lists/characterList/displayList';
 import CommentComponent from '@/components/comments/displayComments';
 import WriteComment from '@/components/comments/writeComment';
-import { getCookie } from 'cookies-next';
 import AddToCharactersList from '@/components/lists/characterList/addToList';
 import { useRouter } from 'next/navigation';
 
@@ -22,10 +21,10 @@ type DisplaySingleProps = {
     character: CharacterAPI;
     comments: Comment[] | undefined;
     lists: CharacterList[] | undefined;
+    user: string;
 };
 
-export default function DisplaySingle({ character, comments, lists }: DisplaySingleProps) {
-    const user_exists = getCookie("token") || "";
+export default function DisplaySingle({ character, comments, lists, user }: DisplaySingleProps) {
     const from_anime_links = character.from_anime.map((anime) => (
         <Link key={anime.id} href={`/anime/${anime.id}`} className="underline">
             {anime.title}
@@ -125,7 +124,7 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
                     {/* Comments */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg space-y-4">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
-                        {user_exists.length > 0 ? (<WriteComment contentType='character' contentId={character.id} handleReload={handleReload} />) : (
+                        {user.length > 0 ? (<WriteComment contentType='character' contentId={character.id} handleReload={handleReload} />) : (
                             <p className="text-gray-600 italic">You should be logged in to write a comment.</p>
                         )}
                         {comments && comments.length > 0 ? (
@@ -140,7 +139,7 @@ export default function DisplaySingle({ character, comments, lists }: DisplaySin
                     {/* CharacterLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Character Lists</h2>
-                        {user_exists && <AddToCharactersList characterId={character.id} handleReload={handleReload} />}
+                        {user && <AddToCharactersList characterId={character.id} handleReload={handleReload} />}
                         {lists && lists.length > 0 ? (
                             lists.map((a, i) => (
                                 <CharacterListDisplay key={i} characterList={a} />
