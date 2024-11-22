@@ -181,6 +181,11 @@ export type AnimeList = {
   anime_List: string[]
   rating: number
 }
+export type AnimeListDetails = {
+  anime: AnimeAPI[]
+  comments: Comment[]
+  anime_list: AnimeList
+}
 
 export type AddToList = {
   object_id: string

@@ -89,6 +89,7 @@ export const getSimilarAnime = (id: string) => animeAPI.get(`/similar/${id}`)
 export const getAnimeRating = (id: string) => animeAPI.get(`/rating/${id}`)
 
 export const getAnimeDetails = (id: string) => animeAPI.get(`/details/${id}`)
+export const getAnimeListDetails = (id: string) => animeAPI.get(`/list/${id}`)
 
 export const getAnimeRatingByUser = (id: string) => animeAPI.get(`/rating/user/${id}`)
 export const postAnimeRating = (id: string, payload: PostRatingRequest) => animeAPI.post(`/rating/${id}`, payload)

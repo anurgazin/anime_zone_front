@@ -1,4 +1,5 @@
 import { AnimeList } from "@/lib/types";
+import Link from "next/link";
 type AnimeListProps = {
     animeList: AnimeList;
 }
@@ -11,7 +12,7 @@ export default function AnimeListDisplay({ animeList }: AnimeListProps) {
             ? "text-red-500"
             : "text-gray-500";
     return (
-        <div className="pb-4 mb-4">
+        <Link href={`/list/anime/${animeList.id}`} className="pb-4 mb-4">
             {/* Header with List Name */}
             <div className="flex justify-between items-center">
                 <p className="flex-wrap font-semibold text-gray-800">{animeList.name}</p>
@@ -19,6 +20,6 @@ export default function AnimeListDisplay({ animeList }: AnimeListProps) {
             </div>
             {/* Rating */}
             <p className={`font-semibold ${rating_color}`}>{animeList.rating}</p>
-        </div>
+        </Link>
     );
 };
