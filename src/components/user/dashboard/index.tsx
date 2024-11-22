@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { AnimeList, CharacterList, Comment, Rating, User } from "@/lib/types";
 import { useState } from 'react';
 import Modal from '@/components/modal';
-import CharacterListDisplay from '@/components/lists/characterList/displayList';
+import CharacterListDisplay from '@/components/lists/characterList/displayListTitle';
 import CommentComponent from '@/components/comments/displayComments';
-import AnimeListDisplay from '@/components/lists/animeList/displayList';
+import AnimeListDisplay from '@/components/lists/animeList/displayListTitle';
 import RatingComponent from '@/components/review/displayReview';
 import Link from 'next/link';
 

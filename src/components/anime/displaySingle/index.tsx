@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Modal from '@/components/modal';
 import CommentComponent from '@/components/comments/displayComments';
 import RatingComponent from '@/components/review/displayReview';
-import AnimeListDisplay from '@/components/lists/animeList/displayList';
+import AnimeListDisplay from '@/components/lists/animeList/displayListTitle';
 import CharacterFromAnimeCard from '@/components/anime/displaySingle/charactersFrom';
 import SimilarAnimeCard from '@/components/anime/displaySingle/similarAnime';
 import WriteComment from '@/components/comments/writeComment';
