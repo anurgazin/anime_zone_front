@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
 
     // Fetch the user token from cookies
-    const userToken = request.cookies.get("token")?.value;
+    const userToken = request.cookies.get("access_token")?.value;
 
     // If the path requires authentication
     if (protectedPaths.some((protectedPath) => path.startsWith(protectedPath))) {

@@ -79,6 +79,11 @@ export type AnimeDetails = {
   characters: CharacterAPI[]
 }
 
+export type TokenPair = {
+  access_token: string
+  refresh_token: string
+}
+
 
 export type Filters = {
   genre: string[];
@@ -127,6 +132,12 @@ export type CharacterAPIUploader = {
   status: string
   logo: File
   media: File[]
+}
+
+export type CharacterDetails = {
+  character: CharacterAPI
+  comments: Comment[]
+  characters_list: CharacterList[]
 }
 
 export type CommentType = "anime" | "character" | "anime_list" | "character_list";

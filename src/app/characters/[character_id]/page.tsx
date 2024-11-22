@@ -1,20 +1,23 @@
 import DisplaySingle from "@/components/characters/displaySingle";
-import { getAllCharacterListsByCharacterId, getAllComments, getSingleCharacter } from "@/lib/api";
+import { getCharacterDetails } from "@/lib/api";
 import Error from "@/components/error";
+import { CharacterDetails } from "@/lib/types";
+import { cookies } from 'next/headers'
 
 export default async function SingleCharacter({ params }: { params: { character_id: string } }) {
     const character_id = params.character_id;
+    const cookieStore = await cookies()
     try {
-        const character_response = await getSingleCharacter(character_id); // Fetch single character data by ID
-        const comment_response = await getAllComments("character", character_id)
-        const list_response = await getAllCharacterListsByCharacterId(character_id)
-        const character = character_response.data
-        const comments = comment_response.data
-        const lists = list_response.data
+        const details_response: CharacterDetails = (await getCharacterDetails(character_id)).data
+        const character = details_response.character
+        const comments = details_response.comments
+        const lists = details_response.characters_list
+        const user = cookieStore.get("access_token")?.value || "";
+
         if (character) {
             return (
                 <div>
-                    <DisplaySingle character={character} comments={comments} lists={lists} />
+                    <DisplaySingle character={character} comments={comments} lists={lists} user={user} />
                 </div>
             );
         }

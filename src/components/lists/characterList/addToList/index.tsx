@@ -34,7 +34,6 @@ export default function AddToCharactersList({ characterId, handleReload }: AddTo
     // Handle adding anime to the selected list
     const handleAddToList = async () => {
         if (characterId && selectedLists.length > 0) {
-            console.log(characterId)
             try {
                 const payload: AddToList = { object_id: characterId };
                 await Promise.all(
