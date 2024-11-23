@@ -1,4 +1,5 @@
 import { CharacterList } from "@/lib/types";
+import Link from "next/link";
 type CharacterListProps = {
     characterList: CharacterList;
 }
@@ -11,7 +12,7 @@ export default function CharacterListDisplay({ characterList }: CharacterListPro
             ? "text-red-500"
             : "text-gray-500";
     return (
-        <div className="pb-4 mb-4">
+        <Link href={`/list/characters/${characterList.id}`} className="pb-4 mb-4">
             {/* Header with List Name */}
             <div className="flex justify-between items-center">
                 <p className="font-semibold text-gray-800">{characterList.name}</p>
@@ -19,6 +20,6 @@ export default function CharacterListDisplay({ characterList }: CharacterListPro
             </div>
             {/* Rating */}
             <p className={`font-semibold ${rating_color}`}>{characterList.rating}</p>
-        </div>
+        </Link>
     );
 };
