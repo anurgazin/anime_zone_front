@@ -200,6 +200,12 @@ export type CharacterList = {
   rating: number
 }
 
+export type CharacterListDetails = {
+  characters: CharacterAPI[]
+  comments: Comment[]
+  characters_list: CharacterList
+}
+
 
 export type LoginUser = {
   email: string

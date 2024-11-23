@@ -98,7 +98,10 @@ export const postAnime = (payload: FormData) => animeAPI.post(``, payload)
 export const getAllCharacters = () => characterAPI.get(``);
 export const getCharactersNameAsc = () => characterAPI.get(`/name/asc`);
 export const getSingleCharacter = (id: string) => characterAPI.get(`/id/${id}`)
+
 export const getCharacterDetails = (id: string) => characterAPI.get(`/details/${id}`)
+export const getCharacterListDetails = (id: string) => characterAPI.get(`/list/${id}`)
+
 export const getAllCharactersFromAnime = (id: string) => characterAPI.get(`/anime/${id}`)
 export const postCharacter = (payload: FormData) => characterAPI.post(``, payload);
 // Comments
