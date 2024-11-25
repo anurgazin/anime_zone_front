@@ -146,6 +146,10 @@ export type CommentUser = {
   username: string
 }
 
+export type RatingAction = {
+  action: "increment" | "decrement"
+}
+
 // Comment struct represents Comment information
 export type Comment = {
   id: string;

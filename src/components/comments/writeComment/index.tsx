@@ -5,7 +5,7 @@ import { postComment } from "@/lib/api";
 import { Button } from "../../ui/button";
 import { PostCommentType } from "@/lib/types";
 
-interface CommentFormProps {
+type CommentFormProps = {
     contentType: PostCommentType["type"];
     contentId: string;
     handleReload: () => void;

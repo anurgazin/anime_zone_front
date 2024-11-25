@@ -186,7 +186,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                         )}
                         {comments && comments.length > 0 ? (
                             comments.map((comment, i) => (
-                                <CommentComponent key={i} comment={comment} />
+                                <CommentComponent key={i} comment={comment} handleReload={handleReload} user={user} />
                             ))
                         ) : (
                             <p className="text-gray-600 italic">No comments yet.</p>
