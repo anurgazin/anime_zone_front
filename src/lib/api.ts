@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getCookie, setCookie } from 'cookies-next';
-import { AddToList, LoginUser, PostCommentType, PostListRequest, PostRatingRequest } from "./types";
+import { AddToList, LoginUser, PostCommentType, PostListRequest, PostRatingRequest, RatingAction } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_DOMAIN;
 
@@ -19,6 +19,7 @@ const listsAPI = axios.create({
 const baseAPI = axios.create({
     baseURL: API_URL
 })
+
 
 // Get Refresh Token Header
 function refreshTokenPair() {
@@ -108,6 +109,8 @@ export const postCharacter = (payload: FormData) => characterAPI.post(``, payloa
 export const getAllComments = (type: string, id: string) => commentsAPI.get(`/${type}/${id}`);
 export const getAllCommentsByUser = (id: string) => commentsAPI.get(`/user/${id}`);
 export const postComment = (payload: PostCommentType) => commentsAPI.post(``, payload)
+export const rateComment = (payload: RatingAction, id: string) => commentsAPI.post(`/rating/${id}`, payload)
+
 // Lists
 export const getAllAnimeLists = () => listsAPI.get(`/anime`);
 export const getAllCharacterLists = () => listsAPI.get(`/characters`);
