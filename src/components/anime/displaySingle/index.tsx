@@ -199,7 +199,7 @@ export default function DisplaySingle({ anime, comments, rating, animeList, char
                         {user && <AddToAnimeList animeId={anime.id} handleReload={handleReload} />}
                         {animeList && animeList.length > 0 ? (
                             animeList.map((a, i) => (
-                                <AnimeListDisplay key={i} animeList={a} />
+                                <AnimeListDisplay key={i} animeList={a} user={user} handleReload={handleReload} />
                             ))
                         ) : (
                             <p className="text-gray-600 italic">No anime lists yet.</p>

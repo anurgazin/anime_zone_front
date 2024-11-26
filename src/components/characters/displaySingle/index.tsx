@@ -129,7 +129,7 @@ export default function DisplaySingle({ character, comments, lists, user }: Disp
                         )}
                         {comments && comments.length > 0 ? (
                             comments.map((comment, i) => (
-                                <CommentComponent key={i} comment={comment} />
+                                <CommentComponent key={i} comment={comment} handleReload={handleReload} user={user} />
                             ))
                         ) : (
                             <p className="text-gray-600 italic">No comments yet.</p>
@@ -142,7 +142,7 @@ export default function DisplaySingle({ character, comments, lists, user }: Disp
                         {user && <AddToCharactersList characterId={character.id} handleReload={handleReload} />}
                         {lists && lists.length > 0 ? (
                             lists.map((a, i) => (
-                                <CharacterListDisplay key={i} characterList={a} />
+                                <CharacterListDisplay key={i} characterList={a} handleReload={handleReload} user={user} />
                             ))
                         ) : (
                             <p className="text-gray-600 italic">No character lists yet.</p>

@@ -150,6 +150,11 @@ export type RatingAction = {
   action: "increment" | "decrement"
 }
 
+export type ListRatingAction = {
+  list_type: "anime_list" | "character_list"
+  action: "increment" | "decrement"
+}
+
 // Comment struct represents Comment information
 export type Comment = {
   id: string;
