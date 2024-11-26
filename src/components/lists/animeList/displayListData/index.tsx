@@ -3,10 +3,12 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/anime/card";
-import { AnimeAPI, AnimeList, Comment } from "@/lib/types";
+import { AnimeAPI, AnimeList, Comment, ListRatingAction, RatingAction } from "@/lib/types";
 import CommentComponent from "@/components/comments/displayComments";
 import WriteComment from "@/components/comments/writeComment";
 import { useRouter } from "next/navigation";
+import { rateList } from "@/lib/api";
+import { useToast } from "@/hooks/use-toast";
 
 type DisplayAnimeListDataProps = {
     animeList: AnimeList
@@ -16,9 +18,10 @@ type DisplayAnimeListDataProps = {
 };
 
 export default function DisplayAnimeListData({ anime, animeList, comments, user }: DisplayAnimeListDataProps) {
+    const { toast } = useToast()
 
     const [currentPage, setCurrentPage] = useState<number>(1);
-
+    const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
     const handleReload = () => {
         router.refresh();
@@ -27,6 +30,33 @@ export default function DisplayAnimeListData({ anime, animeList, comments, user 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
+
+    const handleRate = async (action: string) => {
+        setLoading(true);
+        const payload: ListRatingAction = {
+            list_type: "anime_list",
+            action: action as RatingAction["action"]
+        }
+        try {
+            await rateList(payload, animeList.id)
+            if (handleReload) {
+                toast({
+                    title: "Success",
+                    description: 'Thank you for rating',
+                })
+                handleReload()
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            toast({
+                title: "Error",
+                description: error.response?.data || 'Failed to rate list',
+                variant: "destructive",
+            })
+        } finally {
+            setLoading(false);
+        }
+    }
 
     // Pagination
     const totalItems = anime.length;
@@ -43,9 +73,29 @@ export default function DisplayAnimeListData({ anime, animeList, comments, user 
                 <p className="text-lg font-antonio text-gray-600">
                     <span className="font-anton">Created By:</span> {animeList?.user.username}
                 </p>
-                <p className="text-lg font-antonio text-gray-600">
-                    <span className="font-anton">Rating:</span> {animeList?.rating}
-                </p>
+                <div className="flex justify-between items-center">
+                    <p className="text-lg font-antonio text-gray-600 "><span className="font-anton">Rating:</span> {animeList?.rating}</p>
+                    <div>
+                        <Button
+                            type="button"
+                            onClick={() => handleRate("decrement")}
+                            disabled={loading || !user}
+                            variant="ghost"
+                            className="text-gray-600 hover:text-red-600 p-2"
+                        >
+                            -
+                        </Button>
+                        <Button
+                            type="button"
+                            onClick={() => handleRate("increment")}
+                            disabled={loading || !user}
+                            variant="ghost"
+                            className="text-gray-600 hover:text-green-600 p-2"
+                        >
+                            +
+                        </Button>
+                    </div>
+                </div>
             </div>
 
             {/* Anime Cards */}
@@ -101,7 +151,7 @@ export default function DisplayAnimeListData({ anime, animeList, comments, user 
                 )}
                 {comments && comments.length > 0 ? (
                     comments.map((comment, i) => (
-                        <CommentComponent key={i} comment={comment} />
+                        <CommentComponent key={i} comment={comment} user={user} handleReload={handleReload} />
                     ))
                 ) : (
                     <p className="text-gray-600 italic">No comments yet.</p>

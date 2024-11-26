@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getCookie, setCookie } from 'cookies-next';
-import { AddToList, LoginUser, PostCommentType, PostListRequest, PostRatingRequest, RatingAction } from "./types";
+import { AddToList, ListRatingAction, LoginUser, PostCommentType, PostListRequest, PostRatingRequest, RatingAction } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_DOMAIN;
 
@@ -122,3 +122,4 @@ export const postAnimeList = (payload: PostListRequest) => listsAPI.post(`/anime
 export const postCharacterList = (payload: PostListRequest) => listsAPI.post(`/characters`, payload);
 export const addToAnimeList = (payload: AddToList, id: string) => listsAPI.post(`/anime/add/${id}`, payload)
 export const addToCharactersList = (payload: AddToList, id: string) => listsAPI.post(`/characters/add/${id}`, payload)
+export const rateList = (payload: ListRatingAction, id: string) => listsAPI.post(`/rating/${id}`, payload)

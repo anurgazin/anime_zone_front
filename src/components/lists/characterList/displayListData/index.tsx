@@ -3,10 +3,12 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/characters/card";
-import { CharacterAPI, CharacterList, Comment } from "@/lib/types";
+import { CharacterAPI, CharacterList, Comment, ListRatingAction, RatingAction } from "@/lib/types";
 import CommentComponent from "@/components/comments/displayComments";
 import WriteComment from "@/components/comments/writeComment";
 import { useRouter } from "next/navigation";
+import { rateList } from "@/lib/api";
+import { useToast } from "@/hooks/use-toast";
 
 type DisplayCharacterListDataProps = {
     charactersList: CharacterList
@@ -16,8 +18,10 @@ type DisplayCharacterListDataProps = {
 };
 
 export default function DisplayCharacterListData({ characters, charactersList, comments, user }: DisplayCharacterListDataProps) {
+    const { toast } = useToast()
 
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
     const handleReload = () => {
@@ -27,6 +31,33 @@ export default function DisplayCharacterListData({ characters, charactersList, c
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
+
+    const handleRate = async (action: string) => {
+        setLoading(true);
+        const payload: ListRatingAction = {
+            list_type: "character_list",
+            action: action as RatingAction["action"]
+        }
+        try {
+            await rateList(payload, charactersList.id)
+            if (handleReload) {
+                toast({
+                    title: "Success",
+                    description: 'Thank you for rating',
+                })
+                handleReload()
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            toast({
+                title: "Error",
+                description: error.response?.data || 'Failed to rate list',
+                variant: "destructive",
+            })
+        } finally {
+            setLoading(false);
+        }
+    }
 
     // Pagination
     const totalItems = characters.length;
@@ -43,9 +74,29 @@ export default function DisplayCharacterListData({ characters, charactersList, c
                 <p className="text-lg font-antonio text-gray-600">
                     <span className="font-anton">Created By:</span> {charactersList?.user.username}
                 </p>
-                <p className="text-lg font-antonio text-gray-600">
-                    <span className="font-anton">Rating:</span> {charactersList?.rating}
-                </p>
+                <div className="flex justify-between items-center">
+                    <p className="text-lg font-antonio text-gray-600 "><span className="font-anton">Rating:</span> {charactersList?.rating}</p>
+                    <div>
+                        <Button
+                            type="button"
+                            onClick={() => handleRate("decrement")}
+                            disabled={loading || !user}
+                            variant="ghost"
+                            className="text-gray-600 hover:text-red-600 p-2"
+                        >
+                            -
+                        </Button>
+                        <Button
+                            type="button"
+                            onClick={() => handleRate("increment")}
+                            disabled={loading || !user}
+                            variant="ghost"
+                            className="text-gray-600 hover:text-green-600 p-2"
+                        >
+                            +
+                        </Button>
+                    </div>
+                </div>
             </div>
 
             {/* Anime Cards */}
@@ -101,7 +152,7 @@ export default function DisplayCharacterListData({ characters, charactersList, c
                 )}
                 {comments && comments.length > 0 ? (
                     comments.map((comment, i) => (
-                        <CommentComponent key={i} comment={comment} />
+                        <CommentComponent key={i} comment={comment} handleReload={handleReload} user={user} />
                     ))
                 ) : (
                     <p className="text-gray-600 italic">No comments yet.</p>
