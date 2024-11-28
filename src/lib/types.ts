@@ -195,6 +195,10 @@ export type AnimeListDetails = {
   comments: Comment[]
   anime_list: AnimeList
 }
+export type AnimeListAPI = {
+  anime: AnimeAPI[]
+  anime_list: AnimeList
+}
 
 export type AddToList = {
   object_id: string
