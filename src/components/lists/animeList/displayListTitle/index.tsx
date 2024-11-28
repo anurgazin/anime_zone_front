@@ -54,9 +54,11 @@ export default function AnimeListDisplay({ animeList, handleReload, user }: Anim
         <div className="pb-4 mb-4">
             {error && <p className="text-red-500">{error}</p>}
             {/* Header with List Name */}
-            <Link href={`/list/anime/${animeList.id}`} className="flex justify-between items-center">
-                <p className="flex-wrap font-semibold text-gray-800">{animeList.name}</p>
-                <p className="text-sm text-gray-500">{animeList.user.username}</p>
+            <Link href={`/list/anime/${animeList.id}`} className="block" >
+                <div className="flex justify-between items-center">
+                    <p className="font-semibold break-words text-gray-800 text-lg max-w-full">{animeList.name}</p>
+                    <p className="text-sm text-gray-500">{animeList.user.username}</p>
+                </div>
             </Link>
             {/* Rating */}
             <div className="flex items-center space-x-2">

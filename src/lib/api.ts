@@ -112,7 +112,7 @@ export const postComment = (payload: PostCommentType) => commentsAPI.post(``, pa
 export const rateComment = (payload: RatingAction, id: string) => commentsAPI.post(`/rating/${id}`, payload)
 
 // Lists
-export const getAllAnimeLists = () => listsAPI.get(`/anime`);
+export const getAllAnimeLists = () => listsAPI.get(`/anime/details`);
 export const getAllCharacterLists = () => listsAPI.get(`/characters`);
 export const getAllAnimeListsByAnimeId = (id: string) => listsAPI.get(`/anime/anime/${id}`);
 export const getAllCharacterListsByCharacterId = (id: string) => listsAPI.get(`/characters/character/${id}`);
