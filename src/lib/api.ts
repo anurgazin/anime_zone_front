@@ -113,7 +113,7 @@ export const rateComment = (payload: RatingAction, id: string) => commentsAPI.po
 
 // Lists
 export const getAllAnimeLists = () => listsAPI.get(`/anime/details`);
-export const getAllCharacterLists = () => listsAPI.get(`/characters`);
+export const getAllCharacterLists = () => listsAPI.get(`/characters/details`);
 export const getAllAnimeListsByAnimeId = (id: string) => listsAPI.get(`/anime/anime/${id}`);
 export const getAllCharacterListsByCharacterId = (id: string) => listsAPI.get(`/characters/character/${id}`);
 export const getAllAnimeListsByUserId = (id: string) => listsAPI.get(`/anime/user/${id}`);
