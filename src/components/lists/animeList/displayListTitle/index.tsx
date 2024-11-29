@@ -56,8 +56,8 @@ export default function AnimeListDisplay({ animeList, handleReload, user }: Anim
             {/* Header with List Name */}
             <Link href={`/list/anime/${animeList.id}`} className="block" >
                 <div className="flex justify-between items-center">
-                    <p className="font-semibold break-words text-gray-800 text-lg max-w-full">{animeList.name}</p>
-                    <p className="text-sm text-gray-500">{animeList.user.username}</p>
+                    <p className="font-anton break-words text-gray-800 text-lg max-w-full">{animeList.name}</p>
+                    <p className="font-antonio text-sm text-gray-500">{animeList.user.username}</p>
                 </div>
             </Link>
             {/* Rating */}

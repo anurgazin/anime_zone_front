@@ -218,6 +218,10 @@ export type CharacterListDetails = {
   comments: Comment[]
   characters_list: CharacterList
 }
+export type CharacterListAPI = {
+  characters: CharacterAPI[]
+  characters_list: CharacterList
+}
 
 
 export type LoginUser = {
