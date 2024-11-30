@@ -189,6 +189,7 @@ export type AnimeList = {
   user: ListUser
   anime_List: string[]
   rating: number
+  public: boolean
 }
 export type AnimeListDetails = {
   anime: AnimeAPI[]
@@ -211,6 +212,7 @@ export type CharacterList = {
   user: ListUser
   character_List: string[]
   rating: number
+  public: boolean
 }
 
 export type CharacterListDetails = {
