@@ -5,14 +5,16 @@ import { useRouter } from "next/navigation";
 import AnimeListDisplay from "../displayListTitle";
 import Image from "next/image";
 import Link from "next/link";
+import { getCookie } from "cookies-next";
 
 type DisplayAnimeListProps = {
     animeList: AnimeListAPI[];
     user?: string;
 };
 
-export default function DisplayAnimeLists({ animeList, user }: DisplayAnimeListProps) {
+export default function DisplayAnimeLists({ animeList }: DisplayAnimeListProps) {
     const router = useRouter();
+    const user = getCookie("access_token") || "";
 
     const handleReload = () => {
         router.refresh();

@@ -76,13 +76,15 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                     {/* Comments */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
-                        {comments && comments.length > 0 ? (
-                            comments.map((comment, i) => (
-                                <CommentComponent key={i} comment={comment} />
-                            ))
-                        ) : (
-                            <p className="text-gray-600 italic">No comments yet.</p>
-                        )}
+                        <div className='pr-4 max-h-[400px] overflow-x-hidden overflow-y-auto'>
+                            {comments && comments.length > 0 ? (
+                                comments.map((comment, i) => (
+                                    <CommentComponent key={i} comment={comment} />
+                                ))
+                            ) : (
+                                <p className="text-gray-600 italic">No comments yet.</p>
+                            )}
+                        </div>
                     </div>
                     {/* Reviews */}
                     <div className="border-2 border-orange-200 shadow-md bg-white p-4 rounded-lg">
@@ -90,13 +92,15 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                             <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
                             <Link href={`/dashboard/review`} className='text-3xl text-orange-400'>+</Link>
                         </div>
-                        {reviews && reviews.length > 0 ? (
-                            reviews.map((r, i) => (
-                                r.review && (<RatingComponent key={i} rating={r} />)
-                            ))
-                        ) : (
-                            <p className="text-gray-600 italic">No reviews yet.</p>
-                        )}
+                        <div className='pr-4 max-h-[400px] overflow-x-hidden overflow-y-auto'>
+                            {reviews && reviews.length > 0 ? (
+                                reviews.map((r, i) => (
+                                    r.review && (<RatingComponent key={i} rating={r} />)
+                                ))
+                            ) : (
+                                <p className="text-gray-600 italic">No reviews yet.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
 
@@ -108,13 +112,15 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                             <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Anime Lists</h2>
                             <Link href="/dashboard/animeList" className='text-3xl text-orange-400'>+</Link>
                         </div>
-                        {anime_lists && anime_lists.length > 0 ? (
-                            anime_lists.map((a, i) => (
-                                <AnimeListDisplay key={i} animeList={a} />
-                            ))
-                        ) : (
-                            <p className="text-gray-600 italic">No anime lists yet.</p>
-                        )}
+                        <div className='pr-4 max-h-[400px] overflow-x-hidden overflow-y-auto'>
+                            {anime_lists && anime_lists.length > 0 ? (
+                                anime_lists.map((a, i) => (
+                                    <AnimeListDisplay key={i} animeList={a} />
+                                ))
+                            ) : (
+                                <p className="text-gray-600 italic">No anime lists yet.</p>
+                            )}
+                        </div>
                     </div>
 
                     {/* CharacterLists */}
@@ -123,13 +129,15 @@ export default function DashboardUser({ user, comments, character_lists, anime_l
                             <h2 className="text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Characters Lists</h2>
                             <Link href="/dashboard/charactersList" className='text-3xl text-orange-400'>+</Link>
                         </div>
-                        {character_lists && character_lists.length > 0 ? (
-                            character_lists.map((a, i) => (
-                                <CharacterListDisplay key={i} characterList={a} />
-                            ))
-                        ) : (
-                            <p className="text-gray-600 italic">No character lists yet.</p>
-                        )}
+                        <div className='pr-4 max-h-[400px] overflow-x-hidden overflow-y-auto'>
+                            {character_lists && character_lists.length > 0 ? (
+                                character_lists.map((a, i) => (
+                                    <CharacterListDisplay key={i} characterList={a} />
+                                ))
+                            ) : (
+                                <p className="text-gray-600 italic">No character lists yet.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

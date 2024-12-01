@@ -6,14 +6,16 @@ import Link from "next/link";
 import { rateList } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { getCookie } from "cookies-next";
 type CharacterListProps = {
     characterList: CharacterList;
     handleReload?: () => void;
     user?: string;
 }
 
-export default function CharacterListDisplay({ characterList, user, handleReload }: CharacterListProps) {
+export default function CharacterListDisplay({ characterList, handleReload }: CharacterListProps) {
     const { toast } = useToast()
+    const user = getCookie("access_token") || "";
     const [loading, setLoading] = useState<boolean>(false);
     const handleRate = async (action: string) => {
         setLoading(true);
@@ -52,8 +54,8 @@ export default function CharacterListDisplay({ characterList, user, handleReload
         <div className="pb-4 mb-4">
             {/* Header with List Name */}
             <Link href={`/list/characters/${characterList.id}`} className="flex justify-between items-center">
-                <p className="font-semibold text-gray-800">{characterList.name}</p>
-                <p className="text-sm text-gray-500">{characterList.user.username}</p>
+                <p className="font-anton break-words text-gray-800 text-lg max-w-full">{characterList.name}</p>
+                <p className="font-antonio text-sm text-gray-500">{characterList.user.username}</p>
             </Link>
             {/* Rating */}
             <div className="flex items-center space-x-2">

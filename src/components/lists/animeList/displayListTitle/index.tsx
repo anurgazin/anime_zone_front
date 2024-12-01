@@ -6,15 +6,16 @@ import Link from "next/link";
 import { rateList } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { getCookie } from "cookies-next";
 type AnimeListProps = {
     animeList: AnimeList;
     handleReload?: () => void;
     user?: string;
 }
 
-export default function AnimeListDisplay({ animeList, handleReload, user }: AnimeListProps) {
+export default function AnimeListDisplay({ animeList, handleReload }: AnimeListProps) {
     const { toast } = useToast()
-
+    const user = getCookie("access_token") || "";
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const handleRate = async (action: string) => {

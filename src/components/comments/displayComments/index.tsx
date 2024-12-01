@@ -5,6 +5,7 @@ import { rateComment } from "@/lib/api";
 import { Comment, RatingAction } from "@/lib/types";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { getCookie } from "cookies-next";
 
 type CommentProps = {
     comment: Comment;
@@ -12,8 +13,9 @@ type CommentProps = {
     user?: string;
 }
 
-export default function CommentComponent({ comment, handleReload, user }: CommentProps) {
+export default function CommentComponent({ comment, handleReload }: CommentProps) {
     const date_time = new Date(comment.timestamp);
+    const user_data = getCookie("access_token") || "";
     const formatted_time = date_time.toLocaleDateString() + " " + date_time.toLocaleTimeString();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -48,7 +50,7 @@ export default function CommentComponent({ comment, handleReload, user }: Commen
             {/* Header with Username and Timestamp */}
             <div className="flex justify-between items-center">
                 <Link href={`/dashboard/${comment.user.user_id}`}>
-                    <p className="font-semibold text-gray-800">{comment.user.username}</p>
+                    <p className="font-anton text-gray-800">{comment.user.username}</p>
                 </Link>
                 <p className="text-sm text-gray-500">{formatted_time}</p>
             </div>
@@ -61,7 +63,7 @@ export default function CommentComponent({ comment, handleReload, user }: Commen
                 <Button
                     type="button"
                     onClick={() => handleRate("decrement")}
-                    disabled={loading || !user}
+                    disabled={loading || !user_data}
                     variant="ghost"
                     className="text-gray-600 hover:text-red-600 p-2"
                 >
@@ -73,7 +75,7 @@ export default function CommentComponent({ comment, handleReload, user }: Commen
                 <Button
                     type="button"
                     onClick={() => handleRate("increment")}
-                    disabled={loading || !user}
+                    disabled={loading || !user_data}
                     variant="ghost"
                     className="text-gray-600 hover:text-green-600 p-2"
                 >

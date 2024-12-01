@@ -180,6 +180,7 @@ export type ListUser = {
 export type PostListRequest = {
   title: string
   content_list: string[]
+  public: boolean
 }
 
 // AnimeList struct represents AnimeList information

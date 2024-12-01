@@ -36,7 +36,7 @@ export default function RatingComponent({ rating }: RatingProps) {
         <div className="pb-6 mb-6 border-b border-gray-200">
             {/* Header with Username and Timestamp */}
             <div className="flex justify-between items-center mb-2">
-                <p className="font-semibold text-gray-800">{rating.user.username}</p>
+                <p className="font-anton text-gray-800">{rating.user.username}</p>
                 <p className="text-sm text-gray-500">{formatted_time}</p>
             </div>
 

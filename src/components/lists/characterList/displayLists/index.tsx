@@ -5,15 +5,16 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import CharacterListDisplay from "../displayListTitle";
+import { getCookie } from "cookies-next";
 
 type DisplayCharacterListsProps = {
     characterList: CharacterListAPI[];
     user?: string;
 };
 
-export default function DisplayCharacterLists({ characterList, user }: DisplayCharacterListsProps) {
+export default function DisplayCharacterLists({ characterList }: DisplayCharacterListsProps) {
     const router = useRouter();
-
+    const user = getCookie("access_token") || "";
     const handleReload = () => {
         router.refresh();
     };

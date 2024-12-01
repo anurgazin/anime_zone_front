@@ -9,17 +9,18 @@ import WriteComment from "@/components/comments/writeComment";
 import { useRouter } from "next/navigation";
 import { rateList } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
+import { getCookie } from "cookies-next";
 
 type DisplayCharacterListDataProps = {
     charactersList: CharacterList
     characters: CharacterAPI[]
     comments: Comment[]
-    user: string;
+    user?: string;
 };
 
-export default function DisplayCharacterListData({ characters, charactersList, comments, user }: DisplayCharacterListDataProps) {
+export default function DisplayCharacterListData({ characters, charactersList, comments }: DisplayCharacterListDataProps) {
     const { toast } = useToast()
-
+    const user = getCookie("access_token") || "";
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
 
