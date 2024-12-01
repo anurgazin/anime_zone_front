@@ -36,7 +36,7 @@ export default function UserPage({ user, comments, character_lists, anime_lists,
             </div>
 
             {/* Information */}
-            <div className="lg:col-span-5  grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
+            <div className="lg:col-span-5 grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-auto gap-5 px-4 sm:px-10 py-4">
                 {/* Logo section */}
                 <div className="lg:col-span-1 flex justify-center lg:justify-start relative w-full h-[350px]"
                     onClick={() => handleImageClick({
@@ -57,65 +57,73 @@ export default function UserPage({ user, comments, character_lists, anime_lists,
                 </div>
 
                 {/* Description */}
-                <div className="lg:col-span-4 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg lg:border-none">
-                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Description</h2>
+                <div className="lg:col-span-5 lg:row-start-2 border-2 border-orange-200 p-4 rounded-lg">
+                    <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-2 lg:underline lg:decoration-orange-300 lg:underline-offset-8">Bio</h2>
                     <p className="text-gray-700 whitespace-pre-wrap">{user.bio}</p>
                 </div>
 
                 {/* Comments and Reviews Section */}
-                <div className="lg:col-span-4 lg:row-start-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
+                <div className="lg:col-span-5 lg:row-start-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
                     {/* Comments */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Comments</h2>
-                        {comments && comments.length > 0 ? (
-                            comments.map((comment, i) => (
-                                <CommentComponent key={i} comment={comment} />
-                            ))
-                        ) : (
-                            <p className="text-gray-600 italic">No comments yet.</p>
-                        )}
+                        <div className='pr-4 max-h-[400px] overflow-x-hidden overflow-y-auto'>
+                            {comments && comments.length > 0 ? (
+                                comments.map((comment, i) => (
+                                    <CommentComponent key={i} comment={comment} />
+                                ))
+                            ) : (
+                                <p className="text-gray-600 italic">No comments yet.</p>
+                            )}
+                        </div>
                     </div>
                     {/* Reviews */}
                     <div className="border-2 border-orange-200 shadow-md bg-white p-4 rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Reviews</h2>
-                        {reviews && reviews.length > 0 ? (
-                            reviews.map((r, i) => (
-                                r.review && (<RatingComponent key={i} rating={r} />)
-                            ))
-                        ) : (
-                            <p className="text-gray-600 italic">No reviews yet.</p>
-                        )}
+                        <div className='pr-4 max-h-[400px] overflow-x-hidden overflow-y-auto'>
+                            {reviews && reviews.length > 0 ? (
+                                reviews.map((r, i) => (
+                                    r.review && (<RatingComponent key={i} rating={r} />)
+                                ))
+                            ) : (
+                                <p className="text-gray-600 italic">No reviews yet.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
 
                 {/* Lists */}
-                <div className="lg:col-span-4 lg:row-start-4 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
+                <div className="lg:col-span-5 lg:row-start-4 grid grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-2">
                     {/* AnimeLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Character Lists</h2>
-                        {anime_lists && anime_lists.length > 0 ? (
-                            anime_lists.map((a, i) => (
-                                <AnimeListDisplay key={i} animeList={a} />
-                            ))
-                        ) : (
-                            <p className="text-gray-600 italic">No character lists yet.</p>
-                        )}
+                        <div className='pr-4 max-h-[400px] overflow-x-hidden overflow-y-auto'>
+                            {anime_lists && anime_lists.length > 0 ? (
+                                anime_lists.map((a, i) => (
+                                    <AnimeListDisplay key={i} animeList={a} />
+                                ))
+                            ) : (
+                                <p className="text-gray-600 italic">No character lists yet.</p>
+                            )}
+                        </div>
                     </div>
 
                     {/* CharacterLists */}
                     <div className="border-2 border-orange-200 p-4 shadow-md bg-white rounded-lg">
                         <h2 className="text-xl sm:text-2xl font-anton text-gray-800 mb-4 underline decoration-orange-300 underline-offset-8">Character Lists</h2>
-                        {character_lists && character_lists.length > 0 ? (
-                            character_lists.map((a, i) => (
-                                <CharacterListDisplay key={i} characterList={a} />
-                            ))
-                        ) : (
-                            <p className="text-gray-600 italic">No character lists yet.</p>
-                        )}
+                        <div className='pr-4 max-h-[400px] overflow-x-hidden overflow-y-auto'>
+                            {character_lists && character_lists.length > 0 ? (
+                                character_lists.map((a, i) => (
+                                    <CharacterListDisplay key={i} characterList={a} />
+                                ))
+                            ) : (
+                                <p className="text-gray-600 italic">No character lists yet.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
             {selectedImage && <Modal modalContent={selectedImage} onClose={() => setSelectedImage(null)} />}
-        </div>
+        </div >
     );
 }

@@ -9,17 +9,18 @@ import WriteComment from "@/components/comments/writeComment";
 import { useRouter } from "next/navigation";
 import { rateList } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
+import { getCookie } from "cookies-next";
 
 type DisplayAnimeListDataProps = {
     animeList: AnimeList
     anime: AnimeAPI[]
     comments: Comment[]
-    user: string;
+    user?: string;
 };
 
-export default function DisplayAnimeListData({ anime, animeList, comments, user }: DisplayAnimeListDataProps) {
+export default function DisplayAnimeListData({ anime, animeList, comments }: DisplayAnimeListDataProps) {
     const { toast } = useToast()
-
+    const user = getCookie("access_token") || "";
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
