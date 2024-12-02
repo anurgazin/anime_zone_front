@@ -16,6 +16,7 @@ type CharacterListProps = {
 export default function CharacterListDisplay({ characterList, handleReload }: CharacterListProps) {
     const { toast } = useToast()
     const user = getCookie("access_token") || "";
+    const user_id = getCookie("id") || "";
     const [loading, setLoading] = useState<boolean>(false);
     const handleRate = async (action: string) => {
         setLoading(true);
@@ -53,10 +54,13 @@ export default function CharacterListDisplay({ characterList, handleReload }: Ch
 
         <div className="pb-4 mb-4">
             {/* Header with List Name */}
-            <Link href={`/list/characters/${characterList.id}`} className="flex justify-between items-center">
-                <p className="font-anton break-words text-gray-800 text-lg max-w-full">{characterList.name}</p>
+            <div className="flex justify-between items-center">
+                <div className="flex flex-row items-center gap-1 text-orange-600">
+                    <Link href={`/list/characters/${characterList.id}`} className="font-anton break-words text-gray-800 text-lg max-w-full">{characterList.name}</Link>
+                    {user_id === characterList.user.user_id && <p>&#128394;</p>}
+                </div>
                 <p className="font-antonio text-sm text-gray-500">{characterList.user.username}</p>
-            </Link>
+            </div>
             {/* Rating */}
             <div className="flex items-center space-x-2">
                 <Button
