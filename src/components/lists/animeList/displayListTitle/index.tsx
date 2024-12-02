@@ -16,6 +16,7 @@ type AnimeListProps = {
 export default function AnimeListDisplay({ animeList, handleReload }: AnimeListProps) {
     const { toast } = useToast()
     const user = getCookie("access_token") || "";
+    const user_id = getCookie("id") || "";
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const handleRate = async (action: string) => {
@@ -55,12 +56,14 @@ export default function AnimeListDisplay({ animeList, handleReload }: AnimeListP
         <div className="pb-4 mb-4">
             {error && <p className="text-red-500">{error}</p>}
             {/* Header with List Name */}
-            <Link href={`/list/anime/${animeList.id}`} className="block" >
-                <div className="flex justify-between items-center">
-                    <p className="font-anton break-words text-gray-800 text-lg max-w-full">{animeList.name}</p>
-                    <p className="font-antonio text-sm text-gray-500">{animeList.user.username}</p>
+            <div className="flex justify-between items-center">
+                <div className="flex flex-row items-center gap-1 text-orange-600">
+                    <Link href={`/list/anime/${animeList.id}`} className="font-anton break-words text-gray-800 text-lg max-w-full">{animeList.name}</Link>
+                    {user_id === animeList.user.user_id && <p>&#128394;</p>}
                 </div>
-            </Link>
+                <p className="font-antonio text-sm text-gray-500">{animeList.user.username}</p>
+            </div>
+
             {/* Rating */}
             <div className="flex items-center space-x-2">
                 <Button
