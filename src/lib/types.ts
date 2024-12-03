@@ -183,12 +183,18 @@ export type PostListRequest = {
   public: boolean
 }
 
+export type EditListRequest = {
+  name: string
+  content: string[]
+  public: boolean
+}
+
 // AnimeList struct represents AnimeList information
 export type AnimeList = {
   id: string
   name: string
   user: ListUser
-  anime_List: string[]
+  anime_list: string[]
   rating: number
   public: boolean
 }
@@ -211,7 +217,7 @@ export type CharacterList = {
   id: string
   name: string
   user: ListUser
-  character_List: string[]
+  character_list: string[]
   rating: number
   public: boolean
 }

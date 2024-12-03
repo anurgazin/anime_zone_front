@@ -57,7 +57,7 @@ export default function CharacterListDisplay({ characterList, handleReload }: Ch
             <div className="flex justify-between items-center">
                 <div className="flex flex-row items-center gap-1 text-orange-600">
                     <Link href={`/list/characters/${characterList.id}`} className="font-anton break-words text-gray-800 text-lg max-w-full">{characterList.name}</Link>
-                    {user_id === characterList.user.user_id && <p>&#128394;</p>}
+                    {user_id === characterList.user.user_id && <Link href={`/dashboard/charactersList/edit/${characterList.id}`}>&#128394;</Link>}
                 </div>
                 <p className="font-antonio text-sm text-gray-500">{characterList.user.username}</p>
             </div>
