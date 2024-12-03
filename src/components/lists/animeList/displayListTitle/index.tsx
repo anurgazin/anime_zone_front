@@ -59,7 +59,7 @@ export default function AnimeListDisplay({ animeList, handleReload }: AnimeListP
             <div className="flex justify-between items-center">
                 <div className="flex flex-row items-center gap-1 text-orange-600">
                     <Link href={`/list/anime/${animeList.id}`} className="font-anton break-words text-gray-800 text-lg max-w-full">{animeList.name}</Link>
-                    {user_id === animeList.user.user_id && <p>&#128394;</p>}
+                    {user_id === animeList.user.user_id && <Link href={`/dashboard/animeList/edit/${animeList.id}`}>&#128394;</Link>}
                 </div>
                 <p className="font-antonio text-sm text-gray-500">{animeList.user.username}</p>
             </div>
