@@ -5,6 +5,7 @@ import { CharacterAPI, CharacterList, EditListRequest } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { Switch } from "@/components/ui/switch";
 import { getAllCharacters, patchCharacterList } from "@/lib/api";
+import { Button } from "@/components/ui/button";
 
 type EditCharacterListFormProps = {
     existingList: CharacterList
@@ -145,13 +146,13 @@ export default function EditCharacterListForm({ existingList }: EditCharacterLis
             )}
 
             {/* Submit Button */}
-            <button
+            <Button
                 type="submit"
                 disabled={loading}
                 className="w-full bg-orange-500 text-white font-medium p-3 rounded-md hover:bg-orange-600 transition duration-300 disabled:opacity-50"
             >
                 {loading ? "Updating List..." : "Update List"}
-            </button>
+            </Button>
         </form>
     );
 }
