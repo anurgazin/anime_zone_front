@@ -4,11 +4,12 @@ import { useState, useEffect, FormEvent } from "react";
 import { AnimeAPI, AnimeList, EditListRequest } from "@/lib/types";
 import { Switch } from "@/components/ui/switch";
 import { useRouter } from "next/navigation";
-import { getAllAnime, patchAnimeList } from "@/lib/api";
+import { getAllAnime, patchAnimeList, deleteAnimeList } from "@/lib/api"; // Add deleteAnimeList here
+import { Button } from "@/components/ui/button";
 
 type EditAnimeListFormProps = {
-    existingList: AnimeList
-}
+    existingList: AnimeList;
+};
 
 export default function EditAnimeListForm({ existingList }: EditAnimeListFormProps) {
     const [listTitle, setListTitle] = useState<string>(existingList.name);
@@ -19,8 +20,6 @@ export default function EditAnimeListForm({ existingList }: EditAnimeListFormPro
     const [loading, setLoading] = useState<boolean>(false);
     const [isFetching, setIsFetching] = useState<boolean>(true);
     const router = useRouter();
-
-    console.log(existingList)
 
     // Fetch anime list on mount
     useEffect(() => {
@@ -62,6 +61,27 @@ export default function EditAnimeListForm({ existingList }: EditAnimeListFormPro
                 router.push("/dashboard"); // Redirect to the dashboard
             } else {
                 setError("Failed to update anime list. Please try again.");
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err: any) {
+            setError(err.response?.data?.error || "An unexpected error occurred.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (!confirm("Are you sure you want to delete this anime list?")) return;
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await deleteAnimeList(existingList.id);
+            if (response.status === 200) {
+                router.push("/dashboard"); // Redirect to the dashboard on successful deletion
+            } else {
+                setError("Failed to delete anime list. Please try again.");
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
@@ -146,14 +166,24 @@ export default function EditAnimeListForm({ existingList }: EditAnimeListFormPro
                 </p>
             )}
 
-            {/* Submit Button */}
-            <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-orange-500 text-white font-medium p-3 rounded-md hover:bg-orange-600 transition duration-300 disabled:opacity-50"
-            >
-                {loading ? "Updating List..." : "Update List"}
-            </button>
+            {/* Buttons */}
+            <div className="flex flex-row gap-2 justify-end">
+                <Button
+                    variant="destructive"
+                    onClick={handleDelete}
+                    disabled={loading}
+                    className="bg-red-500 text-white font-medium p-3 rounded-md hover:bg-red-600 transition duration-300 disabled:opacity-50"
+                >
+                    {loading ? "Deleting..." : "Delete"}
+                </Button>
+                <Button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-orange-500 text-white font-medium p-3 rounded-md hover:bg-orange-600 transition duration-300 disabled:opacity-50"
+                >
+                    {loading ? "Updating List..." : "Update List"}
+                </Button>
+            </div>
         </form>
     );
 }

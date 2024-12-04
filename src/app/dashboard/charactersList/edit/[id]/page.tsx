@@ -1,7 +1,7 @@
 import { getCharacterList } from "@/lib/api";
 import { CharacterList } from "@/lib/types";
 import Error from "@/components/error";
-import EditCharacterListForm from "@/components/lists/characterList/editAnimeList";
+import EditCharacterListForm from "@/components/lists/characterList/editCharacterList";
 
 export default async function EditCharacterList({ params }: { params: { id: string } }) {
     const id = params.id;
