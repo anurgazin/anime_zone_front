@@ -130,3 +130,4 @@ export const getCharacterList = (id: string) => listsAPI.get(`/characters/${id}`
 export const patchCharacterList = (payload: EditListRequest, id: string) => listsAPI.put(`/characters/edit/${id}`, payload)
 
 export const deleteAnimeList = (id: string) => listsAPI.delete(`/anime/delete/${id}`)
+export const deleteCharacterList = (id: string) => listsAPI.delete(`/characters/delete/${id}`)
