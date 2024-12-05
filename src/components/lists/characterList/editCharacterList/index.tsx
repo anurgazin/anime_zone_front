@@ -4,7 +4,7 @@ import { useState, useEffect, FormEvent } from "react";
 import { CharacterAPI, CharacterList, EditListRequest } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { Switch } from "@/components/ui/switch";
-import { getAllCharacters, patchCharacterList } from "@/lib/api";
+import { deleteCharacterList, getAllCharacters, patchCharacterList } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 
 type EditCharacterListFormProps = {
@@ -61,6 +61,26 @@ export default function EditCharacterListForm({ existingList }: EditCharacterLis
                 router.push("/dashboard"); // Redirect to the dashboard
             } else {
                 setError("Failed to update character list. Please try again.");
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err: any) {
+            setError(err.response?.data?.error || "An unexpected error occurred.");
+        } finally {
+            setLoading(false);
+        }
+    };
+    const handleDelete = async () => {
+        if (!confirm("Are you sure you want to delete this anime list?")) return;
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await deleteCharacterList(existingList.id);
+            if (response.status === 200) {
+                router.push("/dashboard"); // Redirect to the dashboard on successful deletion
+            } else {
+                setError("Failed to delete anime list. Please try again.");
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
@@ -145,14 +165,24 @@ export default function EditCharacterListForm({ existingList }: EditCharacterLis
                 </p>
             )}
 
-            {/* Submit Button */}
-            <Button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-orange-500 text-white font-medium p-3 rounded-md hover:bg-orange-600 transition duration-300 disabled:opacity-50"
-            >
-                {loading ? "Updating List..." : "Update List"}
-            </Button>
+            {/* Buttons */}
+            <div className="flex flex-row gap-2 justify-end">
+                <Button
+                    variant="destructive"
+                    onClick={handleDelete}
+                    disabled={loading}
+                    className="bg-red-500 text-white font-medium p-3 rounded-md hover:bg-red-600 transition duration-300 disabled:opacity-50"
+                >
+                    {loading ? "Deleting..." : "Delete"}
+                </Button>
+                <Button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-orange-500 text-white font-medium p-3 rounded-md hover:bg-orange-600 transition duration-300 disabled:opacity-50"
+                >
+                    {loading ? "Updating List..." : "Update List"}
+                </Button>
+            </div>
         </form>
     );
 }
