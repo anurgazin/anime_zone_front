@@ -164,11 +164,15 @@ export type Comment = {
   text: string;
   timestamp: Date;
   rating: number;
+  edited: boolean;
 }
 export type PostCommentType = {
   type: CommentType;
   content_id: string;
   text: string;
+}
+export type UpdateCommentType = {
+  text: string
 }
 
 export type ListUser = {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getCookie, setCookie } from 'cookies-next';
-import { AddToList, EditListRequest, ListRatingAction, LoginUser, PostCommentType, PostListRequest, PostRatingRequest, RatingAction } from "./types";
+import { AddToList, EditListRequest, ListRatingAction, LoginUser, PostCommentType, PostListRequest, PostRatingRequest, RatingAction, UpdateCommentType } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_DOMAIN;
 
@@ -110,6 +110,8 @@ export const getAllComments = (type: string, id: string) => commentsAPI.get(`/${
 export const getAllCommentsByUser = (id: string) => commentsAPI.get(`/user/${id}`);
 export const postComment = (payload: PostCommentType) => commentsAPI.post(``, payload)
 export const rateComment = (payload: RatingAction, id: string) => commentsAPI.post(`/rating/${id}`, payload)
+export const editComment = (payload: UpdateCommentType, id: string) => commentsAPI.patch(`/id/${id}`, payload)
+
 
 // Lists
 export const getAllAnimeLists = () => listsAPI.get(`/anime/details`);
