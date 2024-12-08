@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { editComment } from "@/lib/api";
+import { deleteComment, editComment } from "@/lib/api";
 import { Button } from "../../ui/button";
 import { Comment, UpdateCommentType } from "@/lib/types";
 
@@ -37,6 +37,27 @@ export default function EditComment({ comment, onClose, onSave }: EditCommentFor
         }
     };
 
+    const handleDelete = async () => {
+        if (!confirm("Are you sure you want to delete this anime list?")) return;
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await deleteComment(comment.id);
+            if (response.status === 200) {
+                onSave()
+            } else {
+                setError("Failed to delete comment. Please try again.");
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err: any) {
+            setError(err.response?.data?.error || "An unexpected error occurred.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // Handle clearing the textarea
     const handleCancel = () => {
         onClose()
@@ -60,25 +81,36 @@ export default function EditComment({ comment, onClose, onSave }: EditCommentFor
             </div>
 
             {/* Buttons */}
-            <div className="flex justify-end space-x-2">
-                {/* Cancel Button */}
+            <div className="flex justify-between space-x-2">
+                {/* Delete Button */}
                 <Button
-                    type="button"
-                    onClick={handleCancel}
+                    variant="destructive"
+                    onClick={handleDelete}
                     disabled={loading}
-                    variant="ghost"
-                    className="text-gray-600 p-3"
+                    className="bg-red-500 text-white font-medium p-3 rounded-md hover:bg-red-600 transition duration-300 disabled:opacity-50"
                 >
-                    {loading ? "Canceling..." : "Cancel"}
+                    {loading ? "Deleting..." : "Delete"}
                 </Button>
-                {/* Submit Button */}
-                <Button
-                    type="submit"
-                    disabled={loading}
-                    className="bg-orange-400 text-white font-medium p-3 rounded-md hover:bg-orange-500 transition-colors duration-300"
-                >
-                    {loading ? "Edit..." : "Edit Comment"}
-                </Button>
+                <div>
+                    {/* Cancel Button */}
+                    <Button
+                        type="button"
+                        onClick={handleCancel}
+                        disabled={loading}
+                        variant="ghost"
+                        className="text-gray-600 p-3"
+                    >
+                        {loading ? "Canceling..." : "Cancel"}
+                    </Button>
+                    {/* Submit Button */}
+                    <Button
+                        type="submit"
+                        disabled={loading}
+                        className="bg-orange-400 text-white font-medium p-3 rounded-md hover:bg-orange-500 transition-colors duration-300"
+                    >
+                        {loading ? "Edit..." : "Edit Comment"}
+                    </Button>
+                </div>
             </div>
         </form>
     );
