@@ -111,7 +111,7 @@ export const getAllCommentsByUser = (id: string) => commentsAPI.get(`/user/${id}
 export const postComment = (payload: PostCommentType) => commentsAPI.post(``, payload)
 export const rateComment = (payload: RatingAction, id: string) => commentsAPI.post(`/rating/${id}`, payload)
 export const editComment = (payload: UpdateCommentType, id: string) => commentsAPI.patch(`/id/${id}`, payload)
-
+export const deleteComment = (id: string) => commentsAPI.delete(`/id/${id}`)
 
 // Lists
 export const getAllAnimeLists = () => listsAPI.get(`/anime/details`);
