@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Rating } from "@/lib/types";
+import { getCookie } from "cookies-next";
+import Link from "next/link";
 
 type RatingProps = {
     rating: Rating;
@@ -10,6 +12,7 @@ type RatingProps = {
 export default function RatingComponent({ rating }: RatingProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [maxHeight, setMaxHeight] = useState("70px");
+    const user_id = getCookie("id") || "";
     const textRef = useRef<HTMLParagraphElement>(null);
 
     const date_time = new Date(rating.timestamp);
@@ -36,7 +39,10 @@ export default function RatingComponent({ rating }: RatingProps) {
         <div className="pb-6 mb-6 border-b border-gray-200">
             {/* Header with Username and Timestamp */}
             <div className="flex justify-between items-center mb-2">
-                <p className="font-anton text-gray-800">{rating.user.username}</p>
+                <div className="flex flex-row items-center gap-1 text-orange-600">
+                    <p className="font-anton text-gray-800">{rating.user.username}</p>
+                    {user_id === rating.user.user_id && <Link href={`/dashboard/review/edit/${rating.id}`}>&#128394;</Link>}
+                </div>
                 <p className="text-sm text-gray-500">{formatted_time}</p>
             </div>
 

@@ -92,9 +92,12 @@ export const getAnimeRating = (id: string) => animeAPI.get(`/rating/${id}`)
 export const getAnimeDetails = (id: string) => animeAPI.get(`/details/${id}`)
 export const getAnimeListDetails = (id: string) => animeAPI.get(`/list/${id}`)
 
+export const getReviewById = (id: string) => animeAPI.get(`/review/${id}`)
 export const getAnimeRatingByUser = (id: string) => animeAPI.get(`/rating/user/${id}`)
 export const postAnimeRating = (id: string, payload: PostRatingRequest) => animeAPI.post(`/rating/${id}`, payload)
 export const postAnime = (payload: FormData) => animeAPI.post(``, payload)
+
+export const editAnimeReview = (payload: PostRatingRequest, id: string)=>animeAPI.put(`/rating/${id}`, payload)
 // Characters
 export const getAllCharacters = () => characterAPI.get(``);
 export const getCharactersNameAsc = () => characterAPI.get(`/name/asc`);

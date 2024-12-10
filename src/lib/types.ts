@@ -22,7 +22,7 @@ export type RatingUser = {
 }
 
 export type Rating = {
-  id?: string;
+  id: string;
   anime_id: string;
   user: RatingUser;
   score: number;
